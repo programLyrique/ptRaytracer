@@ -14,3 +14,4 @@ run:
     ./$(PROG_NAME)
 
 doc:
+    doxygen
