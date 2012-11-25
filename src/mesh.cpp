@@ -2,16 +2,13 @@
 
 namespace rt
 {
+    Mesh::Mesh()
+    {
+        //ctor
+    }
 
-
-Mesh::Mesh()
-{
-    //ctor
-}
-
-Mesh::~Mesh()
-{
-    //dtor
-}
-
+    Mesh::~Mesh()
+    {
+        //dtor
+    }
 }
