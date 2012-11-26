@@ -10,9 +10,9 @@ namespace rt
             /*!
             *  Coordinates correponding of the position in space
             */
-            int x;
-            int y;
-            int z;
+            double x;
+            double y;
+            double z;
         public:
 
             /** default constructor */
@@ -28,6 +28,11 @@ namespace rt
             * @arg z
             */
             Position(int _x, int _y, int _z);
+
+            /** Accessors */
+            double getX();
+            double getY();
+            double getZ();
     }
 
 }

@@ -6,19 +6,19 @@ namespace rt
     class Sphere:   public Mesh
     {
         protected:
-            /// Center of the sphere
+            /** Center of the sphere */
             int centre;
-            
-            /// Size of the sphere
+
+            /** Size of the sphere */
             int rayon;
         private:
         public:
-            /// default constructor
+            /** default constructor */
             Sphere();
-            
-            /// default destructor
+
+            /** default destructor */
             ~Sphere();
-            
+
             /**
             * Constructor
             * @arg center
