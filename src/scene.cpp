@@ -4,22 +4,22 @@ namespace rt
 {
     Scene::Scene()
     {
-        objets = new vector<Mesh>();
-        cams = new vector<Camera>();
-        lampes = new vector<Light>();
+        objets = new std::vector<Mesh>();
+        cams = new std::vector<Camera>();
+        lampes = new std::vector<Light>();
     }
 
-    Scene::getCams()
+    std::vector<Camera> Scene::getCams()
     {
         return &cams;
     }
 
-    Scene::getLampes()
+    std::vector<Light> Scene::getLampes()
     {
         return &lampes;
     }
 
-    Scene::getObjets()
+    std::vector<Mesh> Scene::getObjets()
     {
         return &objets;
     }
