@@ -10,16 +10,15 @@ namespace rt
             /*!
             *  Coordinates correponding of the position in space
             */
-            int x;
-            int y;
-            int z;
+            double x;
+            double y;
+            double z;
         public:
 
-            /** default constructor */
+            /** Default constructor :
+             * positionned et (0,0,0)
+             */
             Position();
-
-            /** default destructor */
-            ~Position();
 
             /**
             * Constructor
@@ -27,7 +26,33 @@ namespace rt
             * @arg y
             * @arg z
             */
-            Position(int _x, int _y, int _z);
+            Position(double _x, double _y, double _z);
+
+            /**
+             * @return the abscissa of the point
+             */
+            double get_x() const;
+            /**
+             * @return the ordinate of the point
+             */
+            double get_y() const;
+            /**
+             * @return the height of the point
+             */
+            double get_z()const;
+
+            /**
+             * @arg x the abscissa of the point
+             */
+            void set_x(double x);
+            /**
+             * @arg y the ordinate of the point
+             */
+            void set_y(double y);
+            /**
+             * @arg z the height of the point
+             */
+            void set_z(double z);
     }
 
 }
