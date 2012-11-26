@@ -23,19 +23,18 @@ namespace rt
             /**
             * Add a mesh in the scene.
             */
-            void addMesh(const Mesh& mesh);//const ?
+            void addMesh(const Mesh* mesh);//const ?
 
             /**
             * Add a light in the scene.
             */
-            void addLight(const Light& light);
-            // Plutôt en pointeur pou pouvoir passer des trucs alloués dynamiquement ?
+            void addLight(const Light* light);
 
             /**
             * Set the camera in the scene.
             * There is always only one camera !
             */
-            void setCamera(const Camera& camera);
+            void setCamera(const Camera* camera);
 
             /**
              * Renders the scene on the screen.

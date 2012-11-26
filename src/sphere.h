@@ -25,15 +25,15 @@ namespace rt
 
             /**
             * Constructor
-            * @arg center
-            * @arg radius
+            * @param center
+            * @param radius
             */
             Sphere(Position centre, double radius);
 
             /**
              * Whether the given ray intersects the sphere
-             * @arg point the beginning of the ray
-             * @arg vect a directing vector of the ray
+             * @param point the beginning of the ray
+             * @param vect a directing vector of the ray
              */
             bool Sphere::intersect(const Position& point, const vector& vect)
 

@@ -9,7 +9,7 @@ class Mesh
     protected:
         /** Coefficient de reflexion */
         double reflexion;
-        
+
         /** angle de réfraction*/
         double refraction;
     private:
@@ -20,13 +20,13 @@ class Mesh
         virtual ~Mesh();
 
         /** Wether the camera intersects the mesh.
-        *    @arg camera the camera in the scene
+        *    @param camera the camera in the scene
         */
         virtual bool intersect(const Camera& camera) = 0;
-        
+
         /** Wether the line defined by a vector and a point intersects the mesh.
-        *    @arg pos the point
-        *    @arg vect the vector
+        *    @param pos the point
+        *    @param vect the vector
         */
         virtual bool intersect(const Position& pos, const vector& vect) = 0;
 

@@ -19,7 +19,7 @@ namespace rt
 
             /**
             * Constructor from a position
-            * @arg position of the source
+            * @param position of the source
             */
             PointLight(Position& pos);
 

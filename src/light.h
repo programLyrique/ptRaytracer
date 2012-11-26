@@ -15,15 +15,15 @@ namespace rt
             Light();
             /** Default destructor */
             virtual ~Light();
-            
+
             /** Constructor
-            * @arg Parent scene
+            * @param Parent scene
             */
             Light(Scene _scene);
 
             /**
             * Return the illumination of a point in a scene
-            * @arg the position wanted
+            * @param the position wanted
             */
             virtual double illuminate(const Position& position) = 0;
 

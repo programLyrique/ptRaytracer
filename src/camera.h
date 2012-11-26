@@ -1,12 +1,17 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
+#include "position.h"
 
 class Camera
 {
     public:
-        /** Default constructor */
-        Camera();
+        /**  Set up the camera
+         * @param eye the position of the camera
+         * @param centre the point it looks to
+         * @param up a vector directing the vertical direction
+         */
+        Camera(Position eye, Position centre, Position up);
         /** Access eye
          * \return The current value of eye
          */
