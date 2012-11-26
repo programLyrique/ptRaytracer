@@ -8,7 +8,7 @@ namespace rt
     class Sphere:   public Mesh
     {
         protected:
-            /// Center of the sphere
+            /** Center of the sphere */
             Position centre;
 
             /// Size of the sphere
