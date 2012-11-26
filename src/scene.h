@@ -1,7 +1,8 @@
 #ifndef SCENE_H
 #define SCENE_H
-#include <vector>
 
+
+#include <vector>
 
 namespace rt
 {
@@ -20,37 +21,26 @@ namespace rt
             ~Scene();
 
             /**
-             * Add a mesh in the scene.
-             */
+            * Add a mesh in the scene.
+            */
             void addMesh(const Mesh& mesh);//const ?
 
             /**
-             * Add a light in the scene.
-             */
-             void addLight(const Light& light);
-             // Plutôt en pointeur pou pouvoir passer des trucs alloués dynamiquement ?
+            * Add a light in the scene.
+            */
+            void addLight(const Light& light);
+            // Plutôt en pointeur pou pouvoir passer des trucs alloués dynamiquement ?
 
             /**
-             * Set the camera in the scene.
-             * There is always only one camera !
+            * Set the camera in the scene.
+            * There is always only one camera !
+            */
+            void setCamera(const Camera& camera);
+
+            /**
+             * Renders the scene on the screen.
              */
-             void setCamera(const Camera& camera);
-
-
-//            /**
-//            * Return objets
-//            */
-//            std::vector<Mesh>& getObjets();
-//
-//            /**
-//            * Return lampes
-//            */
-//            std::vector<Light>& getLampes();
-//
-//            /**
-//            * Return cams
-//            */
-//            std::vector<Camera> getCams();
+            void render(const screen& s);
 
     };
 }
