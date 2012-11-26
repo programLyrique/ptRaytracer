@@ -15,10 +15,10 @@ namespace rt
 
     bool Sphere::intersect(Position& point, vector& vect)
     {
-        return (vect.x * (centre.getX() - point.getX()) + vect.y * (centre.getY() - point.getY()) + vect.z * (centre.getZ() - point.getZ()))
-        * (vect.x * (centre.getX() - point.getX()) + vect.y * (centre.getY() - point.getY()) + vect.z * (centre.getZ() - point.getZ()))
+        return (vect.x * (Sphere::centre.getX() - point.getX()) + vect.y * (Sphere::centre.getY() - point.getY()) + vect.z * (Sphere::centre.getZ() - point.getZ()))
+        * (vect.x * (Sphere::centre.getX() - point.getX()) + vect.y * (Sphere::centre.getY() - point.getY()) + vect.z * (Sphere::centre.getZ() - point.getZ()))
         - (vect.x * vect.x + vect.y * vect.y + vect.z * vect.z)
-        * ((centre.getX() - point.getX()) * (centre.getX() - point.getX()) + (centre.getY() - point.getY()) * (centre.getY() - point.getY()) + (centre.getZ() - point.getZ()) * (centre.getZ() - point.getZ()) - rayon * rayon)
+        * ((Sphere::centre.getX() - point.getX()) * (Sphere::centre.getX() - point.getX()) + (Sphere::centre.getY() - point.getY()) * (Sphere::centre.getY() - point.getY()) + (Sphere::centre.getZ() - point.getZ()) * (Sphere::centre.getZ() - point.getZ()) - rayon * rayon)
         > 0;
     }
 }
