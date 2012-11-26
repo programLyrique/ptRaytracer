@@ -8,13 +8,18 @@ class Light
 {
     protected:
         /** Parent scene */
-        Scene scene;
+        Scene& scene;
     private:
     public:
         /** Default constructor */
         Light();
         /** Default destructor */
         virtual ~Light();
+        
+        /** Constructor
+        * @arg Parent scene
+        */
+        Light(Scene _scene);
 
         /**
         * Return the illumination of a point in a scene
