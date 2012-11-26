@@ -1,30 +1,43 @@
 #ifndef SPHERE_H
 #define SPHERE_H
 
+#include "Position.h"
+
 namespace rt
 {
     class Sphere:   public Mesh
     {
         protected:
             /** Center of the sphere */
-            int centre;
+            Position centre;
 
-            /** Size of the sphere */
-            int rayon;
+            /// Size of the sphere
+            double radius;
         private:
         public:
-            /** default constructor */
+            /**
+             * Builds a sphere of center (0,0,0 and radius 10.
+             */
             Sphere();
 
-            /** default destructor */
+            /// default destructor
             ~Sphere();
 
             /**
             * Constructor
             * @arg center
-            * @arg rayon
+            * @arg radius
             */
-            Sphere(int _centre, int _rayon);
+            Sphere(Position centre, double radius);
+
+            /**
+             * Whether the given ray intersects the sphere
+             * @arg point the beginning of the ray
+             * @arg vect a directing vector of the ray
+             */
+            bool Sphere::intersect(const Position& point, const vector& vect)
+
+
     };
 }
 

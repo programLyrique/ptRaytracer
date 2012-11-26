@@ -2,23 +2,23 @@
 
 namespace rt
 {
-    Sphere::Sphere(int _centre, int _rayon)
+    Sphere::Sphere(Position centre, double radius)
     {
-        centre = _centre;
-        rayon = _rayon;
+        Sphere::centre = centre;
+        Sphere::radius = radius;
     }
 
-    bool Sphere::intersect(Camera& camera)
+    bool Sphere::intersect(const Position& point, const vector& vect)
     {
         return false;
     }
 
-    bool Sphere::intersect(Position& pos, vector& vect)
+    bool Sphere::intersect(Position& point, vector& vect)
     {
-        return (vect.x * (centre.getX() - pos.getX()) + vect.y * (centre.getY() - pos.getY()) + vect.z * (centre.getZ() - pos.getZ()))
-        * (vect.x * (centre.getX() - pos.getX()) + vect.y * (centre.getY() - pos.getY()) + vect.z * (centre.getZ() - pos.getZ()))
+        return (vect.x * (centre.getX() - point.getX()) + vect.y * (centre.getY() - point.getY()) + vect.z * (centre.getZ() - point.getZ()))
+        * (vect.x * (centre.getX() - point.getX()) + vect.y * (centre.getY() - point.getY()) + vect.z * (centre.getZ() - point.getZ()))
         - (vect.x * vect.x + vect.y * vect.y + vect.z * vect.z)
-        * ((centre.getX() - pos.getX()) * (centre.getX() - pos.getX()) + (centre.getY() - pos.getY()) * (centre.getY() - pos.getY()) + (centre.getZ() - pos.getZ()) * (centre.getZ() - pos.getZ()) - rayon * rayon)
+        * ((centre.getX() - point.getX()) * (centre.getX() - point.getX()) + (centre.getY() - point.getY()) * (centre.getY() - point.getY()) + (centre.getZ() - point.getZ()) * (centre.getZ() - point.getZ()) - rayon * rayon)
         > 0;
     }
 }
