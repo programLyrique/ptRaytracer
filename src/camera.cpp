@@ -1,11 +1,8 @@
 #include "camera.h"
 
-Camera::Camera()
+Camera::Camera(Position eye, Position centre, vector up)
 {
-    //ctor
-}
-
-Camera::~Camera()
-{
-    //dtor
+    Camera::eye = eye;
+    Camera::centre = centre;
+    Camera::up = up;
 }

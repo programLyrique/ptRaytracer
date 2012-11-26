@@ -3,6 +3,10 @@
 
 #include "position.h"
 
+/**
+ * @todo Deciding the size of the screen - the portion of the world seen by
+ * the camera
+ */
 class Camera
 {
     public:
@@ -11,7 +15,7 @@ class Camera
          * @param centre the point it looks to
          * @param up a vector directing the vertical direction
          */
-        Camera(Position eye, Position centre, Position up);
+        Camera(Position eye, Position centre, vector up);
         /** Access eye
          * \return The current value of eye
          */
