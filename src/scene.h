@@ -9,9 +9,9 @@ namespace rt
     {
         protected:
         private:
-            vector<Mesh> objets;
-            vector<Light> lampes;
-            vector<Camera> cams;
+            std::vector<Mesh> objets;
+            std::vector<Light> lampes;
+            std::vector<Camera> cams;
         public:
             /** default constructor */
             Scene();
@@ -22,17 +22,17 @@ namespace rt
             /**
             * Return objets
             */
-            vector<Mesh>& getObjets();
+            std::vector<Mesh>& getObjets();
 
             /**
             * Return lampes
             */
-            vector<Light>& getLampes();
+            std::vector<Light>& getLampes();
 
             /**
             * Return cams
             */
-            vector<Camera> getCams();
+            std::vector<Camera> getCams();
     };
 }
 
