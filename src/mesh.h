@@ -16,13 +16,6 @@ class Mesh
     public:
         /** Default constructor */
         Mesh();
-        /** Default destructor */
-        virtual ~Mesh();
-
-        /** Wether the camera intersects the mesh.
-        *    @param camera the camera in the scene
-        */
-        virtual bool intersect(const Camera& camera) = 0;
 
         /** Wether the line defined by a vector and a point intersects the mesh.
         *    @param pos the point

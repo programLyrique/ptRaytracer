@@ -7,8 +7,5 @@ namespace rt
         //ctor
     }
 
-    Mesh::~Mesh()
-    {
-        //dtor
-    }
+
 }
