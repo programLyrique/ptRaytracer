@@ -9,19 +9,6 @@ namespace rt
         lampes = new std::vector<Light>();
     }
 
-    std::vector<Camera> Scene::getCams()
-    {
-        return &cams;
-    }
 
-    std::vector<Light> Scene::getLampes()
-    {
-        return &lampes;
-    }
-
-    std::vector<Mesh> Scene::getObjets()
-    {
-        return &objets;
-    }
 
 }

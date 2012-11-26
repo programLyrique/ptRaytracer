@@ -8,12 +8,8 @@ namespace rt
         Sphere::radius = radius;
     }
 
-    bool Sphere::intersect(const Position& point, const vector& vect)
-    {
-        return false;
-    }
 
-    bool Sphere::intersect(Position& point, vector& vect)
+    bool Sphere::intersect(const Position& point, const vector& vect)
     {
         return (vect.x * (Sphere::centre.getX() - point.getX()) + vect.y * (Sphere::centre.getY() - point.getY()) + vect.z * (Sphere::centre.getZ() - point.getZ()))
         * (vect.x * (Sphere::centre.getX() - point.getX()) + vect.y * (Sphere::centre.getY() - point.getY()) + vect.z * (Sphere::centre.getZ() - point.getZ()))
