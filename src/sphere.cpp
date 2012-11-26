@@ -2,13 +2,13 @@
 
 namespace rt
 {
-    Sphere::Sphere(int _centre, int _rayon)
+    Sphere::Sphere(Position centre, double radius)
     {
-        centre = _centre;
-        rayon = _rayon;
+        Sphere::centre = centre;
+        Sphere::radius = radius;
     }
-    
-    bool Sphere::intersect(Camera& camera)
+
+    bool Sphere::intersect(const Position& point, const vector& vect)
     {
         return false;
     }
