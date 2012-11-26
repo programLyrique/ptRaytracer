@@ -20,19 +20,38 @@ namespace rt
             ~Scene();
 
             /**
-            * Return objets
-            */
-            std::vector<Mesh>& getObjets();
+             * Add a mesh in the scene.
+             */
+            void addMesh(const Mesh& mesh);//const ?
 
             /**
-            * Return lampes
-            */
-            std::vector<Light>& getLampes();
+             * Add a light in the scene.
+             */
+             void addLight(const Light& light);
+             // Plutôt en pointeur pou pouvoir passer des trucs alloués dynamiquement ?
 
             /**
-            * Return cams
-            */
-            std::vector<Camera> getCams();
+             * Set the camera in the scene.
+             * There is always only one camera !
+             */
+             void setCamera(const Camera& camera);
+
+
+//            /**
+//            * Return objets
+//            */
+//            std::vector<Mesh>& getObjets();
+//
+//            /**
+//            * Return lampes
+//            */
+//            std::vector<Light>& getLampes();
+//
+//            /**
+//            * Return cams
+//            */
+//            std::vector<Camera> getCams();
+
     };
 }
 
