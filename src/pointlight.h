@@ -22,7 +22,7 @@ namespace rt
             */
             PointLight(Position& pos);
 
-    }
+    };
 
 }
 
