@@ -16,18 +16,18 @@
 #define VECTOR_H
 
 namespace rt {
-	
+
 	/**
 	 * This structure describes a 3D vector, providing
 	 * basic operations (addition, scalar product, etc.)
 	 * by overloading common operators.
-	 */	
+	 */
 	struct vector {
-		
+
 		double x;
 		double y;
 		double z;
-	
+
 		vector()
 		: x(0.0), y(0.0), z(0.0) {}
 
@@ -50,7 +50,7 @@ namespace rt {
 		vector operator-(const vector& other) const;
 
 		/**
-		 * Vectorial product 
+		 * Vectorial product
 		 * (a,b,c) ^ (d,e,f) = (bf-ce,cd-af,ae-bd)
 		 */
 		vector operator^(const vector& other) const;
@@ -79,7 +79,7 @@ namespace rt {
 	vector operator*(const double& x, const vector& v);
 
 	/**
-	 * Righ multiplication with a scalar
+	 * Right multiplication with a scalar
 	 * (a,b,c) * x = (ax,bx,cx)
 	 */
 	vector operator*(const vector& v, const double& x);
