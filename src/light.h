@@ -7,6 +7,8 @@ namespace rt
 class Light
 {
     protected:
+        /** Parent scene */
+        Scene scene;
     private:
     public:
         /** Default constructor */
@@ -14,12 +16,11 @@ class Light
         /** Default destructor */
         virtual ~Light();
 
-        /*!
+        /**
         * Return the illumination of a point in a scene
-        * @arg the scene one study
-        * @arg the position one want to know the illumination
+        * @arg the position wanted
         */
-        virtual double illuminate(Scene& scene, Position& position) = 0;
+        virtual double illuminate(const Position& position) = 0;
 
 };
 
