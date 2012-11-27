@@ -4,6 +4,9 @@
 #include "mesh.h"
 #include "light.h"
 #include "camera.h"
+
+#include "screen.hpp"
+
 #include <vector>
 
 namespace rt
@@ -20,7 +23,7 @@ namespace rt
             Scene();
 
             /** default destructor */
-            ~Scene();
+            ~Scene(){};
 
             /**
             * Add a mesh in the scene.
@@ -41,7 +44,7 @@ namespace rt
             /**
              * Renders the scene on the screen.
              */
-            void render();
+            void render(const screen& s);
 
     };
 }

@@ -2,7 +2,8 @@
 #define CAMERA_H
 
 #include "position.h"
-#include "vector.h"
+#include "vector.hpp"
+#include "scene.h"
 
 /**
  * @todo Deciding the size of the screen - the portion of the world seen by

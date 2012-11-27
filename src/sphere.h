@@ -1,7 +1,8 @@
 #ifndef SPHERE_H
 #define SPHERE_H
 
-#include "Position.h"
+#include "position.h"
+#include "mesh.h"
 
 namespace rt
 {
@@ -35,8 +36,7 @@ namespace rt
              * @param point the beginning of the ray
              * @param vect a directing vector of the ray
              */
-            bool Sphere::intersect(const Position& point, const vector& vect)
-
+            bool intersect(const Position& point, const vector& vect);
 
     };
 }

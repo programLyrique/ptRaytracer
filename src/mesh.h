@@ -1,6 +1,9 @@
 #ifndef MESH_H
 #define MESH_H
 
+#include "position.h"
+#include "vector.hpp"
+
 namespace rt
 {
 

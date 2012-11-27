@@ -1,6 +1,8 @@
 #ifndef LIGHT_H
 #define LIGHT_H
 
+#include "scene.h"
+
 namespace rt
 {
 
@@ -8,7 +10,7 @@ namespace rt
     {
         protected:
             /** Parent scene */
-            Scene& scene;
+            Scene* scene;
         private:
         public:
             /** Default constructor */
@@ -19,7 +21,7 @@ namespace rt
             /** Constructor
             * @param Parent scene
             */
-            Light(Scene _scene);
+            Light(Scene * _scene);
 
             /**
             * Return the illumination of a point in a scene

@@ -12,4 +12,20 @@ namespace rt
 
     }
 
+
+    void addMesh(const Mesh* mesh)
+    {
+
+    }
+
+    void addLight(const Light* light)
+    {
+
+    }
+
+    void setCamera(const Camera* camera)
+    {
+
+    }
+
 }

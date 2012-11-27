@@ -30,10 +30,10 @@ namespace rt
             Position(int _x, int _y, int _z);
 
             /** Accessors */
-            double getX();
-            double getY();
-            double getZ();
-    }
+            double getX() const;
+            double getY() const ;
+            double getZ() const;
+    };
 
 }
 
