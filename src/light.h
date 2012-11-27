@@ -21,7 +21,7 @@ namespace rt
             /** Constructor
             * @param Parent scene
             */
-            Light(Scene * _scene);
+            Light(Scene* _scene);
 
             /**
             * Return the illumination of a point in a scene

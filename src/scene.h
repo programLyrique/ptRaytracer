@@ -17,7 +17,7 @@ namespace rt
         private:
             std::vector<Mesh> objets;
             std::vector<Light> lampes;
-            Camera cams;
+            Camera cam;
         public:
             /** default constructor */
             Scene();
