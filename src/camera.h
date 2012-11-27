@@ -20,7 +20,7 @@ namespace rt
          * @param centre the point it looks to
          * @param up a vector directing the vertical direction
          */
-        Camera(Position eye, Position centre, vector up, Scene& par);
+        Camera(Position eye, Position centre, vector _up, Scene* par);
         /** Access eye
          * \return The current value of eye
          */
@@ -32,11 +32,11 @@ namespace rt
         /** Access center
          * \return The current value of center
          */
-        Position getCenter() { return center; };
+        Position getCentre() { return centre; };
         /** set center
          * \param val New value to set
          */
-        void setCenter(Position val) { center = val; };
+        void setCenter(Position val) { centre = val; };
         /** Access up
          * \return The current value of up
          */
@@ -51,9 +51,9 @@ namespace rt
     protected:
     private:
         Position eye; //!< Member variable "eye"
-        Position center; //!< Member variable "center"
+        Position centre; //!< Member variable "centre"
         vector up; //!< Member variable "up"
-        Scene& parent;
+        Scene* parent;
     };
 
 }

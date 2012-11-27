@@ -9,6 +9,9 @@
 
 #include <vector>
 
+class Light;
+class Camera;
+
 #include "mesh.h"
 #include "light.h"
 #include "camera.h"
@@ -19,9 +22,9 @@ namespace rt
     {
         protected:
         private:
-            std::vector<Mesh> objets;
-            std::vector<Light> lampes;
-            Camera cam;
+            std::vector<Mesh*> objets;
+            std::vector<Light*> lampes;
+            Camera* cam;
         public:
             /** default constructor */
             Scene();

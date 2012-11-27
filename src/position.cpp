@@ -9,17 +9,17 @@ namespace rt
         z = _z;
     }
 
-    double Position::getX()
+    double Position::getX() const
     {
         return x;
     }
 
-    double Position::getY()
+    double Position::getY() const
     {
         return y;
     }
 
-    double Position::getZ()
+    double Position::getZ() const
     {
         return z;
     }

@@ -1,6 +1,7 @@
 #ifndef POINTLIGHT_H
 #define POINTLIGHT_H
 
+#include "position.h"
 
 namespace rt
 {
