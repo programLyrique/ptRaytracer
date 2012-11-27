@@ -14,6 +14,7 @@ namespace rt
     class Camera
     {
     public:
+        Camera(){};///A default constructor @todo To remove it !
         /**  Set up the camera
          * @param eye the position of the camera
          * @param centre the point it looks to
