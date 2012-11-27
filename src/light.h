@@ -1,6 +1,7 @@
 #ifndef LIGHT_H
 #define LIGHT_H
 
+class Scene;
 #include "scene.h"
 
 namespace rt

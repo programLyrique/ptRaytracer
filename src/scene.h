@@ -9,6 +9,10 @@
 
 #include <vector>
 
+#include "mesh.h"
+#include "light.h"
+#include "camera.h"
+
 namespace rt
 {
     class Scene
@@ -23,7 +27,7 @@ namespace rt
             Scene();
 
             /** default destructor */
-            ~Scene(){};
+            virtual ~Scene(){};
 
             /**
             * Add a mesh in the scene.

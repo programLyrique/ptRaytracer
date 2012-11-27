@@ -12,7 +12,7 @@ namespace rt
 
     }
 
-    Light::Light(Scene *_scene)
+    Light::Light(Scene * _scene)
     {
         scene = _scene;
     }
