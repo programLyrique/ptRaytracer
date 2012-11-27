@@ -2,6 +2,7 @@
 #define CAMERA_H
 
 #include "position.h"
+#include "vector.h"
 
 /**
  * @todo Deciding the size of the screen - the portion of the world seen by
@@ -15,7 +16,7 @@ class Camera
          * @param centre the point it looks to
          * @param up a vector directing the vertical direction
          */
-        Camera(Position eye, Position centre, vector up);
+        Camera(Position eye, Position centre, vector up, Scene& par);
         /** Access eye
          * \return The current value of eye
          */
@@ -40,11 +41,15 @@ class Camera
          * \param val New value to set
          */
         void setUp(vector val) { up = val; }
+        /** generate the scene from the point of view of the camera */
+        void generate(int height, int width);
+
     protected:
     private:
         Position eye; //!< Member variable "eye"
         Position center; //!< Member variable "center"
         vector up; //!< Member variable "up"
+        Scene& parent;
 };
 
 #endif // CAMERA_H

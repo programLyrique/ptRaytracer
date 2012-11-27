@@ -1,7 +1,9 @@
 #ifndef SCENE_H
 #define SCENE_H
 
-
+#include "mesh.h"
+#include "light.h"
+#include "camera.h"
 #include <vector>
 
 namespace rt
@@ -12,7 +14,7 @@ namespace rt
         private:
             std::vector<Mesh> objets;
             std::vector<Light> lampes;
-            std::vector<Camera> cams;
+            Camera cams;
         public:
             /** default constructor */
             Scene();
@@ -39,7 +41,7 @@ namespace rt
             /**
              * Renders the scene on the screen.
              */
-            void render(const screen& s);
+            void render();
 
     };
 }
