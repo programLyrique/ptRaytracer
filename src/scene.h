@@ -1,20 +1,17 @@
 #ifndef SCENE_H
 #define SCENE_H
 
-#include "mesh.h"
-#include "light.h"
-#include "camera.h"
-
-#include "screen.hpp"
-
-#include <vector>
-
-class Light;
 class Camera;
+class Light;
 
 #include "mesh.h"
 #include "light.h"
 #include "camera.h"
+#include "screen.hpp"
+#include "sphere.h"
+#include <vector>
+#include <stdio.h>
+
 
 namespace rt
 {
@@ -35,7 +32,7 @@ namespace rt
             /**
             * Add a mesh in the scene.
             */
-            void addMesh(const Mesh* mesh);//const ?
+            void addMesh(Mesh* mesh);//const ?
 
             /**
             * Add a light in the scene.
@@ -46,7 +43,7 @@ namespace rt
             * Set the camera in the scene.
             * There is always only one camera !
             */
-            void setCamera(const Camera* camera);
+            void setCamera(Camera* camera);
 
             /**
              * Renders the scene on the screen.

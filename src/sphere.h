@@ -17,7 +17,7 @@ namespace rt
         private:
         public:
             /**
-             * Builds a sphere of center (0,0,0 and radius 10.
+             * Builds a sphere of center (0,0,0) and radius 10.
              */
             Sphere() {};
 
@@ -37,7 +37,7 @@ namespace rt
              * @param vect a directing vector of the ray
              */
             bool intersect(const Position& point, const vector& vect);
-
+            
     };
 }
 
