@@ -2,10 +2,8 @@
 
 namespace rt
 {
-    Sphere::Sphere(Position centre, double radius)
+  Sphere::Sphere(Position c, double r) : centre(c), radius(r)
     {
-        Sphere::centre = centre;
-        Sphere::radius = radius;
     }
 
 

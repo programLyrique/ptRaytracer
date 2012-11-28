@@ -16,10 +16,10 @@ namespace rt
         public:
 
             /** default constructor */
-            Position();
+            Position(){};
 
             /** default destructor */
-            ~Position();
+            ~Position(){};
 
             /**
             * Constructor

@@ -51,7 +51,7 @@ namespace rt
             /**
              * Renders the scene on the screen.
              */
-            void render(const screen& s);
+            void render(screen& s);
 
     };
 }
