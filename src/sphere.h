@@ -3,6 +3,7 @@
 
 #include "position.h"
 #include "mesh.h"
+#include "texture.h"
 
 namespace rt
 {
@@ -14,6 +15,8 @@ namespace rt
 
             /// Size of the sphere
             double radius;
+            
+            Texture t;
         private:
         public:
             /**
@@ -37,6 +40,8 @@ namespace rt
              * @param vect a directing vector of the ray
              */
             bool intersect(const Position& point, const vector& vect);
+            
+            Texture getTexture() { return t; }
             
     };
 }
