@@ -10,6 +10,10 @@ namespace rt
 
 class Mesh
 {
+    /**
+     * One of the building block of a scene : mesh.
+     * Can be a sphere ( @see Sphere ), or a cube...
+     */
     protected:
         /** Coefficient de reflexion */
         double reflexion;

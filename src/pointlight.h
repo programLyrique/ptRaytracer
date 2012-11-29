@@ -5,6 +5,9 @@
 
 namespace rt
 {
+    /**
+     * A simple light : only one point, and isotropic.
+     */
     class PointLight
     {
         protected:

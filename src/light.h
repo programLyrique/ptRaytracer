@@ -6,7 +6,9 @@ class Scene;
 
 namespace rt
 {
-
+    /**
+     * The building blocks of a light.
+     */
     class Light
     {
         protected:

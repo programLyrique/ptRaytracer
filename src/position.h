@@ -3,6 +3,9 @@
 
 namespace rt
 {
+    /**
+     * Position of a point in 3Ds.
+     */
     class Position
     {
         protected:
