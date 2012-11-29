@@ -12,9 +12,9 @@ namespace rt
 			color c;
 		public:
 			/** default constructor */
-			Texture();
+			Texture() {}
 			/** default destructor */
-			~Texture();
+			~Texture() {}
 			/** Constructor
 			* @param color
 			*/

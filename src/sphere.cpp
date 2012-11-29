@@ -2,7 +2,7 @@
 
 namespace rt
 {
-  Sphere::Sphere(Position c, double r) : centre(c), radius(r)
+  Sphere::Sphere(Position c, double r, Texture text) : centre(c), radius(r), t(text)
     {
     }
 

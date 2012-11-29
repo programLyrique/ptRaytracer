@@ -2,6 +2,8 @@
 #include <unistd.h>
 #include "screen.hpp"
 #include "scene.h"
+#include "color.hpp"
+#include "texture.h"
 
 int main(void)
 {
@@ -10,7 +12,7 @@ int main(void)
 	// here the code to draw the pixels...
 	rt::Scene scene;
 	scene.setCamera(new rt::Camera(rt::Position(0, 0, 0), rt::Position(0, 5, 0), rt::vector(0, 0, 1)));
-	scene.addMesh(new rt::Sphere(rt::Position(0, 15, 0), 10));
+	scene.addMesh(new rt::Sphere(rt::Position(0, 15, 0), 10, rt::Texture(rt::color::BLUE)));
 	scene.render(s);
 
 	while(s.update()) {

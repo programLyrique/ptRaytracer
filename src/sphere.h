@@ -32,7 +32,7 @@ namespace rt
             * @param center
             * @param radius
             */
-            Sphere(Position centre, double radius);
+            Sphere(Position centre, double radius, Texture text);
 
             /**
              * Whether the given ray intersects the sphere

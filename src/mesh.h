@@ -3,6 +3,7 @@
 
 #include "position.h"
 #include "vector.hpp"
+#include "texture.h"
 
 namespace rt
 {
@@ -25,6 +26,7 @@ class Mesh
         *    @param vect the vector
         */
         virtual bool intersect(const Position& pos, const vector& vect) = 0;
+        virtual Texture getTexture() = 0;
 
 };
 

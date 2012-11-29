@@ -15,27 +15,24 @@ namespace rt
       Position eye = cam->getEye();
       vector _up = up.unit();
       vector vcenter = vector(centre.getX() - eye.getX(), centre.getY() - eye.getY(), centre.getZ() - eye.getZ());
-      printf("%f %f %f, %f %f %f\n", centre.getX(), centre.getY(), centre.getZ(), eye.getX(), eye.getY(), eye.getZ());
       vector right = vcenter.unit() ^ _up;
-      printf("Starting: %d %d\n", objets.size(), lampes.size());
       for(int i = 0; i < s.width(); ++i)
         {
 		  for(int j = 0; j < s.height(); ++j)
 		        {
 		          
 				  bool inter = false;
+				  rt::color c;
 				  for(int k = 0; k < objets.size(); k++)
 				        {
-				        	//rt::vector vect = vcenter + (i - s.width() / 2) * right + (j - s.height() / 2) * _up;
-				        	//printf("vect %d %d %d \n", vcenter.x, vcenter.y, vcenter.z);
 						  if(objets[k]->intersect(eye, vcenter + (i - s.width() / 2) * right + (j - s.height() / 2) * _up))
 						  {
 							inter = true;
-							printf("Found\n");
+							c = objets[k]->getTexture().getColor();
 						  }
 				        }
 				  if(inter)
-				s.set_pixel(i, j, color::BLACK);
+				s.set_pixel(i, j, c);
 				  else
 				s.set_pixel(i, j, color::WHITE);
 		        }
