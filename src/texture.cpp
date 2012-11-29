@@ -1,6 +1,13 @@
 #include "texture.h"
 
-rt::color Texture::getColor()
+namespace rt
+{
+
+
+color Texture::getColor()
 {
 	return c;
+}
+
+
 }
