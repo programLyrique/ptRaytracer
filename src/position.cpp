@@ -23,4 +23,9 @@ namespace rt
     {
         return z;
     }
+
+    double Position::distance(const Position& p)
+    {
+        return (x - p.getX()) * (x - p.getX()) + (y - p.getY()) * (y - p.getY()) + (z - p.getZ()) * (z - p.getZ());
+    }
 }

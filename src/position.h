@@ -32,10 +32,23 @@ namespace rt
             */
             Position(int _x, int _y, int _z);
 
-            /** Accessors */
+            /** Accessors
+            * \return x
+            */
             double getX() const;
+            /** Accessors
+            * \return y
+            */
             double getY() const;
+            /** Accessors
+            * \return z
+            */
             double getZ() const;
+
+            /** distances between 2 points
+            * @arg other point
+            */
+            double distance(const Position& p);
     };
 
 }
