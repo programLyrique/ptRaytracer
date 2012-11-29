@@ -4,7 +4,7 @@ namespace rt
 {
 
 
-color Texture::getColor()
+color Texture::getColor() const
 {
 	return c;
 }

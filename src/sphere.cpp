@@ -2,7 +2,7 @@
 
 namespace rt
 {
-  Sphere::Sphere(Position c, double r, Texture text) : centre(c), radius(r), t(text)
+  Sphere::Sphere(Position c, double r, Texture text) : centre(c), radius(r)//, t(text)
     {
     }
 
@@ -16,5 +16,5 @@ namespace rt
         * ((Sphere::centre.getX() - point.getX()) * (Sphere::centre.getX() - point.getX()) + (Sphere::centre.getY() - point.getY()) * (Sphere::centre.getY() - point.getY()) + (Sphere::centre.getZ() - point.getZ()) * (Sphere::centre.getZ() - point.getZ()) - radius * radius)
         > 0;
     }
-    
+
 }

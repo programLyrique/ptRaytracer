@@ -17,15 +17,15 @@ namespace rt
 			color c;
 		public:
 			/** default constructor */
-			Texture() {}
+			Texture() {};
 			/** default destructor */
-			~Texture() {}
+			~Texture() {};
 			/** Constructor
 			* @param color
 			*/
-			Texture(color col) : c(col) {}
+			Texture(color col) : c(col) {};
 			/** Accessor */
-			color getColor();
+			color getColor() const;
 
 	};
 }
