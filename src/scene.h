@@ -12,7 +12,6 @@ class Light;
 
 #include <vector>
 #include <cstdio>
-#include <pthread.h>
 
 
 namespace rt
