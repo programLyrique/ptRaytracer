@@ -20,6 +20,9 @@ class Mesh
 
         /** angle de réfraction*/
         double refraction;
+        
+        /** Texture of the mesh*/
+        Texture t;
     private:
     public:
         /** Default constructor */
@@ -30,7 +33,11 @@ class Mesh
         *    @param vect the vector
         */
         virtual bool intersect(const Position& pos, const vector& vect) = 0;
-        virtual Texture getTexture() = 0;
+        /** Accessor
+        * \return texture of the mesh
+        */
+        Texture getTexture() { return t; }
+
 
 };
 
