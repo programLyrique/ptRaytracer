@@ -2,8 +2,8 @@
 
 namespace rt
 {
-    PointLight::PointLight(Position& p)
+    PointLight::PointLight(double x, double y, double z, double pow) : Position(x, y, z), Light(pow)
     {
-        pos = Position(p);
+     
     }
 }

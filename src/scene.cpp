@@ -48,9 +48,9 @@ namespace rt
 		objets.push_back(mesh);
     }
 
-    void Scene::addLight(const Light* light)
+    void Scene::addLight(Light* light)
     {
-
+		lampes.push_back(light);
     }
 
     void Scene::setCamera(Camera* camera)

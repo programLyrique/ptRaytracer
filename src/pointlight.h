@@ -2,30 +2,33 @@
 #define POINTLIGHT_H
 
 #include "position.h"
+#include "light.h"
+#include "scene.h"
 
 namespace rt
 {
     /**
      * A simple light : only one point, and isotropic.
      */
-    class PointLight
+    class PointLight : public Light, public Position
     {
         protected:
-            /** position of the source */
-            Position pos;
         private:
         public:
             /** default constructor */
-            PointLight();
+            PointLight() {}
 
             /** default destructor */
-            ~PointLight();
+            ~PointLight() {}
 
             /**
             * Constructor from a position
-            * @param position of the source
+            * @param x
+            * @param y
+            * @param z
+            * @param power
             */
-            PointLight(Position& pos);
+            PointLight(double x, double y, double z, double power);
 
     };
 

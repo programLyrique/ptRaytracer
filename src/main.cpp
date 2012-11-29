@@ -4,6 +4,7 @@
 #include "scene.h"
 #include "color.hpp"
 #include "texture.h"
+#include "light.h"
 
 int main(void)
 {
@@ -13,6 +14,7 @@ int main(void)
 	rt::Scene scene;
 	scene.setCamera(new rt::Camera(rt::Position(0, 0, 0), rt::Position(0, 5, 0), rt::vector(0, 0, 1)));
 	scene.addMesh(new rt::Sphere(rt::Position(0, 15, 0), 10, rt::Texture(rt::color::BLUE)));
+	//scene.addLight(new rt::PointLight(0., 5., 5., 1.));
 	scene.render(s);
 
 

@@ -10,7 +10,7 @@ class Light;
 #include "screen.hpp"
 #include "sphere.h"
 #include <vector>
-#include <stdio.h>
+#include <cstdio>
 
 
 namespace rt
@@ -41,7 +41,7 @@ namespace rt
             /**
             * Add a light in the scene.
             */
-            void addLight(const Light* light);
+            void addLight(Light* light);
 
             /**
             * Set the camera in the scene.

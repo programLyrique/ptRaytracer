@@ -12,9 +12,9 @@ namespace rt
 
     }
 
-    Light::Light(Scene * _scene)
+    Light::Light(double p)
     {
-        scene = _scene;
+        power = p;
     }
 
 }

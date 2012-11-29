@@ -3,6 +3,7 @@
 
 class Scene;
 #include "scene.h"
+#include "position.h"
 
 namespace rt
 {
@@ -14,6 +15,7 @@ namespace rt
         protected:
             /** Parent scene */
             Scene* scene;
+            double power;
         private:
         public:
             /** Default constructor */
@@ -24,7 +26,7 @@ namespace rt
             /** Constructor
             * @param Parent scene
             */
-            Light(Scene* _scene);
+            Light(double p);
 
             /**
             * Return the illumination of a point in a scene
