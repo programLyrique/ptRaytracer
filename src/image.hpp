@@ -93,13 +93,13 @@ namespace rt {
 			virtual void set_pixel(int x, int y, const color& c);
 
 			/**
-			 * Copy/Past the image's source rectangle to a given destiation
+			 * Copy/Past the image's source rectangle to a given destination
 			 * at given coordinates.
 			 */
 			virtual void blit(image& dst, const rect& srcrect, int dstx, int dsty) const;
 
 			/**
-			 * Copy/Past time entire image to a given destiation
+			 * Copy/Past time entire image to a given destination
 			 * at given coordinates.
 			 */
 			virtual void blit(image& dst, int dstx, int dsty) const;

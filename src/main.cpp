@@ -15,8 +15,9 @@ int main(void)
 	scene.addMesh(new rt::Sphere(rt::Position(0, 15, 0), 10, rt::Texture(rt::color::BLUE)));
 	scene.render(s);
 
+
 	while(s.update()) {
-		
+
 	}
 
 	return 0;

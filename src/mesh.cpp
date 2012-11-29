@@ -7,5 +7,10 @@ namespace rt
         //ctor
     }
 
+    Mesh::Mesh(Texture texture) : t(texture)
+    {
+
+    }
+
 
 }

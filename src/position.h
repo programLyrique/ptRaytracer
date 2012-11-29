@@ -34,7 +34,7 @@ namespace rt
 
             /** Accessors */
             double getX() const;
-            double getY() const ;
+            double getY() const;
             double getZ() const;
     };
 

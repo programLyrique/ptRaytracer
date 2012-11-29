@@ -4,12 +4,12 @@ namespace rt
 {
     Scene::Scene()
     {
-		
+
     }
 
     void Scene::render(screen& s)
     {
-    	
+
       vector up = cam->getUp() ;
       Position centre = cam->getCentre();
       Position eye = cam->getEye();
@@ -20,7 +20,7 @@ namespace rt
         {
 		  for(int j = 0; j < s.height(); ++j)
 		        {
-		          
+
 				  bool inter = false;
 				  rt::color c;
 				  for(int k = 0; k < objets.size(); k++)
@@ -32,15 +32,17 @@ namespace rt
 						  }
 				        }
 				  if(inter)
-				s.set_pixel(i, j, c);
+				  {
+                    s.set_pixel(i, j, c);
+				  }
 				  else
-				s.set_pixel(i, j, color::WHITE);
+                    s.set_pixel(i, j, color::WHITE);
 		        }
 		    }
 		    printf("Finished\n");
  	}
-  
-  
+
+
     void Scene::addMesh(Mesh* mesh)
     {
 		objets.push_back(mesh);

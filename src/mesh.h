@@ -20,13 +20,16 @@ class Mesh
 
         /** angle de réfraction*/
         double refraction;
-        
+
         /** Texture of the mesh*/
         Texture t;
     private:
     public:
-        /** Default constructor */
+        /** Default constructor : puts uniform balck as a texture. */
         Mesh();
+
+        /** @param texture the texture for the mesh*/
+        Mesh(Texture texture);
 
         /** Wether the line defined by a vector and a point intersects the mesh.
         *    @param pos the point
@@ -36,7 +39,7 @@ class Mesh
         /** Accessor
         * \return texture of the mesh
         */
-        Texture getTexture() { return t; }
+        Texture getTexture() const { return t; } ;
 
 
 };
