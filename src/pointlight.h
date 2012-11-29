@@ -29,6 +29,8 @@ namespace rt
             * @param power
             */
             PointLight(double x, double y, double z, double power);
+            
+            double illuminate(const Position& p);
 
     };
 

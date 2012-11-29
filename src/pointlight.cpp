@@ -6,4 +6,9 @@ namespace rt
     {
      
     }
+    
+    double PointLight::illuminate(const Position& p)
+    {
+    	return 0.;
+    }
 }
