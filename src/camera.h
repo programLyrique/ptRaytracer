@@ -8,9 +8,12 @@
 namespace rt
 {
     /**
-    * @todo Deciding the size of the screen - the portion of the world seen by
-    * the camera
-    */
+     * A camera.
+     * Quite a simple perspective one : you give an vertical direction, a position where is the camera
+     * and a position where the camera looks at.
+     * @todo Deciding the size of the screen - the portion of the world seen by
+     * the camera
+     */
     class Camera
     {
 		public:

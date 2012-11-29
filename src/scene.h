@@ -15,6 +15,10 @@ class Light;
 
 namespace rt
 {
+    /**
+     * A scene in which you can place meshes, lights, and cameras, and then, render it on a screen.
+     * @todo Add anti-aliasing filter at the end of the rendering.
+     */
     class Scene
     {
         protected:

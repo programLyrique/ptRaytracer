@@ -5,6 +5,11 @@
 
 namespace rt
 {
+    /**
+     * To give a texture to your meshes.
+     * Supports only uniform color map.
+     * @todo Supporting bump maps, normal maps etc.
+     */
 	class Texture
 	{
 		protected:
@@ -21,7 +26,7 @@ namespace rt
 			Texture(color col) : c(col) {}
 			/** Accessor */
 			color getColor();
-			
+
 	};
 }
 
