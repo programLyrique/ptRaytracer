@@ -9,8 +9,10 @@ class Light;
 #include "camera.h"
 #include "screen.hpp"
 #include "sphere.h"
+
 #include <vector>
-#include <stdio.h>
+#include <cstdio>
+#include <pthread.h>
 
 
 namespace rt

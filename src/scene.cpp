@@ -39,7 +39,7 @@ namespace rt
                     s.set_pixel(i, j, color::WHITE);
 		        }
 		    }
-		    printf("Finished\n");
+		    std::printf("Finished\n");
  	}
 
 
