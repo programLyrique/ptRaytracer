@@ -16,8 +16,11 @@ namespace rt
 		private:
 		    /** color of the object */
 			color c;
-			/** when the object start reflecting */
-			double brillance;
+			/** Parameters for the Phong reflection */
+			int brillance;
+			double ka;
+			double kd;
+			double ks;
 		public:
 			/** default constructor */
 			Texture() {};
@@ -27,7 +30,7 @@ namespace rt
 			* @param color
 			* @param brillance
 			*/
-			Texture(color col, double b) : c(col), brillance(b) {};
+			Texture(color col, int b, double a, double d, double s) : c(col), brillance(b), ka(a), kd(d), ks(s) {};
 			/** Accessor */
 			color getColor() const;
 
