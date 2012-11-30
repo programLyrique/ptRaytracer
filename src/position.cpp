@@ -28,4 +28,9 @@ namespace rt
     {
         return (x - p.getX()) * (x - p.getX()) + (y - p.getY()) * (y - p.getY()) + (z - p.getZ()) * (z - p.getZ());
     }
+    
+    vector Position::vectTo(const Position& p)
+    {
+        return vector(g.getX() - x, p.getY() - y, p.getZ() - z);
+    }
 }
