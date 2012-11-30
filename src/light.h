@@ -24,9 +24,10 @@ namespace rt
             virtual ~Light();
 
             /** Constructor
+            * @aram power
             * @param Parent scene
             */
-            Light(double p);
+            Light(double p, Scene* parent);
 
             /**
             * Return the illumination of a point in a scene
