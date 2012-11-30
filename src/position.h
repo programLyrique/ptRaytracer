@@ -49,6 +49,12 @@ namespace rt
             * @arg other point
             */
             double distance(const Position& p);
+            
+            
+            /** Create a vector for current point to given point
+            * @param point
+            * \return vector
+            vector vectTo(const Position& p);
     };
 
 }
