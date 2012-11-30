@@ -4,6 +4,7 @@
 class Scene;
 #include "scene.h"
 #include "position.h"
+#include "Mesh.h"
 
 namespace rt
 {
@@ -34,7 +35,7 @@ namespace rt
             * Return the illumination of a point in a scene
             * @param the position wanted
             */
-            virtual double illuminate(const Position& position) = 0;
+            virtual double illuminate(const Position& position, const Sphere* m) = 0;
 
     };
 }

@@ -34,7 +34,7 @@ namespace rt
 			~Texture() {};
 			/** Constructor
 			* @param color
-			* @param brillance
+			* @param brillance and other coefficients
 			*/
 			Texture(color col, int b, double aR, double dR, double sR, double aG, double dG, double sG, double aB, double dB, double sB) : c(col), brillance(b), kaR(aR), kdR(dR), ksR(sR), kaG(aG), kdG(dG), ksG(sG), kaB(aB), kdB(dB), ksB(sB) {};
 			/** Accessor */

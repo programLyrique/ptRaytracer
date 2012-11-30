@@ -49,6 +49,11 @@ namespace rt
             */
             Position getIntersection(const Position& point, const vector& vect);
 
+            /** Accessor
+            * \return centre
+            */
+            Position getCenter() { return center; }
+
     };
 }
 
