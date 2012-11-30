@@ -15,7 +15,8 @@ namespace rt
         protected:
             /** Parent scene */
             Scene* scene;
-            double power;
+            double powerD;
+            double powerS;
         private:
         public:
             /** Default constructor */
@@ -27,7 +28,7 @@ namespace rt
             * @aram power
             * @param Parent scene
             */
-            Light(double p, Scene* parent);
+            Light(double pD, double pS, Scene* parent);
 
             /**
             * Return the illumination of a point in a scene

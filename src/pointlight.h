@@ -29,8 +29,8 @@ namespace rt
             * @param power
             */
             PointLight(double x, double y, double z, double power, Scene* parent);
-            
-            double illuminate(const Position& p);
+
+            double illuminate(const Position& p, const Mesh* m);
 
     };
 

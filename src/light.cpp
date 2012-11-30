@@ -12,10 +12,11 @@ namespace rt
 
     }
 
-    Light::Light(double p, Scene* parent)
+    Light::Light(double pD, double pS, Scene* parent)
     {
         scene = parent;
-        power = p;
+        powerS = pS;
+        powerD = pD;
     }
 
 }
