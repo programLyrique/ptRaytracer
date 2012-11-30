@@ -23,14 +23,31 @@ namespace rt
 
 				  bool inter = false;
 				  rt::color c;
+				  rt::Position p;
 				  for(int k = 0; k < objets.size(); k++)
-				        {
-						  if(objets[k]->intersect(eye, vcenter + (i - s.width() / 2) * right + (j - s.height() / 2) * _up))
-						  {
-							inter = true;
-							c = objets[k]->getTexture().getColor();
-						  }
-				        }
+                  {
+					  if(objets[k]->intersect(eye, vcenter + (i - s.width() / 2) * right + (j - s.height() / 2) * _up))
+					  {
+
+						rt::Position pos = objrts[k].getIntersection(eye, vcenter + (i - s.width() / 2) * right + (j - s.height() / 2) * _up);
+						if(inter)
+						{
+                            if(eye.distance(pos) < eye.distance(p))
+                            {
+                               c = objets[k]->getTexture().getColor();
+                               p = pos
+                            }
+
+						}
+						else
+						{
+						    inter = true;
+						    p = pos;
+						    c = objets[k]->getTexture().getColor();
+						}
+                       }
+                  }
+
 				  if(inter)
 				  {
                     s.set_pixel(i, j, c);

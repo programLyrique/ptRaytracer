@@ -17,4 +17,9 @@ namespace rt
         > 0;
     }
 
+    Position Sphere::getIntersection(const Position& point, const vector& vect)
+    {
+        return rt::Position(point);
+;    }
+
 }

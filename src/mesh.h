@@ -36,6 +36,15 @@ class Mesh
         *    @param vect the vector
         */
         virtual bool intersect(const Position& pos, const vector& vect) = 0;
+
+
+        /** get intersection between the object and a line if it exists
+        * @param point the beginning of the ray
+        * @param vect a directing vector of the ray
+        * \return the intersection if it exists
+        */
+        virtual Position getIntersection(const Position& point, const vector& vect) = 0;
+
         /** Accessor
         * \return texture of the mesh
         */

@@ -42,6 +42,13 @@ namespace rt
              */
             bool intersect(const Position& point, const vector& vect);
 
+            /** get intersection between the sphere and a line if it exists
+            * @param point the beginning of the ray
+            * @param vect a directing vector of the ray
+            * \return the intersection if it exists
+            */
+            Position getIntersection(const Position& point, const vector& vect);
+
     };
 }
 
