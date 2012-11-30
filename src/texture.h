@@ -14,7 +14,10 @@ namespace rt
 	{
 		protected:
 		private:
+		    /** color of the object */
 			color c;
+			/** when the object start reflecting */
+			double brillance;
 		public:
 			/** default constructor */
 			Texture() {};
@@ -22,8 +25,9 @@ namespace rt
 			~Texture() {};
 			/** Constructor
 			* @param color
+			* @param brillance
 			*/
-			Texture(color col) : c(col) {};
+			Texture(color col, double b) : c(col), brillance(b) {};
 			/** Accessor */
 			color getColor() const;
 

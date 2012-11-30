@@ -4,7 +4,6 @@ namespace rt
 {
     Scene::Scene()
     {
-
     }
 
     void Scene::render(screen& s)
