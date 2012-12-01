@@ -21,7 +21,7 @@ namespace rt
 
     	if(!cache)
     	{
-            return m->getTexture().getKaR() * (m->getCentre().vectTo(p).unit() | p.vectTo(*this)) + 2 * m->getTexture().getKsR() * vision | ((m->getCentre().vectTo(p).unit() | p.vectTo(*this)) * m->getCentre().vectTo(p).unit() - p.vectTo(*this));
+            return m->getTexture().getKaR() * (m->getCentre().vectTo(p).unit() | p.vectTo(*this)) + 2 * m->getTexture().getKsR() * std::pow(vision | ((m->getCentre().vectTo(p).unit() | p.vectTo(*this)) * m->getCentre().vectTo(p).unit() - p.vectTo(*this)), m->getTexture().getBrillance());
     	}
 
     	return 0;
