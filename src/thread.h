@@ -4,6 +4,9 @@
 #include <pthread.h>
 
 
+/** Creates a thread.
+ * Just a wrapper around the C pthread library (Posix threads).
+ */
 class Thread
 {
     public:
