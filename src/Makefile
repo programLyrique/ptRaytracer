@@ -1,9 +1,9 @@
 CC=g++
-CFLAGS=-W -Wall -ansi -pedantic
+CFLAGS=-W -Wall -ansi -pedantic -D_REENTRANT
 LDFLAGS=
 
 INCLUDE=-I. -I/usr/include -I/usr/include/SDL -I./include
-LIBS=-L/usr/lib -lSDL -pthreads
+LIBS=-L/usr/lib -lSDL -lpthreads
 
 EXEC=main
 SRC= $(wildcard *.cpp)
