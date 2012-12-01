@@ -30,9 +30,15 @@ namespace rt
         - (vect.x * vect.x + vect.y * vect.y + vect.z * vect.z)
         * ((Sphere::centre.getX() - point.getX()) * (Sphere::centre.getX() - point.getX()) + (Sphere::centre.getY() - point.getY()) * (Sphere::centre.getY() - point.getY()) + (Sphere::centre.getZ() - point.getZ()) * (Sphere::centre.getZ() - point.getZ()) - radius * radius);
         //Calcul du discriminant
-        double t = (-((vect.x * (Sphere::centre.getX() - point.getX()) + vect.y * (Sphere::centre.getY() - point.getY()) + vect.z * (Sphere::centre.getZ() - point.getZ()))) - std::sqrt(delta)) / (vect.x * vect.x + vect.y * vect.y + vect.z * vect.z);
-
-        return Position(point.getX() - t * vect.x, point.getY() - t * vect.y, point.getZ() - t * vect.z);
+        double t1 = (-((vect.x * (Sphere::centre.getX() - point.getX()) + vect.y * (Sphere::centre.getY() - point.getY()) + vect.z * (Sphere::centre.getZ() - point.getZ()))) - std::sqrt(delta)) / (vect.x * vect.x + vect.y * vect.y + vect.z * vect.z);
+        double t2 = (-((vect.x * (Sphere::centre.getX() - point.getX()) + vect.y * (Sphere::centre.getY() - point.getY()) + vect.z * (Sphere::centre.getZ() - point.getZ()))) + std::sqrt(delta)) / (vect.x * vect.x + vect.y * vect.y + vect.z * vect.z);
+        Position p1(point.getX() - t1 * vect.x, point.getY() - t1 * vect.y, point.getZ() - t1 * vect.z);
+        Position p2(point.getX() - t2 * vect.x, point.getY() - t2 * vect.y, point.getZ() - t2 * vect.z);
+        
+        if(p1.distance(point) < p2.distance(point))
+        	return p1;
+		else
+        	return p2;
     }
 
 }

@@ -33,4 +33,9 @@ namespace rt
     {
         return vector(p.getX() - x, p.getY() - y, p.getZ() - z);
     }
+    
+    bool Position::operator!=(const Position& p/*, const Position& q*/) const
+    {
+    	return ((x - p.getX()) < 0.00001)||((y != p.getY()) < 0.00001)||((z != p.getZ() < 0.00001));
+    }
 }

@@ -64,7 +64,7 @@ namespace rt
                     //printf("\n");
 				  }
 				  else
-                    s.set_pixel(i, j, color::WHITE);
+                    s.set_pixel(i, j, color::BLACK);
                   
 		        }
 		    }

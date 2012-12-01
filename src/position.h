@@ -63,6 +63,8 @@ namespace rt
             void print() const {
             	printf("%f %f %f\n", x, y, z);
             }
+            
+    		virtual bool operator!=(const Position& p/*, const Position& q*/) const;
     };
 
 }

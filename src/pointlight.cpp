@@ -16,13 +16,17 @@ namespace rt
     	{
     	    if((*it)->intersect(p, p.vectTo(*this)))
     	    {
-    	        cache = true;
-    	        o = i;
+    	    	Position q = (*it)->getIntersection(p, p.vectTo(*this));
+    	    	if((p.getX() - q.getX() > 0.0001)||(p.getY() - q.getY() > 0.0001)||(p.getZ() - q.getZ() > 0.0001))
+    	    	{
+    	        	cache = true;
+    	        	o = i;
+    	        }
     	    }
     	    ++i;
     	}
 
-    	if(cache)
+    	if(!cache)
     	{
             return ((double) m->getTexture().getColor().get_red() / ((double) 255) * m->getTexture().getKaR()) * (m->getCentre().vectTo(p).unit() | p.vectTo(*this)) + 2 * ((double) m->getTexture().getColor().get_red() / ((double) 255)) * m->getTexture().getKsR() * std::pow(vision | ((m->getCentre().vectTo(p).unit() | p.vectTo(*this)) * m->getCentre().vectTo(p).unit() - p.vectTo(*this)), m->getTexture().getBrillance());
     	}
@@ -42,16 +46,22 @@ namespace rt
     	{
     	    if((*it)->intersect(p, p.vectTo(*this)))
     	    {
-    	        cache = true;
-    	        o = i;
-    	        printf("---------------------------------------\n");
-    	        (*it)->getIntersection(p, p.vectTo(*this)).print();
-    	        p.print();
+    	    	Position q = (*it)->getIntersection(p, p.vectTo(*this));
+    	        if((p.getX() - q.getX() > 0.0001)||(p.getY() - q.getY() > 0.0001)||(p.getZ() - q.getZ() > 0.0001))
+    	    	{
+    	        	cache = true;
+    	        	o = i;
+    	        	printf("HIDDEN\n");
+    	        	//printf("---------------------------------------\n");
+    	        	//q.print();
+    	        	//p.print();
+    	        }
+    	        
     	    }
     	    ++i;
     	}
 
-    	if(cache)
+    	if(!cache)
     	{
             return ((double) m->getTexture().getColor().get_green() / ((double) 255) * m->getTexture().getKaG()) * (m->getCentre().vectTo(p).unit() | p.vectTo(*this)) + 2 * ((double) m->getTexture().getColor().get_green() / ((double) 255)) * m->getTexture().getKsG() * std::pow(vision | ((m->getCentre().vectTo(p).unit() | p.vectTo(*this)) * m->getCentre().vectTo(p).unit() - p.vectTo(*this)), m->getTexture().getBrillance());
     	}
@@ -70,13 +80,17 @@ namespace rt
     	{
     	    if((*it)->intersect(p, p.vectTo(*this)))
     	    {
-    	        cache = true;
-    	        o = i;
+    	    	Position q = (*it)->getIntersection(p, p.vectTo(*this));
+    	        if((p.getX() - q.getX() > 0.0001)||(p.getY() - q.getY() > 0.0001)||(p.getZ() - q.getZ() > 0.0001))
+    	    	{
+    	        	cache = true;
+    	        	o = i;
+    	        }
     	    }
     	    ++i;
     	}
 
-    	if(cache)
+    	if(!cache)
     	{
             return ((double) m->getTexture().getColor().get_blue() / ((double) 255) * m->getTexture().getKaB()) * (m->getCentre().vectTo(p).unit() | p.vectTo(*this)) + 2 * ((double) m->getTexture().getColor().get_blue() / ((double) 255)) * m->getTexture().getKsB() * std::pow(vision | ((m->getCentre().vectTo(p).unit() | p.vectTo(*this)) * m->getCentre().vectTo(p).unit() - p.vectTo(*this)), m->getTexture().getBrillance());
     	}
