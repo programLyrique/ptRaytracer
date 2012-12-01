@@ -44,6 +44,7 @@ namespace rt
 						    p = pos;
 						    c = objets[k]->getTexture().getColor();
 						}
+						printf("%f %f %f\n", p.getX(), p.getY(), p.getZ());
                        }
                   }
 
