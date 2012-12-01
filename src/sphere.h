@@ -1,6 +1,7 @@
 #ifndef SPHERE_H
 #define SPHERE_H
 
+#include <cmath>
 #include "position.h"
 #include "mesh.h"
 #include "texture.h"
