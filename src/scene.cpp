@@ -23,18 +23,21 @@ namespace rt
 				  bool inter = false;
 				  rt::color c;
 				  rt::Position p;
+				  int o = 0;
+				  vector v = (vcenter + (i - s.width() / 2) * right + (j - s.height() / 2) * _up).unit();
 				  for(unsigned k = 0; k < objets.size(); k++)
                   {
-					  if(objets[k]->intersect(eye, vcenter + (i - s.width() / 2) * right + (j - s.height() / 2) * _up))
+					  if(objets[k]->intersect(eye, v))
 					  {
 
-						rt::Position pos = objets[k]->getIntersection(eye, vcenter + (i - s.width() / 2) * right + (j - s.height() / 2) * _up);
+						rt::Position pos = objets[k]->getIntersection(eye, v);
 						if(inter)
 						{
                             if(eye.distance(pos) < eye.distance(p))
                             {
                                c = objets[k]->getTexture().getColor();
                                p = pos;
+                               o = k;
                             }
 
 						}
@@ -43,22 +46,26 @@ namespace rt
 						    inter = true;
 						    p = pos;
 						    c = objets[k]->getTexture().getColor();
+						    o = k;
 						}
-						printf("%f %f %f\n", p.getX(), p.getY(), p.getZ());
+						//printf("%f %f %f ", p.getX(), p.getY(), p.getZ());
                        }
                   }
 
 				  if(inter)
 				  {
-				  	vector tem = (vcenter + (i - s.width() / 2) * right + (j - s.height() / 2) * _up).unit();
-				  	int l1 = lampes[0]->illuminateB(p, (Sphere*) objets[0], tem);
-				  	int l2 = lampes[0]->illuminateR(p, (Sphere*) objets[0], tem);
-				  	int l3 = lampes[0]->illuminateG(p, (Sphere*) objets[0], tem);
-				  	printf("%d %d %d\n", l1, l2, l3);
+				  	vector tem = -1 * (vcenter + (i - s.width() / 2) * right + (j - s.height() / 2) * _up).unit();
+				  	int l1 = lampes[0]->illuminateB(p, (Sphere*) objets[o], tem);
+				  	int l2 = lampes[0]->illuminateR(p, (Sphere*) objets[o], tem);
+				  	int l3 = lampes[0]->illuminateG(p, (Sphere*) objets[o], tem);
+				  	//printf("%d %d %d\n", l1, l2, l3);
                     s.set_pixel(i, j, color(l2, l3, l1));
+                    //printf("%f %f %f %d %d", tem.x, tem.y, tem.z, i, j);
+                    //printf("\n");
 				  }
 				  else
                     s.set_pixel(i, j, color::WHITE);
+                  
 		        }
 		    }
 		    printf("Finished\n");

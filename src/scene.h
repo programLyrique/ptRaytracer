@@ -58,6 +58,8 @@ namespace rt
             
             std::vector<Mesh*>::const_iterator getDebObjets() { return objets.begin(); }
             std::vector<Mesh*>::const_iterator getFinObjets() { return objets.end(); }
+            
+            Camera* getCamera() { return cam; }
 
     };
 }
