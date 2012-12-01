@@ -39,6 +39,18 @@ namespace rt
 			Texture(color col, int b, double aR, double dR, double sR, double aG, double dG, double sG, double aB, double dB, double sB) : c(col), brillance(b), kaR(aR), kdR(dR), ksR(sR), kaG(aG), kdG(dG), ksG(sG), kaB(aB), kdB(dB), ksB(sB) {};
 			/** Accessor */
 			color getColor() const;
+			
+			double getKaR() { return kaR; }
+			double getKaG() { return kaG; }
+			double getKaB() { return kaB; }
+			double getKsR() { return ksR; }			
+			double getKsB() { return ksB; }
+			double getKsG() { return ksG; }
+			double getKdR() { return kdR; }									
+			double getKdG() { return kdG; }
+			double getKdB() { return kdB; }
+			int getBrillance() { return brillance; }						
+									
 
 	};
 }

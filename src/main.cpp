@@ -14,8 +14,8 @@ int main(void)
 	// here the code to draw the pixels...
 	rt::Scene scene;
 	scene.setCamera(new rt::Camera(rt::Position(0, 0, 0), rt::Position(0, 5, 0), rt::vector(0, 0, 1)));
-	scene.addMesh(new rt::Sphere(rt::Position(0, 15, 0), 10, rt::Texture(rt::color::BLUE)));
-	scene.addLight(new rt::PointLight(0., 5., 5., 1.));
+	scene.addMesh(new rt::Sphere(rt::Position(0, 15, 0), 10, rt::Texture(rt::color::BLUE, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)));
+	scene.addLight(new rt::PointLight(0., 5., 5., 5., 1., &scene));
 	scene.render(s);
 
 

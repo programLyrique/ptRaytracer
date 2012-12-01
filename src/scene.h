@@ -54,8 +54,8 @@ namespace rt
              */
             void render(screen& s);
             
-            std::const_iterator getDebObjets() { return objets.cbegin(); }
-            std::const_iterator getFinObjets() { return objets.cend(); }
+            std::vector<Mesh*>::const_iterator getDebObjets() { return objets.begin(); }
+            std::vector<Mesh*>::const_iterator getFinObjets() { return objets.end(); }
 
     };
 }

@@ -1,6 +1,8 @@
 #ifndef POSITION_H
 #define POSITION_H
 
+#include "vector.hpp"
+
 namespace rt
 {
     /**
@@ -48,13 +50,14 @@ namespace rt
             /** distances between 2 points
             * @arg other point
             */
-            double distance(const Position& p);
+            double distance(const Position& p) const;
             
             
             /** Create a vector for current point to given point
             * @param point
             * \return vector
-            vector vectTo(const Position& p);
+            */
+            vector vectTo(const Position& p) const;
     };
 
 }

@@ -4,6 +4,8 @@
 #include "position.h"
 #include "light.h"
 #include "scene.h"
+#include "mesh.h"
+#include <vector>
 
 namespace rt
 {
@@ -28,7 +30,7 @@ namespace rt
             * @param z
             * @param power
             */
-            PointLight(double x, double y, double z, double power, Scene* parent);
+            PointLight(double x, double y, double z, double powerD, double powerS, Scene* parent);
 
             int illuminateR(const Position& p, const Sphere* m, const vector vision);
             int illuminateG(const Position& p, const Sphere* m, const vector vision);

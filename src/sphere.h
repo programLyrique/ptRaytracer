@@ -53,7 +53,7 @@ namespace rt
             /** Accessor
             * \return centre
             */
-            Position getCenter() { return center; }
+            Position getCentre() const { return centre; }
 
     };
 }

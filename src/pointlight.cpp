@@ -2,7 +2,7 @@
 
 namespace rt
 {
-    PointLight::PointLight(double x, double y, double z, double pow, Scene* parent) : Position(x, y, z), Light(pow, parent)
+    PointLight::PointLight(double x, double y, double z, double powD, double powS, Scene* scene) : Light(powD, powS, scene), Position(x, y, z)
     {
 
     }
@@ -11,9 +11,9 @@ namespace rt
     {
         bool cache = false;
 
-    	for(const_iterator it = parent->getDebObjets(); it != parent.getFinObjets(); ++it)
+    	for(std::vector<Mesh*>::const_iterator it = scene->getDebObjets(); it != scene->getFinObjets(); ++it)
     	{
-    	    if(it->intersect(p, p.vectTo(*this)))
+    	    if((*it)->intersect(p, p.vectTo(*this)))
     	    {
     	        cache = true;
     	    }
@@ -27,14 +27,14 @@ namespace rt
     	return 0;
 
     }
-
+/*
     int PointLight::illuminateG(const Position& p, const Sphere* m, const vector vision)
     {
         bool cache = false;
 
-    	for(const_iterator it = parent->getDebObjets(); it != parent.getFinObjets(); ++it)
+    	for(std::vector<Mesh*>::const_iterator it = scene->getDebObjets(); it != scene->getFinObjets(); ++it)
     	{
-    	    if(it->intersect(p, p.vectTo(*this)))
+    	    if((*it)->intersect(p, p.vectTo(*this)))
     	    {
     	        cache = true;
     	    }
@@ -54,12 +54,12 @@ namespace rt
     {
         bool cache = false;
 
-    	for(const_iterator it = parent->getDebObjets(); it != parent.getFinObjets(); ++it)
+    	for(std::vector<Mesh*>::const_iterator it = scene->getDebObjets(); it != scene->getFinObjets(); ++it)
     	{
-    	    if(it->intersect(p, p.vectTo(*this)))
+    	    if((*it)->intersect(p, p.vectTo(*this)))
     	    {
     	        cache = true;
-    	    }
+    	    
     	}
 
     	if(!cache)
@@ -70,4 +70,5 @@ namespace rt
     	return 0;
 
     }
+    }*/
 }

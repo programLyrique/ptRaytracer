@@ -24,13 +24,13 @@ namespace rt
         return z;
     }
 
-    double Position::distance(const Position& p)
+    double Position::distance(const Position& p) const
     {
         return (x - p.getX()) * (x - p.getX()) + (y - p.getY()) * (y - p.getY()) + (z - p.getZ()) * (z - p.getZ());
     }
     
-    vector Position::vectTo(const Position& p)
+    vector Position::vectTo(const Position& p) const
     {
-        return vector(g.getX() - x, p.getY() - y, p.getZ() - z);
+        return vector(p.getX() - x, p.getY() - y, p.getZ() - z);
     }
 }
