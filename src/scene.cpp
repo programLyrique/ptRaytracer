@@ -1,6 +1,7 @@
 #include "scene.h"
 
 #include <cmath>
+#include <iostream>
 
 namespace rt
 {
@@ -11,6 +12,7 @@ namespace rt
 
     void Scene::renderArea(unsigned x, unsigned y, unsigned width, unsigned height, screen& s)
     {
+        std::cout << "Rendering of " << x << "," << y << " - " << width << "," << height << std::endl;
         vector up = cam->getUp() ;
         Position centre = cam->getCentre();
         Position eye = cam->getEye();
@@ -40,8 +42,8 @@ namespace rt
 				  //else
                   //  s.set_pixel(i, j, color::WHITE); // Black is the background.
 		        }
-		    }
-		    std::printf("Finished\n");
+        }
+        //s.fill_rect(x,y,width, height, color::BLUE);
     }
 
     /*unsigned b_log(unsigned i)
@@ -52,23 +54,44 @@ namespace rt
 
     void Scene::render(screen& s, unsigned nbThreads)
     {
+        std::cout << "Rendering with " << nbThreads << std::endl;
         // Most of the times, the number of procs is a power of 2.
         // Anyway, it's rarely a prime number (except 2...).
         unsigned p2 = std::log(nbThreads) / std::log(2);//More efficient to detect the most significant bit
-        unsigned nb_w = std::pow(2, p2 / 2); // Nombre de divisions de la largeur
-        unsigned nb_h = p2 / nb_w ;// Nombre de morceaux en hauteur
+        unsigned nb_w = 0; // Nombre de divisions de la largeur
+        unsigned nb_h = 0; // Nombre de morceaux en hauteur
+        //What is the longest side ?
+        if(s.height() > s.width())
+        {
+            nb_w = std::pow(2, p2 / 2);
+            nb_h = nbThreads / nb_w ;
+        }
+        else
+        {
+            nb_h = std::pow(2, p2 / 2);
+            nb_w = nbThreads / nb_h ;
+        }
+
         unsigned w = s.width() / nb_w;
         unsigned h = s.height() / nb_h;
+        std::cout << "Parts are " << w << " x " << h << std::endl;
+        std::cout << "There are " << nb_w << " parts in width and " << nb_h << " in height." << std::endl;
         unsigned limit_w = w * (nb_w - 1);
         unsigned limit_h = h * (nb_h - 1 );
-        for(unsigned i = 0 ; i <  limit_w; i += w)
-            for(unsigned j = 0; i < limit_h; j += h)
+        std::cout << "Number of simple parts : limit_w = " << limit_w << " and limit_h = " << limit_h << std::endl;
+        for(int i = 0 ; i <  s.width(); i += w)
+            for(int j = 0; j < s.height(); j += h)
             {
+                std::cout << "Rendering area (" << i << "," << j << ")" << std::endl;
                 renderArea(i,j,w,h,s);
             }
         //Render the last parts (w,h + reminder of the devision)
-        renderArea(limit_h, limit_w, s.width() - limit_w, s.height() - limit_w, s);
-
+        /*std::cout << "Rendering last parts" << std::endl;
+        for(unsigned i = 0; i < limit_w ; i += w)
+            renderArea(i, limit_h, w, s.height() - h, s);
+        for(unsigned j=0; j < limit_h; j += h)
+            renderArea(limit_w, j, s.width() - h, h, s);
+        std::cout << "End of rendering" << std::endl;*/
  	}
 
     void Scene::render(screen& s)
