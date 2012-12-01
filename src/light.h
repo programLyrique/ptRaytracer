@@ -2,6 +2,7 @@
 #define LIGHT_H
 
 class Scene;
+
 #include "scene.h"
 #include "position.h"
 #include "mesh.h"

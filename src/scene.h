@@ -3,12 +3,14 @@
 
 class Camera;
 class Light;
+class PointLight;
 
 #include "mesh.h"
 #include "light.h"
 #include "camera.h"
 #include "screen.hpp"
 #include "sphere.h"
+//#include "pointlight.h"
 #include <vector>
 #include <cstdio>
 

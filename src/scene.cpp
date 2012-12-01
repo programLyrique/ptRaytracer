@@ -50,7 +50,12 @@ namespace rt
 
 				  if(inter)
 				  {
-                    s.set_pixel(i, j, c);
+				  	vector tem = (vcenter + (i - s.width() / 2) * right + (j - s.height() / 2) * _up).unit();
+				  	int l1 = lampes[0]->illuminateB(p, (Sphere*) objets[0], tem);
+				  	int l2 = lampes[0]->illuminateR(p, (Sphere*) objets[0], tem);
+				  	int l3 = lampes[0]->illuminateG(p, (Sphere*) objets[0], tem);
+				  	printf("%d %d %d\n", l1, l2, l3);
+                    s.set_pixel(i, j, color(l2, l3, l1));
 				  }
 				  else
                     s.set_pixel(i, j, color::WHITE);
