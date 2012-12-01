@@ -54,7 +54,7 @@ namespace rt
 
 				  if(inter)
 				  {
-				  	vector tem = -1 * (vcenter + (i - s.width() / 2) * right + (j - s.height() / 2) * _up).unit();
+				  	vector tem = (-1 * v).unit();
 				  	double l1 = lampes[0]->illuminateB(p, (Sphere*) objets[o], tem);
 				  	double l2 = lampes[0]->illuminateR(p, (Sphere*) objets[o], tem);
 				  	double l3 = lampes[0]->illuminateG(p, (Sphere*) objets[o], tem);
