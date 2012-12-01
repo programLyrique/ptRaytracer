@@ -14,25 +14,25 @@ namespace rt
 {
 
 
-Thread::Thread() : thread(0)
+Thread::Thread() : thread(NULL)
 {
 
 }
 
 Thread::~Thread()
 {
-    //dtor
+
 }
 
 bool Thread::exec()
 {
-    return pthread_create(thread, 0, startRoutine, this) == 0;
+    return pthread_create(thread, NULL, startRoutine, this) == 0;
 }
 
 bool Thread::join()
 {
-    if(thread != 0) // Le thread existe.
-        return pthread_join(*thread, 0) == 0;
+    if(thread != NULL) // Le thread existe.
+        return pthread_join(*thread, NULL) == 0;
     else
         return false;
 }
@@ -41,10 +41,10 @@ void * Thread::startRoutine(void * obj)
 {
     Thread * t = static_cast<Thread*> (obj);
     t->run ();
-    return 0;
+    return NULL;
 }
 
-unsigned int nbCores()
+unsigned int Thread::nbCores()
 {
 #ifdef WIN32
     SYSTEM_INFO sysinfo;

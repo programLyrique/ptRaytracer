@@ -22,8 +22,9 @@ class Thread
         /**
          * To use pthread functions that are not implemented in the class Thread.
          * @return a handle to the thread
+         * @todo what if the pointer is NULL ?
          */
-        pthread_t getHandle() const { return *thread;}
+        pthread_t getHandle() const { return *thread; }
 
         /**
          * Launches the thread.
