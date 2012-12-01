@@ -6,6 +6,7 @@
 #include "scene.h"
 #include "mesh.h"
 #include <vector>
+#include <algorithm>
 
 namespace rt
 {
@@ -32,9 +33,9 @@ namespace rt
             */
             PointLight(double x, double y, double z, double powerD, double powerS, Scene* parent);
 
-            int illuminateR(const Position& p, const Sphere* m, const vector vision);
-            int illuminateG(const Position& p, const Sphere* m, const vector vision);
-            int illuminateB(const Position& p, const Sphere* m, const vector vision);
+            double illuminateR(const Position& p, const Sphere* m, const vector vision);
+            double illuminateG(const Position& p, const Sphere* m, const vector vision);
+            double illuminateB(const Position& p, const Sphere* m, const vector vision);
 
     };
 

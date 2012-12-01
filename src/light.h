@@ -37,9 +37,9 @@ namespace rt
             * Return the illumination of a point in a scene
             * @param the position wanted
             */
-            virtual int illuminateR(const Position& position, const Sphere* m, const vector vision) = 0;
-            virtual int illuminateG(const Position& position, const Sphere* m, const vector vision) = 0;
-            virtual int illuminateB(const Position& position, const Sphere* m, const vector vision) = 0;                        
+            virtual double illuminateR(const Position& position, const Sphere* m, const vector vision) = 0;
+            virtual double illuminateG(const Position& position, const Sphere* m, const vector vision) = 0;
+            virtual double illuminateB(const Position& position, const Sphere* m, const vector vision) = 0;                        
 
     };
 }

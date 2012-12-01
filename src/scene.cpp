@@ -55,11 +55,11 @@ namespace rt
 				  if(inter)
 				  {
 				  	vector tem = -1 * (vcenter + (i - s.width() / 2) * right + (j - s.height() / 2) * _up).unit();
-				  	int l1 = lampes[0]->illuminateB(p, (Sphere*) objets[o], tem);
-				  	int l2 = lampes[0]->illuminateR(p, (Sphere*) objets[o], tem);
-				  	int l3 = lampes[0]->illuminateG(p, (Sphere*) objets[o], tem);
+				  	double l1 = lampes[0]->illuminateB(p, (Sphere*) objets[o], tem);
+				  	double l2 = lampes[0]->illuminateR(p, (Sphere*) objets[o], tem);
+				  	double l3 = lampes[0]->illuminateG(p, (Sphere*) objets[o], tem);
 				  	//printf("%d %d %d\n", l1, l2, l3);
-                    s.set_pixel(i, j, color(l2, l3, l1));
+                    s.set_pixel(i, j, color(255 * l2, 255 * l3, 255 * l1));
                     //printf("%f %f %f %d %d", tem.x, tem.y, tem.z, i, j);
                     //printf("\n");
 				  }
