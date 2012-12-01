@@ -27,7 +27,7 @@ namespace rt
     	return 0;
 
     }
-/*
+    
     int PointLight::illuminateG(const Position& p, const Sphere* m, const vector vision)
     {
         bool cache = false;
@@ -42,14 +42,13 @@ namespace rt
 
     	if(!cache)
     	{
-            return m->getTexture().getKaG() * (m->getCentre().vectTo(p).unit() | p.vectTo(*this)) + 2 * m->getTexture().getKsG() * vision | ((m->getCentre().vectTo(p).unit() | p.vectTo(*this)) * m->getCentre().vectTo(p).unit() - p.vectTo(*this));
+            return m->getTexture().getKaG() * (m->getCentre().vectTo(p).unit() | p.vectTo(*this)) + 2 * m->getTexture().getKsG() * std::pow(vision | ((m->getCentre().vectTo(p).unit() | p.vectTo(*this)) * m->getCentre().vectTo(p).unit() - p.vectTo(*this)), m->getTexture().getBrillance());
     	}
 
     	return 0;
 
     }
-
-
+    
     int PointLight::illuminateB(const Position& p, const Sphere* m, const vector vision)
     {
         bool cache = false;
@@ -59,16 +58,16 @@ namespace rt
     	    if((*it)->intersect(p, p.vectTo(*this)))
     	    {
     	        cache = true;
-    	    
+    	    }
     	}
 
     	if(!cache)
     	{
-            return m->getTexture().getKaB() * (m->getCentre().vectTo(p).unit() | p.vectTo(*this)) + 2 * m->getTexture().getKsB() * vision | ((m->getCentre().vectTo(p).unit() | p.vectTo(*this)) * m->getCentre().vectTo(p).unit() - p.vectTo(*this));
+            return m->getTexture().getKaB() * (m->getCentre().vectTo(p).unit() | p.vectTo(*this)) + 2 * m->getTexture().getKsB() * std::pow(vision | ((m->getCentre().vectTo(p).unit() | p.vectTo(*this)) * m->getCentre().vectTo(p).unit() - p.vectTo(*this)), m->getTexture().getBrillance());
     	}
 
     	return 0;
 
     }
-    }*/
+
 }
