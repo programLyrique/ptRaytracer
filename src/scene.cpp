@@ -21,7 +21,6 @@ namespace rt
 		        {
 
 				  bool inter = false;
-				  rt::color c;
 				  rt::Position p;
 				  int o = 0;
 				  vector v = (vcenter + (i - s.width() / 2) * right + (j - s.height() / 2) * _up).unit();
@@ -35,10 +34,8 @@ namespace rt
 						{
                             if(eye.distance(pos) < eye.distance(p))
                             {
-                               c = objets[k]->getTexture().getColor();
                                p = pos;
                                o = k;
-                               printf("UPDATEavec %d\n", k);
                             }
 
 						}
@@ -46,10 +43,8 @@ namespace rt
 						{
 						    inter = true;
 						    p = pos;
-						    c = objets[k]->getTexture().getColor();
 						    o = k;
 						}
-						//printf("%f %f %f ", p.getX(), p.getY(), p.getZ());
                        }
                   }
 
@@ -59,10 +54,7 @@ namespace rt
 				  	double l1 = lampes[0]->illuminateB(p, (Sphere*) objets[o], tem);
 				  	double l2 = lampes[0]->illuminateR(p, (Sphere*) objets[o], tem);
 				  	double l3 = lampes[0]->illuminateG(p, (Sphere*) objets[o], tem);
-				  	//printf("%d %d %d\n", l1, l2, l3);
                     s.set_pixel(i, j, color(255 * l2, 255 * l3, 255 * l1));
-                    //printf("%f %f %f %d %d", tem.x, tem.y, tem.z, i, j);
-                    //printf("\n");
 				  }
 				  //else
                   //  s.set_pixel(i, j, color::BLACK);

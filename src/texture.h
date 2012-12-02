@@ -15,18 +15,11 @@ namespace rt
 		protected:
 		private:
 		    /** color of the object */
-			color c;
+			color cB;
+			color cN;
 			/** Parameters for the Phong reflection */
 			int brillance;
-			double kaR;
-			double kdR;
-			double ksR;
-            double kaG;
-			double kdG;
-			double ksG;
-            double kaB;
-			double kdB;
-			double ksB;
+
 		public:
 			/** default constructor */
 			Texture() {};
@@ -36,19 +29,10 @@ namespace rt
 			* @param color
 			* @param brillance and other coefficients
 			*/
-			Texture(color col, int b, double aR, double dR, double sR, double aG, double dG, double sG, double aB, double dB, double sB) : c(col), brillance(b), kaR(aR), kdR(dR), ksR(sR), kaG(aG), kdG(dG), ksG(sG), kaB(aB), kdB(dB), ksB(sB) {};
+			Texture(color colB, color colN, int b) : cB(colB), cN(colN), brillance(b) {};
 			/** Accessor */
-			color getColor() const;
-			
-			double getKaR() { return kaR; }
-			double getKaG() { return kaG; }
-			double getKaB() { return kaB; }
-			double getKsR() { return ksR; }			
-			double getKsB() { return ksB; }
-			double getKsG() { return ksG; }
-			double getKdR() { return kdR; }									
-			double getKdG() { return kdG; }
-			double getKdB() { return kdB; }
+			color getColorB() const { return cB; }
+			color getColorN() const { return cN; }
 			int getBrillance() { return brillance; }						
 									
 
