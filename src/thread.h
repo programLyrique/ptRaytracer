@@ -24,7 +24,7 @@ class Thread
          * @return a handle to the thread
          * @todo what if the pointer is NULL ?
          */
-        pthread_t getHandle() const { return *thread; }
+        pthread_t getHandle() const { return thread; }
 
         /**
          * Launches the thread.
@@ -48,7 +48,7 @@ class Thread
          */
         virtual void run() = 0;
     private:
-        pthread_t * thread;
+        pthread_t thread;
         /**
          * To wrap run() so that run() can be launched with pthread_create.
          * Has to be static because non static member functions have a hidden parameter which

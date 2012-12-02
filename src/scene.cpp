@@ -60,7 +60,7 @@ namespace rt
         int p2 = std::log(nbThreads) / std::log(2);//More efficient to detect the most significant bit
         int nb_w = 0; // Nombre de divisions de la largeur
         int nb_h = 0; // Nombre de morceaux en hauteur
-        std::vector<Thread*> threads(nbThreads);
+        std::vector<ThreadRender*> threads(nbThreads);
         //What is the longest side ?
         if(s.height() > s.width())
         {
@@ -90,7 +90,10 @@ namespace rt
                 k++;
             }
         for(k=0; k < nbThreads ;k++)
+        {
+            std::cout << "Launching thread n." << k + 1<< std::endl;
             threads[k]->exec();
+        }
         for(k=0;k < nbThreads; k++)
             threads[k]->join();
         for(k=0; k < nbThreads;k++)

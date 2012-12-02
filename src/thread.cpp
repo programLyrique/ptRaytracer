@@ -14,7 +14,7 @@ namespace rt
 {
 
 
-Thread::Thread() : thread(NULL)
+Thread::Thread()
 {
 
 }
@@ -26,13 +26,13 @@ Thread::~Thread()
 
 bool Thread::exec()
 {
-    return pthread_create(thread, NULL, startRoutine, this) == 0;
+    return pthread_create(&thread, NULL, startRoutine, this) == 0;
 }
 
 bool Thread::join()
 {
     if(thread != NULL) // Le thread existe.
-        return pthread_join(*thread, NULL) == 0;
+        return pthread_join(thread, NULL) == 0;
     else
         return false;
 }
