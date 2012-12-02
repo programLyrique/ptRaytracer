@@ -55,24 +55,24 @@ namespace rt
 				  if(inter)
 				  {
 				  	vector tem = (-1 * v).unit();
-				  	double l1 = 0; 
-				  	double l2 = 0; 
-				  	double l3 = 0; 
-				  	
+				  	double l1 = 0;
+				  	double l2 = 0;
+				  	double l3 = 0;
+
 				  	for(int k = 0; k < lampes.size(); ++k)
 				  	{
 				  		l1 += lampes[k]->illuminateR(p, (Sphere*) objets[o], tem);
-				  		l2 += lampes[k]->illuminateG(p, (Sphere*) objets[o], tem);				  		
-				  		l3 += lampes[k]->illuminateB(p, (Sphere*) objets[o], tem);				  		
+				  		l2 += lampes[k]->illuminateG(p, (Sphere*) objets[o], tem);
+				  		l3 += lampes[k]->illuminateB(p, (Sphere*) objets[o], tem);
 				  	}
-				  	
+
 				  	l1 = std::min(l1, 255.);
 				  	l2 = std::min(l2, 255.);
 				  	l3 = std::min(l3, 255.);
-				  	
+
                     s.set_pixel(i, j, color((int)l1, (int)l2, (int)l3));
 				  }
-				  
+
 		        }
         }
     }
@@ -147,6 +147,10 @@ namespace rt
         std::cout << "End of rendering" << std::endl;
  	}
 
+    void Scene::render(screen& s)
+    {
+        render(s, Thread::nbCores());
+    }
 
     void Scene::addMesh(Mesh* mesh)
     {

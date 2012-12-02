@@ -1,9 +1,5 @@
 CC=g++
-<<<<<<< HEAD
-CFLAGS=-W -Wall -ansi -pedantic -g
-=======
-CFLAGS=-W -Wall -g -ansi -pedantic 
->>>>>>> multithreaded_renderer
+CFLAGS=-W -Wall -ansi -pedantic -g 
 LDFLAGS=
 
 INCLUDE=-I. -I/usr/include -I/usr/include/SDL -I./include

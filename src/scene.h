@@ -9,9 +9,9 @@ class Light;
 #include "camera.h"
 #include "screen.hpp"
 #include "sphere.h"
-//#include "pointlight.h"
+#include "thread.h"
+
 #include <vector>
-#include <stdio.h>
 
 
 namespace rt
@@ -22,7 +22,6 @@ namespace rt
      */
     class Scene
     {
-        protected:
         private:
             std::vector<Mesh*> objets;
             std::vector<Light*> lampes;
@@ -84,10 +83,10 @@ namespace rt
              * to render the scene.
              */
             void render(screen& s);
-            
+
             std::vector<Mesh*>::const_iterator getDebObjets() { return objets.begin(); }
             std::vector<Mesh*>::const_iterator getFinObjets() { return objets.end(); }
-            
+
             Camera* getCamera() { return cam; }
 
             /**
