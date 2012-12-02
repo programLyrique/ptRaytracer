@@ -49,6 +49,8 @@ namespace rt
             * \return the intersection if it exists
             */
             Position getIntersection(const Position& point, const vector& vect);
+            
+            vector getNormal(const Position& p) const;
 
             /** Accessor
             * \return centre

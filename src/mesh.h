@@ -44,6 +44,13 @@ class Mesh
         * \return the intersection if it exists
         */
         virtual Position getIntersection(const Position& point, const vector& vect) = 0;
+        
+        
+        /** Retourne un vecteur normal a la surface 
+        * @param point of the object
+        * \return vector
+        */
+        virtual vector getNormal(const Position& p) const = 0;
 
         /** Accessor
         * \return texture of the mesh

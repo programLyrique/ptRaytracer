@@ -43,5 +43,10 @@ namespace rt
 		else
         	return p2;
     }
+    
+    vector Sphere::getNormal(const Position& p) const
+    {
+    	return centre.vectTo(p);
+    }
 
 }

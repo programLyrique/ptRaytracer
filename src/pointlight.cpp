@@ -7,7 +7,7 @@ namespace rt
 
     }
 
-    double PointLight::illuminateR(const Position& p, const Sphere* m, const vector vision)
+    double PointLight::illuminateR(const Position& p, const Mesh* m, const vector vision)
     {
         bool cache = false;
 		int o = 0;
@@ -30,8 +30,8 @@ namespace rt
     	if(!cache)
     	{
     		//double a = 0;
-    		double a = std::max(0., ((double) m->getTexture().getColor().get_red() / ((double) 255) * m->getTexture().getKaR()) * (m->getCentre().vectTo(p).unit() | p.vectTo(*this).unit()));
-    		double b = std::max(0., ((double) m->getTexture().getColor().get_red() / ((double) 255)) * m->getTexture().getKsR() * std::pow(vision.unit() | (2 * (m->getCentre().vectTo(p).unit() | p.vectTo(*this).unit()) * m->getCentre().vectTo(p).unit() - p.vectTo(*this).unit()).unit(), m->getTexture().getBrillance()));
+    		double a = std::max(0., ((double) m->getTexture().getColor().get_red() / ((double) 255) * m->getTexture().getKaR()) * (m->getNormal(p).unit() | p.vectTo(*this).unit()));
+    		double b = std::max(0., ((double) m->getTexture().getColor().get_red() / ((double) 255)) * m->getTexture().getKsR() * std::pow(vision.unit() | (2 * (m->getNormal(p).unit() | p.vectTo(*this).unit()) * m->getNormal(p).unit() - p.vectTo(*this).unit()).unit(), m->getTexture().getBrillance()));
     		//double b = 0;
     		if(a < 0 || b < 0) 
     			printf("rouge: %f %f ", a, b);
@@ -41,7 +41,7 @@ namespace rt
 
     }
     
-    double PointLight::illuminateG(const Position& p, const Sphere* m, const vector vision)
+    double PointLight::illuminateG(const Position& p, const Mesh* m, const vector vision)
     {
         bool cache = false;
         int o = 0;
@@ -71,8 +71,8 @@ namespace rt
     	if(!cache)
     	{
     		//double a = 0;
-    		double a = std::max(0., ((double) m->getTexture().getColor().get_green() / ((double) 255) * m->getTexture().getKaG()) * (m->getCentre().vectTo(p).unit() | p.vectTo(*this).unit()));
-    		double b = std::max(0., ((double) m->getTexture().getColor().get_green() / ((double) 255)) * m->getTexture().getKsG() * std::pow(vision.unit() | (2 *(m->getCentre().vectTo(p).unit() | p.vectTo(*this).unit()) * m->getCentre().vectTo(p).unit() - p.vectTo(*this).unit()).unit(), m->getTexture().getBrillance()));
+    		double a = std::max(0., ((double) m->getTexture().getColor().get_green() / ((double) 255) * m->getTexture().getKaG()) * (m->getNormal(p).unit() | p.vectTo(*this).unit()));
+    		double b = std::max(0., ((double) m->getTexture().getColor().get_green() / ((double) 255)) * m->getTexture().getKsG() * std::pow(vision.unit() | (2 *(m->getNormal(p).unit() | p.vectTo(*this).unit()) * m->getNormal(p).unit() - p.vectTo(*this).unit()).unit(), m->getTexture().getBrillance()));
     		//double b = 0;
     		if(a < 0 || b < 0) 
     			printf("vert: %f %f ", a, b);
@@ -82,7 +82,7 @@ namespace rt
 
     }
     
-    double PointLight::illuminateB(const Position& p, const Sphere* m, const vector vision)
+    double PointLight::illuminateB(const Position& p, const Mesh* m, const vector vision)
     {
         bool cache = false;
 		int o = 0;
@@ -105,8 +105,8 @@ namespace rt
     	if(!cache)
     	{
     		//double a = 0;
-    		double a = std::max(0., ((double) m->getTexture().getColor().get_blue() / ((double) 255) * m->getTexture().getKaB()) * (m->getCentre().vectTo(p).unit() | p.vectTo(*this).unit()));
-    		double b = std::max(0., ((double) m->getTexture().getColor().get_blue() / ((double) 255)) * m->getTexture().getKsB() * std::pow(vision.unit() | (2 * (m->getCentre().vectTo(p).unit() | p.vectTo(*this).unit()) * m->getCentre().vectTo(p).unit() - p.vectTo(*this).unit()).unit(), m->getTexture().getBrillance()));
+    		double a = std::max(0., ((double) m->getTexture().getColor().get_blue() / ((double) 255) * m->getTexture().getKaB()) * (m->getNormal(p).unit() | p.vectTo(*this).unit()));
+    		double b = std::max(0., ((double) m->getTexture().getColor().get_blue() / ((double) 255)) * m->getTexture().getKsB() * std::pow(vision.unit() | (2 * (m->getNormal(p).unit() | p.vectTo(*this).unit()) * m->getNormal(p).unit() - p.vectTo(*this).unit()).unit(), m->getTexture().getBrillance()));
     		//double b = 0;
     		//if(a < 0 || b < 0) 
     			//printf("bleu: %f %f\n", a, b);
