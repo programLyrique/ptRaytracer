@@ -3,14 +3,17 @@
 
 class Camera;
 class Light;
+class PointLight;
 
 #include "mesh.h"
 #include "light.h"
 #include "camera.h"
 #include "screen.hpp"
 #include "sphere.h"
+//#include "pointlight.h"
 #include <vector>
-#include <stdio.h>
+#include <cstdio>
+#include <algorithm>
 
 
 namespace rt
@@ -41,7 +44,7 @@ namespace rt
             /**
             * Add a light in the scene.
             */
-            void addLight(const Light* light);
+            void addLight(Light* light);
 
             /**
             * Set the camera in the scene.
@@ -53,6 +56,11 @@ namespace rt
              * Renders the scene on the screen.
              */
             void render(screen& s);
+            
+            std::vector<Mesh*>::const_iterator getDebObjets() { return objets.begin(); }
+            std::vector<Mesh*>::const_iterator getFinObjets() { return objets.end(); }
+            
+            Camera* getCamera() { return cam; }
 
     };
 }

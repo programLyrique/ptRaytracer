@@ -12,9 +12,10 @@ namespace rt
 
     }
 
-    Light::Light(Scene * _scene)
+    Light::Light(color c, Scene* parent): couleur(c)
     {
-        scene = _scene;
+        scene = parent;
+
     }
 
 }

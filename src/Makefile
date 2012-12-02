@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-W -Wall -ansi -pedantic
+CFLAGS=-W -Wall -ansi -pedantic -g
 LDFLAGS=
 
 INCLUDE=-I. -I/usr/include -I/usr/include/SDL -I./include
@@ -7,7 +7,7 @@ LIBS=-L/usr/lib -lSDL
 
 EXEC=main
 SRC= $(wildcard *.cpp)
-OBJ= $(SRC:.cpp=.o)
+OBJ= $(SRC:.cpp=.o)	
 
 all: $(EXEC)
 

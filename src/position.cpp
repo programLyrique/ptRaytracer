@@ -2,7 +2,7 @@
 
 namespace rt
 {
-    Position::Position(int _x, int _y, int _z)
+    Position::Position(double _x, double _y, double _z)
     {
         x = _x;
         y = _y;
@@ -22,5 +22,20 @@ namespace rt
     double Position::getZ() const
     {
         return z;
+    }
+
+    double Position::distance(const Position& p) const
+    {
+        return (x - p.getX()) * (x - p.getX()) + (y - p.getY()) * (y - p.getY()) + (z - p.getZ()) * (z - p.getZ());
+    }
+    
+    vector Position::vectTo(const Position& p) const
+    {
+        return vector(p.getX() - x, p.getY() - y, p.getZ() - z);
+    }
+    
+    bool Position::operator!=(const Position& p/*, const Position& q*/) const
+    {
+    	return ((x - p.getX()) < 0.00001)||((y != p.getY()) < 0.00001)||((z != p.getZ() < 0.00001));
     }
 }

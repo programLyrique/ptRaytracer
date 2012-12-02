@@ -4,7 +4,6 @@ namespace rt
 {
     Scene::Scene()
     {
-
     }
 
     void Scene::render(screen& s)
@@ -22,21 +21,56 @@ namespace rt
 		        {
 
 				  bool inter = false;
-				  rt::color c;
-				  for(int k = 0; k < objets.size(); k++)
-				        {
-						  if(objets[k]->intersect(eye, vcenter + (i - s.width() / 2) * right + (j - s.height() / 2) * _up))
-						  {
-							inter = true;
-							c = objets[k]->getTexture().getColor();
-						  }
-				        }
+				  rt::Position p;
+				  int o = 0;
+				  vector v = (vcenter + (i - s.width() / 2) * right + (j - s.height() / 2) * _up).unit();
+				  for(unsigned k = 0; k < objets.size(); k++)
+                  {
+					  if(objets[k]->intersect(eye, v))
+					  {
+
+						rt::Position pos = objets[k]->getIntersection(eye, v);
+						if(inter)
+						{
+                            if(eye.distance(pos) < eye.distance(p))
+                            {
+                               p = pos;
+                               o = k;
+                            }
+
+						}
+						else
+						{
+						    inter = true;
+						    p = pos;
+						    o = k;
+						}
+                       }
+                  }
+
 				  if(inter)
 				  {
-                    s.set_pixel(i, j, c);
+				  	vector tem = (-1 * v).unit();
+				  	double l1 = 0; 
+				  	double l2 = 0; 
+				  	double l3 = 0; 
+				  	
+				  	for(int k = 0; k < lampes.size(); ++k)
+				  	{
+				  		l1 += lampes[k]->illuminateR(p, (Sphere*) objets[o], tem);
+				  		l2 += lampes[k]->illuminateG(p, (Sphere*) objets[o], tem);				  		
+				  		l3 += lampes[k]->illuminateB(p, (Sphere*) objets[o], tem);				  		
+				  	}
+				  	
+				  	l1 = std::min(l1, 255.);
+				  	l2 = std::min(l2, 255.);
+				  	l3 = std::min(l3, 255.);
+				  	
+                    s.set_pixel(i, j, color((int)l1, (int)l2, (int)l3));
 				  }
-				  else
-                    s.set_pixel(i, j, color::WHITE);
+				  //else
+                  //  s.set_pixel(i, j, color::BLACK);
+
 		        }
 		    }
 		    printf("Finished\n");
@@ -48,9 +82,9 @@ namespace rt
 		objets.push_back(mesh);
     }
 
-    void Scene::addLight(const Light* light)
+    void Scene::addLight(Light* light)
     {
-
+		lampes.push_back(light);
     }
 
     void Scene::setCamera(Camera* camera)
