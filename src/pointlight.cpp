@@ -23,7 +23,7 @@ namespace rt
 
     	double a = std::max(0., ((double) m->getTexture().getColorB().get_red() / ((double) 255)) * (m->getNormal(p).unit() | p.vectTo(*this).unit()));
     	double b = std::max(0., ((double) m->getTexture().getColorN().get_red() / ((double) 255)) * std::pow(vision.unit() | (2 * (m->getNormal(p).unit() | p.vectTo(*this).unit()) * m->getNormal(p).unit() - p.vectTo(*this).unit()).unit(), m->getTexture().getBrillance()));
-         return std::min(couleur.get_red() * (a + b), 255.);
+         return std::min(couleur.get_red() * ((1 - m->getTexture().getTransparence()) * a + b), 255.);
 
     }
     
@@ -46,7 +46,7 @@ namespace rt
 
     	double a = std::max(0., ((double) m->getTexture().getColorB().get_green() / ((double) 255)) * (m->getNormal(p).unit() | p.vectTo(*this).unit()));
     	double b = std::max(0., ((double) m->getTexture().getColorN().get_green() / ((double) 255)) * std::pow(vision.unit() | (2 *(m->getNormal(p).unit() | p.vectTo(*this).unit()) * m->getNormal(p).unit() - p.vectTo(*this).unit()).unit(), m->getTexture().getBrillance()));
-        return std::min(couleur.get_green() * (a + b), 255.);
+        return std::min(couleur.get_green() * ((1 - m->getTexture().getTransparence()) * a + b), 255.);
 
     }
     
@@ -67,7 +67,7 @@ namespace rt
 
     	double a = std::max(0., ((double) m->getTexture().getColorB().get_blue() / ((double) 255)) * (m->getNormal(p).unit() | p.vectTo(*this).unit()));
     	double b = std::max(0., ((double) m->getTexture().getColorN().get_blue() / ((double) 255)) * std::pow(vision.unit() | (2 * (m->getNormal(p).unit() | p.vectTo(*this).unit()) * m->getNormal(p).unit() - p.vectTo(*this).unit()).unit(), m->getTexture().getBrillance()));
-        return std::min(couleur.get_blue() * (a + b), 255.);
+        return std::min(couleur.get_blue() * ((1 - m->getTexture().getTransparence()) * a + b), 255.);
 
     }
 

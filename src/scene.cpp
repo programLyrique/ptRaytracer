@@ -61,16 +61,138 @@ namespace rt
 
 				  	for(int k = 0; k < lampes.size(); ++k)
 				  	{
-				  		l1 += lampes[k]->illuminateR(p, (Sphere*) objets[o], tem);
-				  		l2 += lampes[k]->illuminateG(p, (Sphere*) objets[o], tem);
-				  		l3 += lampes[k]->illuminateB(p, (Sphere*) objets[o], tem);
+				  		l1 += lampes[k]->illuminateR(p, objets[o], tem);
+				  		l2 += lampes[k]->illuminateG(p, objets[o], tem);
+				  		l3 += lampes[k]->illuminateB(p, objets[o], tem);
 				  	}
 
 				  	l1 = std::min(l1, 255.);
 				  	l2 = std::min(l2, 255.);
 				  	l3 = std::min(l3, 255.);
+				  	
+				  	vector reflection = (2 * (tem | objets[o]->getNormal(p)) * objets[o]->getNormal(p) - tem).unit();
+				  	bool reflect = false;
+				  	Position brill;
+				  	int e = 0;
+				  	
+				  	for(unsigned k = 0; k < objets.size(); k++)
+		            {
+						  if(objets[k]->intersect(p, reflection))
+						  {
 
-                    s.set_pixel(i, j, color((int)l1, (int)l2, (int)l3));
+								rt::Position pos = objets[k]->getIntersection(p, reflection);
+								if(reflect)
+								{
+				                    if(p.distance(pos) < p.distance(brill))
+				                    {
+				                    	if(k != o)
+				                    	{
+				                       		brill = pos;
+				                       		e = k;
+				                       	}
+				                    }
+
+								}
+								else
+								{
+									if(o != k)
+									{
+										reflect = true;
+										brill = pos;
+										e = k;
+									}
+								}
+		                   }
+		              }
+		              
+		              	double n1 = 0;
+				  		double n2 = 0;
+				  		double n3 = 0;
+				  		
+						if(reflect)
+						{
+					  		for(int k = 0; k < lampes.size(); ++k)
+						  	{
+						  		n1 += lampes[k]->illuminateR(brill, objets[e], brill.vectTo(p).unit());
+						  		n2 += lampes[k]->illuminateG(brill, objets[e], brill.vectTo(p).unit());
+						  		n3 += lampes[k]->illuminateB(brill, objets[e], brill.vectTo(p).unit());
+						  	}
+
+						  	n1 = std::min(n1, 255.);
+						  	n2 = std::min(n2, 255.);
+						  	n3 = std::min(n3, 255.);
+					  	}
+					  	
+		                if( (1./(objets[o]->getTexture().getIndice()) * (v.unit()^objets[o]->getNormal(p).unit()).norm()) > 1)
+		                {
+		                	printf("brix will be shit\n");
+		                }
+		                vector r = 1/(objets[o]->getTexture().getIndice()) * v.unit() - (std::sqrt(1 - (1/(objets[o]->getTexture().getIndice()) * (v.unit()^objets[o]->getNormal(p)).norm() * (1/(objets[o]->getTexture().getIndice()) * (v.unit()^objets[o]->getNormal(p)).norm()))) + 1/(objets[o]->getTexture().getIndice()) * (v.unit() | objets[o]->getNormal(p))) * objets[o]->getNormal(p);
+		                Position transp(objets[o].autreCote());
+		                tem = 1/(objets[e]->getTexture().getIndice()) * r.unit() - (std::sqrt(1 - (1/(objets[e]->getTexture().getIndice()) * (r.unit()^objets[e]->getNormal(transp)).norm() * (1/(objets[e]->getTexture().getIndice()) * (r.unit()^objets[e]->getNormal(transp)).norm()))) + 1/(objets[e]->getTexture().getIndice()) * (r.unit() | objets[e]->getNormal(transp))) * objets[e]->getNormal(transp);
+				  		double m1 = 0;
+				  		double m2 = 0;
+				  		double m3 = 0;
+						
+						double o1 = 0;
+						double o2 = 0;
+						double o3 = 0;
+						
+						if(objets[o]->getTexture().getTransparence() != 0)
+						{
+						
+					  		for(int k = 0; k < lampes.size(); ++k)
+						  	{
+						  		//m1 += lampes[k]->illuminateR(transp, objets[o], tem);
+						  		//m2 += lampes[k]->illuminateG(transp, objets[o], tem);
+						  		//m3 += lampes[k]->illuminateB(transp, objets[o], tem);
+						  	}
+
+						  	m1 = std::min(m1, 255.);
+						  	m2 = std::min(m2, 255.);
+						  	m3 = std::min(m3, 255.);
+		              
+		              		bool brillance = false;
+		              		
+		              		for(unsigned k = 0; k < objets.size(); k++)
+						    {
+								  if(objets[k]->intersect(transp, tem))
+								  {
+
+										rt::Position pos = objets[k]->getIntersection(transp, tem);
+										if(brillance)
+										{
+								            if(p.distance(pos) < p.distance(brill))
+								            {
+								               brill = pos;
+								               e = k;
+								            }
+
+										}
+										else
+										{
+											brillance = true;
+											brill = pos;
+											e = k;
+										}
+						           }
+						     }
+						     if(brillance)
+							{
+						  		for(int k = 0; k < lampes.size(); ++k)
+							  	{
+							  		//o1 += lampes[k]->illuminateR(brill, objets[e], brill.vectTo(p).unit());
+							  		//o2 += lampes[k]->illuminateG(brill, objets[e], brill.vectTo(p).unit());
+							  		//o3 += lampes[k]->illuminateB(brill, objets[e], brill.vectTo(p).unit());
+							  	}
+
+							  	n1 = std::min(o1, 255.);
+							  	n2 = std::min(o2, 255.);
+							  	n3 = std::min(o3, 255.);
+						  	}
+		              	}
+
+                    s.set_pixel(i, j, color((int)std::min((l1 + objets[o]->getTexture().getTransparence() * m1 + (1 - objets[o]->getTexture().getTransparence()) * n1 + objets[o]->getTexture().getTransparence() * o1), 255.), (int)std::min((l2 + objets[o]->getTexture().getTransparence() * m2 + (1 - objets[o]->getTexture().getTransparence()) * n2 + objets[o]->getTexture().getTransparence() * o2), 255.), (int)std::min((l3 + objets[o]->getTexture().getTransparence() * m3 + (1 - objets[o]->getTexture().getTransparence()) * n3 + objets[o]->getTexture().getTransparence() * o3), 255.)));
 				  }
 
 		        }

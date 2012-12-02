@@ -45,6 +45,8 @@ class Mesh
         */
         virtual Position getIntersection(const Position& point, const vector& vect) = 0;
         
+        virtual
+        
         
         /** Retourne un vecteur normal a la surface 
         * @param point of the object

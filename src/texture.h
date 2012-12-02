@@ -23,7 +23,7 @@ namespace rt
 			/** transparency of the object (0 not at all, 1 perfectly)*/
 			double transparence;
 			/** refraction parameter*/
-			int indice;
+			double indice;
 
 		public:
 			/** default constructor */
@@ -34,11 +34,13 @@ namespace rt
 			* @param color
 			* @param brillance and other coefficients
 			*/
-			Texture(color colB, color colN, int b) : cB(colB), cN(colN), brillance(b) {};
+			Texture(color colB, color colN, int b, double t, double n) : cB(colB), cN(colN), brillance(b), transparence(t), indice(n) {};
 			/** Accessor */
 			color getColorB() const { return cB; }
 			color getColorN() const { return cN; }
-			int getBrillance() { return brillance; }						
+			int getBrillance() { return brillance; }
+			double getTransparence() { return transparence; }					
+			double getIndice() { return indice; }
 									
 
 	};
