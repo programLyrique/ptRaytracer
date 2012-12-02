@@ -26,7 +26,7 @@ namespace rt
 
 				  bool inter = false;
 				  rt::color c;
-				  for(int k = 0; k < objets.size(); k++)
+				  for(int k = 0; k < (int ) objets.size(); k++)
 				        {
 						  if(objets[k]->intersect(eye, vcenter + (i - s.width() / 2) * right + (j - s.height() / 2) * _up))
 						  {
@@ -54,7 +54,7 @@ namespace rt
 
     void Scene::render(screen& s, int nbThreads)
     {
-        std::cout << "Rendering with " << nbThreads << std::endl;
+        std::cout << "Rendering with " << nbThreads <<  " threads." << std::endl;
         // Most of the times, the number of procs is a power of 2.
         // Anyway, it's rarely a prime number (except 2...).
         int p2 = std::log(nbThreads) / std::log(2);//More efficient to detect the most significant bit
@@ -94,8 +94,13 @@ namespace rt
             std::cout << "Launching thread n." << k + 1<< std::endl;
             threads[k]->exec();
         }
+        s.update();
         for(k=0;k < nbThreads; k++)
+        {
             threads[k]->join();
+            s.update();//Probably useless
+        }
+
         for(k=0; k < nbThreads;k++)
             delete threads[k];
         //Render the last parts (w,h + reminder of the devision)

@@ -31,7 +31,7 @@ bool Thread::exec()
 
 bool Thread::join()
 {
-    if(thread != NULL) // Le thread existe.
+    if(thread != 0) // Le thread existe.
         return pthread_join(thread, NULL) == 0;
     else
         return false;

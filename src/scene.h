@@ -46,12 +46,12 @@ namespace rt
                 ThreadRender(Scene& _sc,int _x, int _y, int _w, int _h, screen& _s);
                 void run();
             private:
+                Scene& sc;
                 int x;
                 int y;
                 int w;
                 int h;
                 screen& s;
-                Scene& sc;
         };
 
 
