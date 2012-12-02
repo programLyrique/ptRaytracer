@@ -2,7 +2,7 @@
 
 namespace rt
 {
-    PointLight::PointLight(double x, double y, double z, double powD, double powS, Scene* scene) : Light(powD, powS, scene), Position(x, y, z)
+    PointLight::PointLight(double x, double y, double z, color c, Scene* scene) : Light(c, scene), Position(x, y, z)
     {
 
     }
@@ -23,7 +23,7 @@ namespace rt
 
     	double a = std::max(0., ((double) m->getTexture().getColorB().get_red() / ((double) 255)) * (m->getNormal(p).unit() | p.vectTo(*this).unit()));
     	double b = std::max(0., ((double) m->getTexture().getColorN().get_red() / ((double) 255)) * std::pow(vision.unit() | (2 * (m->getNormal(p).unit() | p.vectTo(*this).unit()) * m->getNormal(p).unit() - p.vectTo(*this).unit()).unit(), m->getTexture().getBrillance()));
-         return std::min(a + b, 1.);
+         return std::min(couleur.get_red() * (a + b), 255.);
 
     }
     
@@ -46,7 +46,7 @@ namespace rt
 
     	double a = std::max(0., ((double) m->getTexture().getColorB().get_green() / ((double) 255)) * (m->getNormal(p).unit() | p.vectTo(*this).unit()));
     	double b = std::max(0., ((double) m->getTexture().getColorN().get_green() / ((double) 255)) * std::pow(vision.unit() | (2 *(m->getNormal(p).unit() | p.vectTo(*this).unit()) * m->getNormal(p).unit() - p.vectTo(*this).unit()).unit(), m->getTexture().getBrillance()));
-        return  std::min(a + b, 1.);
+        return std::min(couleur.get_green() * (a + b), 255.);
 
     }
     
@@ -67,7 +67,7 @@ namespace rt
 
     	double a = std::max(0., ((double) m->getTexture().getColorB().get_blue() / ((double) 255)) * (m->getNormal(p).unit() | p.vectTo(*this).unit()));
     	double b = std::max(0., ((double) m->getTexture().getColorN().get_blue() / ((double) 255)) * std::pow(vision.unit() | (2 * (m->getNormal(p).unit() | p.vectTo(*this).unit()) * m->getNormal(p).unit() - p.vectTo(*this).unit()).unit(), m->getTexture().getBrillance()));
-        return std::min(a + b, 1.);
+        return std::min(couleur.get_blue() * (a + b), 255.);
 
     }
 

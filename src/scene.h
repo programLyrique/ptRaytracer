@@ -13,6 +13,7 @@ class PointLight;
 //#include "pointlight.h"
 #include <vector>
 #include <cstdio>
+#include <algorithm>
 
 
 namespace rt

@@ -6,7 +6,8 @@ class Scene;
 #include "scene.h"
 #include "position.h"
 #include "mesh.h"
-#include "sphere.h" 
+#include "sphere.h"
+#include "color.hpp"
 
 namespace rt
 {
@@ -18,8 +19,7 @@ namespace rt
         protected:
             /** Parent scene */
             Scene* scene;
-            double powerD;
-            double powerS;
+            color couleur;
         private:
         public:
             /** Default constructor */
@@ -31,7 +31,7 @@ namespace rt
             * @aram power
             * @param Parent scene
             */
-            Light(double pD, double pS, Scene* parent);
+            Light(color c, Scene* parent);
 
             /**
             * Return the illumination of a point in a scene

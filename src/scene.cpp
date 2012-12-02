@@ -51,10 +51,22 @@ namespace rt
 				  if(inter)
 				  {
 				  	vector tem = (-1 * v).unit();
-				  	double l1 = lampes[0]->illuminateB(p, (Sphere*) objets[o], tem);
-				  	double l2 = lampes[0]->illuminateR(p, (Sphere*) objets[o], tem);
-				  	double l3 = lampes[0]->illuminateG(p, (Sphere*) objets[o], tem);
-                    s.set_pixel(i, j, color(255 * l2, 255 * l3, 255 * l1));
+				  	double l1 = 0; 
+				  	double l2 = 0; 
+				  	double l3 = 0; 
+				  	
+				  	for(int k = 0; k < lampes.size(); ++k)
+				  	{
+				  		l1 += lampes[k]->illuminateR(p, (Sphere*) objets[o], tem);
+				  		l2 += lampes[k]->illuminateG(p, (Sphere*) objets[o], tem);				  		
+				  		l3 += lampes[k]->illuminateB(p, (Sphere*) objets[o], tem);				  		
+				  	}
+				  	
+				  	l1 = std::min(l1, 255.);
+				  	l2 = std::min(l2, 255.);
+				  	l3 = std::min(l3, 255.);
+				  	
+                    s.set_pixel(i, j, color((int)l1, (int)l2, (int)l3));
 				  }
 				  //else
                   //  s.set_pixel(i, j, color::BLACK);

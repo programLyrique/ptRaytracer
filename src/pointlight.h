@@ -7,6 +7,7 @@
 #include "mesh.h"
 #include <vector>
 #include <algorithm>
+#include "color.hpp"
 
 namespace rt
 {
@@ -29,9 +30,10 @@ namespace rt
             * @param x
             * @param y
             * @param z
-            * @param power
+            * @param color
+            * @param parent
             */
-            PointLight(double x, double y, double z, double powerD, double powerS, Scene* parent);
+            PointLight(double x, double y, double z, color c, Scene* parent);
 
             double illuminateR(const Position& p, const Mesh* m, const vector vision);
             double illuminateG(const Position& p, const Mesh* m, const vector vision);
