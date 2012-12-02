@@ -17,8 +17,13 @@ namespace rt
 		    /** color of the object */
 			color cB;
 			color cN;
-			/** Parameters for the Phong reflection */
+			/** Parameter for the Phong reflection */
 			int brillance;
+			
+			/** transparency of the object (0 not at all, 1 perfectly)*/
+			double transparence;
+			/** refraction parameter*/
+			int indice;
 
 		public:
 			/** default constructor */
