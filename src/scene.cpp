@@ -63,9 +63,9 @@ namespace rt
                     //printf("%f %f %f %d %d", tem.x, tem.y, tem.z, i, j);
                     //printf("\n");
 				  }
-				  else
-                    s.set_pixel(i, j, color::BLACK);
-                  
+				  //else
+                  //  s.set_pixel(i, j, color::BLACK);
+
 		        }
 		    }
 		    printf("Finished\n");
