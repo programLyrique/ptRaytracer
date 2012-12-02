@@ -42,11 +42,15 @@ namespace rt
         }
     }
 
-    /*unsigned b_log(unsigned i)
+    Scene::ThreadRender::ThreadRender(Scene& _sc,int _x, int _y, int _w, int _h, screen& _s) :
+        sc(_sc),x(_x), y(_y), w(_w), h(_h), s(_s)
     {
-        i |= (i >> 1); i |= (i >> 2); i |= (i >> 4); i |= (i >> 8); i |= (i >> 16);
-        return i - (i >>> 1);
-    }*/
+
+    }
+    void Scene::ThreadRender::run()
+    {
+        sc.renderArea(x,y,w,h,s);
+    }
 
     void Scene::render(screen& s, int nbThreads)
     {
@@ -56,6 +60,7 @@ namespace rt
         int p2 = std::log(nbThreads) / std::log(2);//More efficient to detect the most significant bit
         int nb_w = 0; // Nombre de divisions de la largeur
         int nb_h = 0; // Nombre de morceaux en hauteur
+        std::vector<Thread*> threads(nbThreads);
         //What is the longest side ?
         if(s.height() > s.width())
         {
@@ -74,13 +79,22 @@ namespace rt
         std::cout << "There are " << nb_w << " parts in width and " << nb_h << " in height." << std::endl;
         int limit_w = w * (nb_w - 1);
         int limit_h = h * (nb_h - 1 );
+        int k = 0;
         //std::cout << "Number of simple parts : limit_w = " << limit_w << " and limit_h = " << limit_h << std::endl;
         for(int i = 0 ; i <  s.width(); i += w)
             for(int j = 0; j < s.height(); j += h)
             {
-                std::cout << "Rendering of " << x << "," << y << " - " << width << "," << height << std::endl;
-                renderArea(i,j,w ,h,s);
+                std::cout << "Rendering of " << i << "," << j << " - " << w << "," << h << std::endl;
+                threads[k] = new ThreadRender(*this,i,j,w,h,s);
+                //renderArea(i,j,w ,h,s);
+                k++;
             }
+        for(k=0; k < nbThreads ;k++)
+            threads[k]->exec();
+        for(k=0;k < nbThreads; k++)
+            threads[k]->join();
+        for(k=0; k < nbThreads;k++)
+            delete threads[k];
         //Render the last parts (w,h + reminder of the devision)
         /*std::cout << "Rendering last parts" << std::endl;
         for(unsigned i = 0; i < limit_w ; i += w)

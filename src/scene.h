@@ -37,10 +37,24 @@ namespace rt
              */
             void renderArea(int x, int y, int width, int height, screen& s);
 
-            /**
-             * Calculate the binary log of nb
-             */
-             //static unsigned b_log(unsigned nb);
+        /**
+         * Internal class to implement a rendering thread.
+         */
+        class ThreadRender : public Thread
+        {
+            public:
+                ThreadRender(Scene& _sc,int _x, int _y, int _w, int _h, screen& _s);
+                void run();
+            private:
+                int x;
+                int y;
+                int w;
+                int h;
+                screen& s;
+                Scene& sc;
+        };
+
+
         public:
             /** default constructor */
             Scene();
@@ -74,6 +88,7 @@ namespace rt
             /**
              * Renders the scene on the screen .
              * @param nbThreads number of threads to render the scene.
+             * @todo Handling the case when nbThreads is not a power of two !
              */
             void render(screen& s, int nbThreads);
     };
