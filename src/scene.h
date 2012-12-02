@@ -35,7 +35,7 @@ namespace rt
              * @param width width of the rectangle
              * @param height of the rectangle
              */
-            void renderArea(unsigned x, unsigned y, unsigned width, unsigned height, screen& s);
+            void renderArea(int x, int y, int width, int height, screen& s);
 
             /**
              * Calculate the binary log of nb
@@ -75,7 +75,7 @@ namespace rt
              * Renders the scene on the screen .
              * @param nbThreads number of threads to render the scene.
              */
-            void render(screen& s, unsigned nbThreads);
+            void render(screen& s, int nbThreads);
     };
 }
 
