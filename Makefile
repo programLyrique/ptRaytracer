@@ -8,7 +8,7 @@ export MASTER=..#Le chemin du Makefile par rapport au makefile appelé
 
 #Il faudra modifier le Makefile dans source pour qu'il mette les binaires dans BIN
 all:
-	cd $(SRC); $(MAKE); mv main ../$(BIN);
+	cd $(SRC); $(MAKE); mv main ../$(BIN)/;
 
 run:
 	cd $(BIN); ./$(PROG_NAME);
