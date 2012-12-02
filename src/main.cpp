@@ -22,7 +22,7 @@ int main(void)
     scene.addLight(new rt::PointLight(-20, -25, 0, rt::color::WHITE, &scene));
     for(int k = 0 ; k < NB_SPHERES ; k++)
     {
-        scene.addMesh(new rt::Sphere(rt::Position(0 * cos(k), 20 + 35* cos(k), 25 * cos(k) ), 3, rt::Texture(rt::color::RED, rt::color::BLUE, 100)));
+        scene.addMesh(new rt::Sphere(rt::Position(0 * cos(k), 20 + 35* cos(k), 25 * cos(k) ), 3, rt::Texture(rt::color::RED, rt::color::BLUE, 1)));
     }
 
     scene.render(s);
