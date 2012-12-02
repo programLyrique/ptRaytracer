@@ -38,6 +38,7 @@ namespace rt
                                c = objets[k]->getTexture().getColor();
                                p = pos;
                                o = k;
+                               printf("UPDATEavec %d\n", k);
                             }
 
 						}

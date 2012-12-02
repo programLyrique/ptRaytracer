@@ -4,7 +4,7 @@
 #include "scene.h"
 #include "color.hpp"
 #include "texture.h"
-#include "light.h"
+#include "light.h"    
 #include "pointlight.h"
 
 int main(void)
@@ -14,9 +14,9 @@ int main(void)
 	// here the code to draw the pixels...
 	rt::Scene scene;
 	scene.setCamera(new rt::Camera(rt::Position(0, 0, 0), rt::Position(0, 500, 0), rt::vector(0, 0, 1)));
-	scene.addMesh(new rt::Sphere(rt::Position(10, 50, -10), 10, rt::Texture(rt::color::WHITE, 1, 1., 1., 1., 1., 1., 1., 1., 1., 1.)));
-	scene.addLight(new rt::PointLight(0., 0., 0., 5., 5., &scene));
-	scene.addMesh(new rt::Sphere(rt::Position(-12, 20, -3), 5, rt::Texture(rt::color::RED, 1, 1., 1., 1., 1., 1., 1., 1., 1., 1.)));
+	scene.addMesh(new rt::Sphere(rt::Position(0, 7, 0), 1, rt::Texture(rt::color::WHITE, 10, 1., 1., 1., 1., 1., 1., 1., 1., 1.)));
+	scene.addLight(new rt::PointLight(10., 0., 0., 5., 5., &scene));
+	scene.addMesh(new rt::Sphere(rt::Position(0, 15, 0), 5, rt::Texture(rt::color::RED, 10, 1., 1., 1., 1., 1., 1., 1., 1., 1.)));
 	scene.render(s);
 
 

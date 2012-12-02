@@ -17,7 +17,7 @@ namespace rt
     	    if((*it)->intersect(*this, this->vectTo(p)))
     	    {
     	    	Position q = (*it)->getIntersection(*this, this->vectTo(p));
-    	    	if((p.getX() - q.getX() > 0.0001)||(p.getY() - q.getY() > 0.0001)||(p.getZ() - q.getZ() > 0.0001))
+    	    	if((q.distance(*this) < p.distance(*this)) && ((std::abs(p.getX() - q.getX()) > 0.0001)||(std::abs(p.getY() - q.getY()) > 0.0001)||(std::abs(p.getZ() - q.getZ()) > 0.0001)))
     	    	{
     	        	cache = true;
     	        	//printf("HIDDEN\n");
@@ -37,8 +37,6 @@ namespace rt
     			printf("rouge: %f %f ", a, b);
             return std::min(a + b, 1.);
     	}
-		/*else
-			printf("Je suis cache par %d\n", o);*/
     	return 0;
 
     }
@@ -54,15 +52,17 @@ namespace rt
     	    if((*it)->intersect(*this, this->vectTo(p)))
     	    {
     	    	Position q = (*it)->getIntersection(*this, this->vectTo(p));
-    	        if((p.getX() - q.getX() > 0.0001)||(p.getY() - q.getY() > 0.0001)||(p.getZ() - q.getZ() > 0.0001))
+    	        if((q.distance(*this) < p.distance(*this)) && ((std::abs(p.getX() - q.getX()) > 0.0001)||(std::abs(p.getY() - q.getY()) > 0.0001)||(std::abs(p.getZ() - q.getZ()) > 0.0001)))
     	    	{
     	        	cache = true;
     	        	o = i;
     	        	//printf("HIDDEN\n");
-    	        	//printf("---------------------------------------\n");
+    	        	
+    	        }
+    	        //printf("---------------------------------------\n");
     	        	//q.print();
     	        	//p.print();
-    	        }
+    	        //printf("distance: %f %f\n", q.distance(*this), p.distance(*this));
     	        
     	    }
     	    ++i;
@@ -78,8 +78,6 @@ namespace rt
     			printf("vert: %f %f ", a, b);
             return  std::min(a + b, 1.);
     	}
-		/*else
-			printf("Je suis cache par %d\n", o);*/
     	return 0;
 
     }
@@ -94,7 +92,7 @@ namespace rt
     	    if((*it)->intersect(*this, this->vectTo(p)))
     	    {
     	    	Position q = (*it)->getIntersection(*this, this->vectTo(p));
-    	        if((p.getX() - q.getX() > 0.0001)||(p.getY() - q.getY() > 0.0001)||(p.getZ() - q.getZ() > 0.0001))
+    	        if((q.distance(*this) < p.distance(*this)) && ((std::abs(p.getX() - q.getX()) > 0.0001)||(std::abs(p.getY() - q.getY()) > 0.0001)||(std::abs(p.getZ() - q.getZ()) > 0.0001)))
     	    	{
     	        	cache = true;
     	        	//printf("HIDDEN\n");
@@ -114,8 +112,6 @@ namespace rt
     			//printf("bleu: %f %f\n", a, b);
             return std::min(a + b, 1.);
     	}
-    	/*else
-			printf("Je suis cache par %d\n", o);*/
 
     	return 0;
 

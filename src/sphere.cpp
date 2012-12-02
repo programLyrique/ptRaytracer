@@ -16,7 +16,7 @@ namespace rt
         //Calcul du discriminant
         if( delta > 0)
         {
-            if(-((vect.x * (Sphere::centre.getX() - point.getX()) + vect.y * (Sphere::centre.getY() - point.getY()) + vect.z * (Sphere::centre.getZ() - point.getZ()))) - std::sqrt(delta) < 0)
+            if(-((vect.x * (Sphere::centre.getX() - point.getX()) + vect.y * (Sphere::centre.getY() - point.getY()) + vect.z * (Sphere::centre.getZ() - point.getZ()))) - std::sqrt(delta) < 0 || (-((vect.x * (Sphere::centre.getX() - point.getX()) + vect.y * (Sphere::centre.getY() - point.getY()) + vect.z * (Sphere::centre.getZ() - point.getZ()))) + std::sqrt(delta)) < 0)
             	//printf("%f\n", -((vect.x * (Sphere::centre.getX() - point.getX()) + vect.y * (Sphere::centre.getY() - point.getY()) + vect.z * (Sphere::centre.getZ() - point.getZ()))) - std::sqrt(delta));
                 return true;
         }
@@ -34,6 +34,9 @@ namespace rt
         double t2 = (-((vect.x * (Sphere::centre.getX() - point.getX()) + vect.y * (Sphere::centre.getY() - point.getY()) + vect.z * (Sphere::centre.getZ() - point.getZ()))) + std::sqrt(delta)) / (vect.x * vect.x + vect.y * vect.y + vect.z * vect.z);
         Position p1(point.getX() - t1 * vect.x, point.getY() - t1 * vect.y, point.getZ() - t1 * vect.z);
         Position p2(point.getX() - t2 * vect.x, point.getY() - t2 * vect.y, point.getZ() - t2 * vect.z);
+        //printf("---------------\n");
+        //p1.print();
+        //p2.print();
         
         if(p1.distance(point) < p2.distance(point))
         	return p1;
