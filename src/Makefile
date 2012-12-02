@@ -1,9 +1,13 @@
 CC=g++
+<<<<<<< HEAD
 CFLAGS=-W -Wall -ansi -pedantic -g
+=======
+CFLAGS=-W -Wall -g -ansi -pedantic 
+>>>>>>> multithreaded_renderer
 LDFLAGS=
 
 INCLUDE=-I. -I/usr/include -I/usr/include/SDL -I./include
-LIBS=-L/usr/lib -lSDL
+LIBS=-L/usr/lib -lSDL -lpthread
 
 EXEC=main
 SRC= $(wildcard *.cpp)

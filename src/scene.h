@@ -3,7 +3,6 @@
 
 class Camera;
 class Light;
-class PointLight;
 
 #include "mesh.h"
 #include "light.h"
@@ -12,8 +11,7 @@ class PointLight;
 #include "sphere.h"
 //#include "pointlight.h"
 #include <vector>
-#include <cstdio>
-#include <algorithm>
+#include <stdio.h>
 
 
 namespace rt
@@ -29,6 +27,34 @@ namespace rt
             std::vector<Mesh*> objets;
             std::vector<Light*> lampes;
             Camera* cam;
+
+            /**
+             * Renders a rectangle of the scene.
+             * @param x x-coordinate of the left-upper vertex
+             * @param y y-coordinate of the left-upper vertex
+             * @param width width of the rectangle
+             * @param height of the rectangle
+             */
+            void renderArea(int x, int y, int width, int height, screen& s);
+
+        /**
+         * Internal class to implement a rendering thread.
+         */
+        class ThreadRender : public Thread
+        {
+            public:
+                ThreadRender(Scene& _sc,int _x, int _y, int _w, int _h, screen& _s);
+                void run();
+            private:
+                Scene& sc;
+                int x;
+                int y;
+                int w;
+                int h;
+                screen& s;
+        };
+
+
         public:
             /** default constructor */
             Scene();
@@ -54,6 +80,8 @@ namespace rt
 
             /**
              * Renders the scene on the screen.
+             * Detects the number of cores on the computer, and execute as many threads as there are cores
+             * to render the scene.
              */
             void render(screen& s);
             
@@ -62,6 +90,12 @@ namespace rt
             
             Camera* getCamera() { return cam; }
 
+            /**
+             * Renders the scene on the screen .
+             * @param nbThreads number of threads to render the scene.
+             * @todo Handling the case when nbThreads is not a power of two !
+             */
+            void render(screen& s, int nbThreads);
     };
 }
 
