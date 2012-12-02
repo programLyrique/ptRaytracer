@@ -4,6 +4,7 @@
 #include "scene.h"
 #include "color.hpp"
 #include "texture.h"
+#include "pointlight.h"
 
 int main(void)
 {
