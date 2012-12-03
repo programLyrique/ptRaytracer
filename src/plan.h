@@ -20,9 +20,9 @@ namespace rt
 			/** Constructor */
 			Plan() {}
 			~Plan() {}
-			Plan(Texture t, Position& p, vector n) : Mesh(t), point(p), normal(n.unit()) {}
+			Plan(Texture t, const Position& p, vector n) : Mesh(t), point(p), normal(n.unit()) {}
 			
-			vector getNormal() { return normal; }
+			vector getNormal(const Position& p, const vector& vect) const;
 			
 			bool intersect(const Position& pos, const vector& vect);
 			

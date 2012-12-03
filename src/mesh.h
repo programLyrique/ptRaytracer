@@ -50,7 +50,7 @@ class Mesh
         * @param point of the object
         * \return vector
         */
-        virtual vector getNormal(const Position& p) const = 0;
+        virtual vector getNormal(const Position& p, const vector& v) const = 0;
 
         /** Accessor
         * \return texture of the mesh

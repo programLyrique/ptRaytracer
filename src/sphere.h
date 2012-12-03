@@ -50,7 +50,7 @@ namespace rt
             */
             Position getIntersection(const Position& point, const vector& vect);
             
-            vector getNormal(const Position& p) const;
+            vector getNormal(const Position& p, const vector& vect) const;
 
             /** Accessor
             * \return centre
