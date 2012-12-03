@@ -129,12 +129,15 @@ namespace rt
 		                }
 		                //printf("GoGo transparence: ");
 		                //printf("%4f %4f %4f ", v.unit().x, v.unit().y, v.unit().z);
-		                vector r = 1/(objets[o]->getTexture().getIndice()) * v.unit() - (std::sqrt(1 - (1/(objets[o]->getTexture().getIndice()) * (v.unit()^objets[o]->getNormal(p)).norm() * (1/(objets[o]->getTexture().getIndice()) * (v.unit()^objets[o]->getNormal(p)).norm()))) + 1/(objets[o]->getTexture().getIndice()) * (v.unit() | objets[o]->getNormal(p))) * objets[o]->getNormal(p);
+		                double n1n2 = 1/(objets[o]->getTexture().getIndice());
+		                v = v.unit();
+		                vector normal = objets[o]->getNormal(p).unit();
+		                vector r =  (n1n2 * v - (n1n2 * (v | normal) - std::sqrt(1 - n1n2 * n1n2 * (v | normal) *(v | normal))) * normal).unit();
 		                //printf("%4f %4f %4f ", r.unit().x, r.unit().y, r.unit().z);
 		                Position transp(objets[o]->autreCote(p, r, p));
 		                //Position transp(objets[o]->autreCote(p, v, p));
-		                //tem = v;
-		                tem = 1/(objets[e]->getTexture().getIndice()) * r.unit() - (std::sqrt(1 - (1/(objets[e]->getTexture().getIndice()) * (r.unit()^objets[e]->getNormal(transp)).norm() * (1/(objets[e]->getTexture().getIndice()) * (r.unit()^objets[e]->getNormal(transp)).norm()))) + 1/(objets[e]->getTexture().getIndice()) * (r.unit() | objets[e]->getNormal(transp))) * objets[e]->getNormal(transp);
+		                vector normal2 = objets[o]->getNormal(transp).unit();
+		                tem = (n1n2 * r - (n1n2 * (r | normal2) - std::sqrt(1 - n1n2 * n1n2 * (r | normal2) *(r | normal2))) * normal2).unit();
 		                //printf("%4f %4f %4f\n", tem.unit().x, tem.unit().y, tem.unit().z);
 				  		double m1 = 0;
 				  		double m2 = 0;
@@ -192,9 +195,9 @@ namespace rt
 							  		o3 += lampes[k]->illuminateB(brill, objets[e], brill.vectTo(p).unit());
 							  	}
 
-							  	n1 = std::min(o1, 255.);
-							  	n2 = std::min(o2, 255.);
-							  	n3 = std::min(o3, 255.);
+							  	o1 = std::min(o1, 255.);
+							  	o2 = std::min(o2, 255.);
+							  	o3 = std::min(o3, 255.);
 						  	}
 		              	}
 
