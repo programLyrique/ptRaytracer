@@ -45,7 +45,7 @@ class Mesh
         */
         virtual Position getIntersection(const Position& point, const vector& vect) = 0;
         
-        virtual
+        virtual Position autreCote(const Position& point, const vector& vect, const Position& act) const = 0;
         
         
         /** Retourne un vecteur normal a la surface 

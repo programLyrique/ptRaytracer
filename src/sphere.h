@@ -50,6 +50,8 @@ namespace rt
             */
             Position getIntersection(const Position& point, const vector& vect);
             
+            Position autreCote(const Position& point, const vector& vect, const Position& act) const;
+            
             vector getNormal(const Position& p) const;
 
             /** Accessor

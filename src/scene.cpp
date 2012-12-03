@@ -127,9 +127,15 @@ namespace rt
 		                {
 		                	printf("brix will be shit\n");
 		                }
+		                //printf("GoGo transparence: ");
+		                //printf("%4f %4f %4f ", v.unit().x, v.unit().y, v.unit().z);
 		                vector r = 1/(objets[o]->getTexture().getIndice()) * v.unit() - (std::sqrt(1 - (1/(objets[o]->getTexture().getIndice()) * (v.unit()^objets[o]->getNormal(p)).norm() * (1/(objets[o]->getTexture().getIndice()) * (v.unit()^objets[o]->getNormal(p)).norm()))) + 1/(objets[o]->getTexture().getIndice()) * (v.unit() | objets[o]->getNormal(p))) * objets[o]->getNormal(p);
-		                Position transp(objets[o].autreCote());
+		                //printf("%4f %4f %4f ", r.unit().x, r.unit().y, r.unit().z);
+		                Position transp(objets[o]->autreCote(p, r, p));
+		                //Position transp(objets[o]->autreCote(p, v, p));
+		                //tem = v;
 		                tem = 1/(objets[e]->getTexture().getIndice()) * r.unit() - (std::sqrt(1 - (1/(objets[e]->getTexture().getIndice()) * (r.unit()^objets[e]->getNormal(transp)).norm() * (1/(objets[e]->getTexture().getIndice()) * (r.unit()^objets[e]->getNormal(transp)).norm()))) + 1/(objets[e]->getTexture().getIndice()) * (r.unit() | objets[e]->getNormal(transp))) * objets[e]->getNormal(transp);
+		                //printf("%4f %4f %4f\n", tem.unit().x, tem.unit().y, tem.unit().z);
 				  		double m1 = 0;
 				  		double m2 = 0;
 				  		double m3 = 0;
@@ -143,9 +149,9 @@ namespace rt
 						
 					  		for(int k = 0; k < lampes.size(); ++k)
 						  	{
-						  		//m1 += lampes[k]->illuminateR(transp, objets[o], tem);
-						  		//m2 += lampes[k]->illuminateG(transp, objets[o], tem);
-						  		//m3 += lampes[k]->illuminateB(transp, objets[o], tem);
+						  		m1 += lampes[k]->illuminateR(transp, objets[o], tem);
+						  		m2 += lampes[k]->illuminateG(transp, objets[o], tem);
+						  		m3 += lampes[k]->illuminateB(transp, objets[o], tem);
 						  	}
 
 						  	m1 = std::min(m1, 255.);
@@ -181,9 +187,9 @@ namespace rt
 							{
 						  		for(int k = 0; k < lampes.size(); ++k)
 							  	{
-							  		//o1 += lampes[k]->illuminateR(brill, objets[e], brill.vectTo(p).unit());
-							  		//o2 += lampes[k]->illuminateG(brill, objets[e], brill.vectTo(p).unit());
-							  		//o3 += lampes[k]->illuminateB(brill, objets[e], brill.vectTo(p).unit());
+							  		o1 += lampes[k]->illuminateR(brill, objets[e], brill.vectTo(p).unit());
+							  		o2 += lampes[k]->illuminateG(brill, objets[e], brill.vectTo(p).unit());
+							  		o3 += lampes[k]->illuminateB(brill, objets[e], brill.vectTo(p).unit());
 							  	}
 
 							  	n1 = std::min(o1, 255.);

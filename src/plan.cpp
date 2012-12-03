@@ -15,5 +15,10 @@ namespace rt
 		double t = - (normal.x * pos.getX() + normal.y * pos.getY() + normal.z * pos.getZ() + d) / (normal.x * vect.x + normal.y * vect.y + normal.z * vect.z);
 		return Position(pos.getX() + t * vect.x, pos.getY() + t * vect.y, pos.getZ() + t * vect.z);
 	}
+	
+	Position Plan::autreCote(const Position& point, const vector& vect, const Position& act) const
+	{
+		return act;
+	}
 
 }

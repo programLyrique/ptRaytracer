@@ -44,6 +44,27 @@ namespace rt
         	return p2;
     }
     
+    Position Sphere::autreCote(const Position& point, const vector& vect, const Position& act) const
+    {
+    	double delta = (vect.x * (Sphere::centre.getX() - point.getX()) + vect.y * (Sphere::centre.getY() - point.getY()) + vect.z * (Sphere::centre.getZ() - point.getZ()))
+        * (vect.x * (Sphere::centre.getX() - point.getX()) + vect.y * (Sphere::centre.getY() - point.getY()) + vect.z * (Sphere::centre.getZ() - point.getZ()))
+        - (vect.x * vect.x + vect.y * vect.y + vect.z * vect.z)
+        * ((Sphere::centre.getX() - point.getX()) * (Sphere::centre.getX() - point.getX()) + (Sphere::centre.getY() - point.getY()) * (Sphere::centre.getY() - point.getY()) + (Sphere::centre.getZ() - point.getZ()) * (Sphere::centre.getZ() - point.getZ()) - radius * radius);
+        //Calcul du discriminant
+        double t1 = (-((vect.x * (Sphere::centre.getX() - point.getX()) + vect.y * (Sphere::centre.getY() - point.getY()) + vect.z * (Sphere::centre.getZ() - point.getZ()))) - std::sqrt(delta)) / (vect.x * vect.x + vect.y * vect.y + vect.z * vect.z);
+        double t2 = (-((vect.x * (Sphere::centre.getX() - point.getX()) + vect.y * (Sphere::centre.getY() - point.getY()) + vect.z * (Sphere::centre.getZ() - point.getZ()))) + std::sqrt(delta)) / (vect.x * vect.x + vect.y * vect.y + vect.z * vect.z);
+        Position p1(point.getX() - t1 * vect.x, point.getY() - t1 * vect.y, point.getZ() - t1 * vect.z);
+        Position p2(point.getX() - t2 * vect.x, point.getY() - t2 * vect.y, point.getZ() - t2 * vect.z);
+        //printf("---------------\n");
+        //p1.print();
+        //p2.print();
+        
+        if(((std::abs(p1.getX() - act.getX()) > 0.0001)||(std::abs(p1.getY() - act.getY()) > 0.0001)||(std::abs(p1.getZ() - act.getZ()) > 0.0001)))
+        	return p1;
+		else
+        	return p2;
+    }
+    
     vector Sphere::getNormal(const Position& p) const
     {
     	return centre.vectTo(p);
