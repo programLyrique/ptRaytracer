@@ -1,6 +1,7 @@
 #include "scene.h"
 
 #include <cmath>
+#include <ctime>
 #include <iostream>
 
 namespace rt
@@ -23,22 +24,22 @@ namespace rt
         {
 		  for(int j = y; j < y + height; ++j)
 		   {
-				
-				// Oversampling x 4 
+                double step = 0;
+                double mL1 = 0;
+                double mL2 = 0;
+                double mL3 = 0;
+				// Oversampling x 9
 				if(oversampling)
-				{
-					double step = 0.25;
-					double mL1 = 0;
-					double mL2 = 0;
-					double mL3 = 0;
-					
-					for(ho=i - step; ho < i + step ; i++)
-						for(ve=j-step; ve < j + step ; j++)
+				    step = 0.25;
+
+					for(double ho=i - step; ho <= i + step ; ho += step)
+						for(double ve=j-step; ve <= j + step ; ve+=step)
 						{
+                          //  std::cout  << ho << " et " << ve << std::endl;
 						  bool inter = false;
 						  rt::Position p;
 						  int o = 0;
-						  vector v = (vcenter + (ho - s.width() / 2) * right + (ve - s.height() / 2) * _up).unit();
+						  vector v = (vcenter + (ho - s.width() / 2.0) * right + (ve - s.height() / 2.0) * _up).unit();
 						  for(unsigned k = 0; k < objets.size(); k++)
 					      {
 							  if(objets[k]->intersect(eye, v))
@@ -70,31 +71,29 @@ namespace rt
 						  	double l2 = 0;
 						  	double l3 = 0;
 
-						  	for(int k = 0; k < lampes.size(); ++k)
+						  	for(int k = 0; k < lights.size(); ++k)
 						  	{
-						  		l1 += lampes[k]->illuminateR(p, (Sphere*) objets[o], tem);
-						  		l2 += lampes[k]->illuminateG(p, (Sphere*) objets[o], tem);
-						  		l3 += lampes[k]->illuminateB(p, (Sphere*) objets[o], tem);
+						  		l1 += lights[k]->illuminateR(p, (Sphere*) objets[o], tem);
+						  		l2 += lights[k]->illuminateG(p, (Sphere*) objets[o], tem);
+						  		l3 += lights[k]->illuminateB(p, (Sphere*) objets[o], tem);
 						  	}
 
 						  	l1 = std::min(l1, 255.);
 						  	l2 = std::min(l2, 255.);
 						  	l3 = std::min(l3, 255.);
-						  	
+
 						  	mL1 += l1;
 						  	mL2 += l2;
 						  	mL3 += l3;
+
 						}
-						}
-						mL1 /= 4.0;
-						mL2 /= 4.0;
-						mL3 /= 4.0;
-						
-					    s.set_pixel(i, j, color((int)mL1, (int)mL2, (int)mL3));
-					        
-					  
-				  
+
 				  }
+						mL1 /= 9.0;
+						mL2 /= 9.0;
+						mL3 /= 9.0;
+
+					    s.set_pixel(i, j, color((int)mL1, (int)mL2, (int)mL3));
 
 		        }
         }
@@ -113,12 +112,14 @@ namespace rt
     void Scene::render(screen& s, int nbThreads)
     {
         std::cout << "Rendering with " << nbThreads <<  " threads." << std::endl;
+
+        std::cout << getNbObjects() << " objects. " << getNbLights() << " lights." << std::endl;
         // Most of the times, the number of procs is a power of 2.
         // Anyway, it's rarely a prime number (except 2...).
         int p2 = std::log(nbThreads) / std::log(2);//More efficient to detect the most significant bit
         int nb_w = 0; // Nombre de divisions de la largeur
         int nb_h = 0; // Nombre de morceaux en hauteur
-        std::vector<ThreadRender*> threads(nbThreads);
+        std::vector<ThreadRender*> threads(nbThreads);//A "pool" of threads
         //What is the longest side ?
         if(s.height() > s.width())
         {
@@ -135,8 +136,11 @@ namespace rt
         int h = s.height() / nb_h;
         std::cout << "Parts are " << w << " x " << h << std::endl;
         std::cout << "There are " << nb_w << " parts in width and " << nb_h << " in height." << std::endl;
-        int limit_w = w * (nb_w - 1);
-        int limit_h = h * (nb_h - 1 );
+
+        time_t beginning = std::time(NULL);
+
+        //int limit_w = w * (nb_w - 1); // useful when there are parts left by the divisions above.
+        //int limit_h = h * (nb_h - 1 );
         int k = 0;
         //std::cout << "Number of simple parts : limit_w = " << limit_w << " and limit_h = " << limit_h << std::endl;
         for(int i = 0 ; i <  s.width(); i += w)
@@ -167,7 +171,9 @@ namespace rt
             renderArea(i, limit_h, w, s.height() - h, s);
         for(unsigned j=0; j < limit_h; j += h)
             renderArea(limit_w, j, s.width() - h, h, s);*/
-        std::cout << "End of rendering" << std::endl;
+
+        time_t end = std::time(NULL);
+        std::cout << "End of rendering. Took " << end - beginning << " seconds." << std::endl;
  	}
 
     void Scene::render(screen& s)
@@ -182,7 +188,7 @@ namespace rt
 
     void Scene::addLight(Light* light)
     {
-		lampes.push_back(light);
+		lights.push_back(light);
     }
 
     void Scene::setCamera(Camera* camera)

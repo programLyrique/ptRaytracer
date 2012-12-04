@@ -9,11 +9,11 @@
 #include "plan.h"
 #include <cmath>
 
-#define NB_SPHERES 100
+#define NB_SPHERES 20
 
 int main(void)
 {
-    rt::screen s(1376,768);
+    rt::screen s(640,480);
 
     // here the code to draw the pixels...
     rt::Scene scene;

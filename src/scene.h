@@ -24,7 +24,7 @@ namespace rt
     {
         private:
             std::vector<Mesh*> objets;
-            std::vector<Light*> lampes;
+            std::vector<Light*> lights;
             Camera* cam;
 
         /**
@@ -85,10 +85,20 @@ namespace rt
              */
             void render(screen& s);
 
-            std::vector<Mesh*>::const_iterator getDebObjets() { return objets.begin(); }
-            std::vector<Mesh*>::const_iterator getFinObjets() { return objets.end(); }
+            std::vector<Mesh*>::const_iterator getDebObjets() const { return objets.begin(); }
+            std::vector<Mesh*>::const_iterator getFinObjets() const { return objets.end(); }
 
             Camera* getCamera() { return cam; }
+
+            /**
+             * Number of objects in the scene
+             */
+            int getNbObjects() const { return objets.size();}
+
+            /**
+             * Number of lights in the scene.
+             */
+            int getNbLights() const { return lights.size(); }
 
             /**
              * Renders the scene on the screen .
