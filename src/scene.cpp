@@ -10,7 +10,7 @@ namespace rt
 
     }
 
-    void Scene::renderArea(int x, int y, int width, int height, screen& s)
+    void Scene::renderArea(int x, int y, int width, int height, screen& s, bool oversampling = true)
     {
         vector up = cam->getUp() ;
         Position centre = cam->getCentre();
@@ -22,55 +22,78 @@ namespace rt
         for(int i = x; i < x + width; ++i)
         {
 		  for(int j = y; j < y + height; ++j)
-		        {
-
-				  bool inter = false;
-				  rt::Position p;
-				  int o = 0;
-				  vector v = (vcenter + (i - s.width() / 2) * right + (j - s.height() / 2) * _up).unit();
-				  for(unsigned k = 0; k < objets.size(); k++)
-                  {
-					  if(objets[k]->intersect(eye, v))
-					  {
-
-						rt::Position pos = objets[k]->getIntersection(eye, v);
-						if(inter)
+		   {
+				
+				// Oversampling x 4 
+				if(oversampling)
+				{
+					double step = 0.25;
+					double mL1 = 0;
+					double mL2 = 0;
+					double mL3 = 0;
+					
+					for(ho=i - step; ho < i + step ; i++)
+						for(ve=j-step; ve < j + step ; j++)
 						{
-                            if(eye.distance(pos) < eye.distance(p))
-                            {
-                               p = pos;
-                               o = k;
-                            }
+						  bool inter = false;
+						  rt::Position p;
+						  int o = 0;
+						  vector v = (vcenter + (ho - s.width() / 2) * right + (ve - s.height() / 2) * _up).unit();
+						  for(unsigned k = 0; k < objets.size(); k++)
+					      {
+							  if(objets[k]->intersect(eye, v))
+							  {
 
+								rt::Position pos = objets[k]->getIntersection(eye, v);
+								if(inter)
+								{
+					                if(eye.distance(pos) < eye.distance(p))
+					                {
+					                   p = pos;
+					                   o = k;
+					                }
+
+								}
+								else
+								{
+									inter = true;
+									p = pos;
+									o = k;
+								}
+					           }
+					      }
+
+						  if(inter)
+						  {
+						  	vector tem = (-1 * v).unit();
+						  	double l1 = 0;
+						  	double l2 = 0;
+						  	double l3 = 0;
+
+						  	for(int k = 0; k < lampes.size(); ++k)
+						  	{
+						  		l1 += lampes[k]->illuminateR(p, (Sphere*) objets[o], tem);
+						  		l2 += lampes[k]->illuminateG(p, (Sphere*) objets[o], tem);
+						  		l3 += lampes[k]->illuminateB(p, (Sphere*) objets[o], tem);
+						  	}
+
+						  	l1 = std::min(l1, 255.);
+						  	l2 = std::min(l2, 255.);
+						  	l3 = std::min(l3, 255.);
+						  	
+						  	mL1 += l1;
+						  	mL2 += l2;
+						  	mL3 += l3;
 						}
-						else
-						{
-						    inter = true;
-						    p = pos;
-						    o = k;
 						}
-                       }
-                  }
-
-				  if(inter)
-				  {
-				  	vector tem = (-1 * v).unit();
-				  	double l1 = 0;
-				  	double l2 = 0;
-				  	double l3 = 0;
-
-				  	for(int k = 0; k < lampes.size(); ++k)
-				  	{
-				  		l1 += lampes[k]->illuminateR(p, (Sphere*) objets[o], tem);
-				  		l2 += lampes[k]->illuminateG(p, (Sphere*) objets[o], tem);
-				  		l3 += lampes[k]->illuminateB(p, (Sphere*) objets[o], tem);
-				  	}
-
-				  	l1 = std::min(l1, 255.);
-				  	l2 = std::min(l2, 255.);
-				  	l3 = std::min(l3, 255.);
-
-                    s.set_pixel(i, j, color((int)l1, (int)l2, (int)l3));
+						mL1 /= 4.0;
+						mL2 /= 4.0;
+						mL3 /= 4.0;
+						
+					    s.set_pixel(i, j, color((int)mL1, (int)mL2, (int)mL3));
+					        
+					  
+				  
 				  }
 
 		        }

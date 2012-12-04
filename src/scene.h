@@ -27,15 +27,6 @@ namespace rt
             std::vector<Light*> lampes;
             Camera* cam;
 
-            /**
-             * Renders a rectangle of the scene.
-             * @param x x-coordinate of the left-upper vertex
-             * @param y y-coordinate of the left-upper vertex
-             * @param width width of the rectangle
-             * @param height of the rectangle
-             */
-            void renderArea(int x, int y, int width, int height, screen& s);
-
         /**
          * Internal class to implement a rendering thread.
          */
@@ -53,7 +44,17 @@ namespace rt
                 screen& s;
         };
 
-
+	protected:
+            /**
+             * Renders a rectangle of the scene.
+             * @param x x-coordinate of the left-upper vertex
+             * @param y y-coordinate of the left-upper vertex
+             * @param width width of the rectangle
+             * @param height of the rectangle
+             * @param oversampling if true, calculate 4 virtual pixels
+             * @todo oversampling with 8 pixels
+             */
+            void renderArea(int x, int y, int width, int height, screen& s, bool oversampling);
         public:
             /** default constructor */
             Scene();
