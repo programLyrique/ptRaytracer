@@ -7,11 +7,13 @@
 #include "texture.h"
 #include "pointlight.h"
 #include "plan.h"
+
 #include <cmath>
+#include <sstream>
 
 #define NB_SPHERES 20
 
-int main(void)
+int main(int argc, char** argv)
 {
     rt::screen s(640,480);
 
@@ -26,8 +28,18 @@ int main(void)
     }
     scene.addMesh(new rt::Plan(rt::Texture(rt::color::WHITE, rt::color::WHITE, 1, 0, 1), rt::Position(0, 0, 10), rt::vector(0, 0, -1)));
 
-    scene.render(s);
+    std::cout << "Nombre de param : " << argc << std::endl;
 
+    //On peut passer le nombre de coeurs voulus en paramètre
+    if(argc <= 1)
+        scene.render(s);
+    else
+    {
+        std::istringstream iss(argv[1]);
+        int nbThreads;
+        iss >> nbThreads;
+        scene.render(s, nbThreads);
+    }
 
     while(s.update()) {
 
