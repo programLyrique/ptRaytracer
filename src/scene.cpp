@@ -127,17 +127,19 @@ namespace rt
 		                {
 		                	printf("brix will be shit\n");
 		                }
-		                //printf("GoGo transparence: ");
+		                //printf("GoGo transparence:");
 		                //printf("%4f %4f %4f ", v.unit().x, v.unit().y, v.unit().z);
 		                double n1n2 = 1/(objets[o]->getTexture().getIndice());
 		                v = v.unit();
+		                //printf("%f %f %f", p.getX(), p.getY(), p.getZ());
 		                vector normal = objets[o]->getNormal(p).unit();
-		                vector r =  (n1n2 * v - (n1n2 * (v | normal) - std::sqrt(1 - n1n2 * n1n2 * (v | normal) *(v | normal))) * normal).unit();
-		                //printf("%4f %4f %4f ", r.unit().x, r.unit().y, r.unit().z);
+		                vector r =  (n1n2 * v - (- n1n2 * (v | normal) - std::sqrt(1 - n1n2 * n1n2 * (1 - (v | normal) *(v | normal)))) * normal).unit();
+		                //printf("%4f %4f %4f \n", r.x, r.y, r.z);
 		                Position transp(objets[o]->autreCote(p, r, p));
+		                //printf(" %f %f %f\n", transp.getX(), transp.getY(), transp.getZ());
 		                //Position transp(objets[o]->autreCote(p, v, p));
 		                vector normal2 = objets[o]->getNormal(transp).unit();
-		                tem = (n1n2 * r - (n1n2 * (r | normal2) - std::sqrt(1 - n1n2 * n1n2 * (r | normal2) *(r | normal2))) * normal2).unit();
+		                tem = (n1n2 * r - (n1n2 * (r | normal2) - std::sqrt(1 - n1n2 * n1n2 * (1 - (r | normal2) *(r | normal2)))) * normal2).unit();
 		                //printf("%4f %4f %4f\n", tem.unit().x, tem.unit().y, tem.unit().z);
 				  		double m1 = 0;
 				  		double m2 = 0;
@@ -167,23 +169,28 @@ namespace rt
 						    {
 								  if(objets[k]->intersect(transp, tem))
 								  {
-
+																
 										rt::Position pos = objets[k]->getIntersection(transp, tem);
-										if(brillance)
+										if(k != o)
 										{
-								            if(p.distance(pos) < p.distance(brill))
-								            {
-								               brill = pos;
-								               e = k;
-								            }
+											if(brillance)
+											{
+										        if(transp.distance(pos) < transp.distance(brill))
+										        {
+										           brill = pos;
+										           e = k;
+										        }
 
+											}
+											else
+											{
+												brillance = true;
+												brill = pos;
+												e = k;
+											}
+											printf("J'intersecte youpi avec %d, sachant que j'appartiend à %d\n", e, o);
 										}
-										else
-										{
-											brillance = true;
-											brill = pos;
-											e = k;
-										}
+										
 						           }
 						     }
 						     if(brillance)
@@ -194,10 +201,10 @@ namespace rt
 							  		o2 += lampes[k]->illuminateG(brill, objets[e], brill.vectTo(p).unit());
 							  		o3 += lampes[k]->illuminateB(brill, objets[e], brill.vectTo(p).unit());
 							  	}
-
-							  	o1 = std::min(o1, 255.);
+							  	o1 = std::min(o1, 255.);							  
 							  	o2 = std::min(o2, 255.);
 							  	o3 = std::min(o3, 255.);
+							  	//o2 = 255.;
 						  	}
 		              	}
 

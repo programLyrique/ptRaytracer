@@ -20,13 +20,15 @@ int main(void)
     scene.setCamera(new rt::Camera(rt::Position(0, 0, 0), rt::Position(0, 500, 0), rt::vector(0, 0, 1)));
     scene.addLight(new rt::PointLight(20., 25., 0., rt::color::WHITE, &scene));
     scene.addLight(new rt::PointLight(-20, -25, 0, rt::color::WHITE, &scene));
-    for(int k = 0 ; k < NB_SPHERES ; k++)
+    scene.addMesh(new rt::Sphere(rt::Position(0, 20, 0), 3, rt::Texture(rt::color::BLACK, rt::color::WHITE, 100, 1, 1.01)));
+    scene.addMesh(new rt::Sphere(rt::Position(5, 40, 0), 3, rt::Texture(rt::color::GREEN, rt::color::WHITE, 100, 0, 1)));
+    /*for(int k = 0 ; k < NB_SPHERES ; k++)
     {
-        scene.addMesh(new rt::Sphere(rt::Position(0 * cos(k), 20 + 35* cos(k), 25 * cos(k) ), 3, rt::Texture(rt::color::RED, rt::color::WHITE, 10, 0.999, 10)));
-    }
-    scene.addMesh(new rt::Sphere(rt::Position(20, 20, 0), 3, rt::Texture(rt::color::BLACK, rt::color::WHITE, 100, 0, 5)));
-    //scene.addMesh(new rt::Sphere(rt::Position(0, 35, -20), 5, rt::Texture(rt::color::GREEN, rt::color::BLACK, 100, 0, 2)));
-    scene.addLight(new rt::PointLight(0, 35, -20, rt::color::GREEN, &scene));
+        scene.addMesh(new rt::Sphere(rt::Position(0 * cos(k), 20 + 35* cos(k), 25 * cos(k) ), 3, rt::Texture(rt::color::RED, rt::color::WHITE, 10, 0.999, 1)));
+    }*/
+    //scene.addMesh(new rt::Sphere(rt::Position(20, 20, 0), 3, rt::Texture(rt::color::BLACK, rt::color::WHITE, 100, 0, 5)));
+    //scene.addMesh(new rt::Sphere(rt::Position(0, 35, -10), 10, rt::Texture(rt::color::GREEN, rt::color::BLACK, 1, 0, 2)));
+    //scene.addLight(new rt::PointLight(0, 35, -10, rt::color::GREEN, &scene));
 
     scene.render(s);
 
