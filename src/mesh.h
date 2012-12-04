@@ -45,6 +45,11 @@ class Mesh
         */
         virtual Position getIntersection(const Position& point, const vector& vect) = 0;
         
+        /** Return the point on the other side of the mesh
+        * \return point
+     	*/
+        virtual Position autreCote(const Position& point, const vector& vect, const Position& act) const = 0;
+        
         
         /** Retourne un vecteur normal a la surface 
         * @param point of the object
