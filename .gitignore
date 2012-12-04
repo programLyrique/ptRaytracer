@@ -1,2 +1,8 @@
 *.o
 *.html
+*.aux
+*.nav
+*.out
+*.toc
+*.snm
+*.log
