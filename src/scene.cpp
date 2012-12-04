@@ -1,15 +1,16 @@
 #include "scene.h"
-
+#include "thread.h"
 #include <cmath>
 #include <ctime>
 #include <iostream>
+#include "screen.hpp"
 
 namespace rt
 {
-Scene::Scene()
-{
+    Scene::Scene()
+    {
 
-}
+    }
 
 void Scene::renderArea(int x, int y, int width, int height, screen& s, bool oversampling = true)
 {
@@ -103,6 +104,126 @@ void Scene::renderArea(int x, int y, int width, int height, screen& s, bool over
 
             s.set_pixel(i, j, color((int)mL1, (int)mL2, (int)mL3));
 
+					/*			}
+								else
+								{
+									if(o != k)
+									{
+										reflect = true;
+										brill = pos;
+										e = k;
+									}
+								}
+		                   }
+		              }
+
+		              	double n1 = 0;
+				  		double n2 = 0;
+				  		double n3 = 0;
+
+						if(reflect)
+						{
+					  		for(int k = 0; k < lampes.size(); ++k)
+						  	{
+						  		n1 += lampes[k]->illuminateR(brill, objets[e], brill.vectTo(p).unit());
+						  		n2 += lampes[k]->illuminateG(brill, objets[e], brill.vectTo(p).unit());
+						  		n3 += lampes[k]->illuminateB(brill, objets[e], brill.vectTo(p).unit());
+						  	}
+
+						  	n1 = std::min(n1, 255.);
+						  	n2 = std::min(n2, 255.);
+						  	n3 = std::min(n3, 255.);
+					  	}
+
+		                if( (1./(objets[o]->getTexture().getIndice()) * (v.unit()^objets[o]->getNormal(p).unit()).norm()) > 1)
+		                {
+		                	//printf("brix will be shit\n");
+		                }
+		                //printf("GoGo transparence:");
+		                //printf("%4f %4f %4f ", v.unit().x, v.unit().y, v.unit().z);
+		                double n1n2 = 1/(objets[o]->getTexture().getIndice());
+		                v = v.unit();
+		                //printf("%f %f %f", p.getX(), p.getY(), p.getZ());
+		                vector normal = objets[o]->getNormal(p).unit();
+		                vector r =  (n1n2 * v - (- n1n2 * (v | normal) - std::sqrt(1 - n1n2 * n1n2 * (1 - (v | normal) *(v | normal)))) * normal).unit();
+		                //printf("%4f %4f %4f \n", r.x, r.y, r.z);
+		                Position transp(objets[o]->autreCote(p, r, p));
+		                //printf(" %f %f %f\n", transp.getX(), transp.getY(), transp.getZ());
+		                //Position transp(objets[o]->autreCote(p, v, p));
+		                vector normal2 = objets[o]->getNormal(transp).unit();
+		                tem = (n1n2 * r - (n1n2 * (r | normal2) - std::sqrt(1 - n1n2 * n1n2 * (1 - (r | normal2) *(r | normal2)))) * normal2).unit();
+		                //printf("%4f %4f %4f\n", tem.unit().x, tem.unit().y, tem.unit().z);
+				  		double m1 = 0;
+				  		double m2 = 0;
+				  		double m3 = 0;
+
+						double o1 = 0;
+						double o2 = 0;
+						double o3 = 0;
+
+						if(objets[o]->getTexture().getTransparence() != 0)
+						{
+
+					  		for(int k = 0; k < lampes.size(); ++k)
+						  	{
+						  		m1 += lampes[k]->illuminateR(transp, objets[o], tem);
+						  		m2 += lampes[k]->illuminateG(transp, objets[o], tem);
+						  		m3 += lampes[k]->illuminateB(transp, objets[o], tem);
+						  	}
+
+						  	m1 = std::min(m1, 255.);
+						  	m2 = std::min(m2, 255.);
+						  	m3 = std::min(m3, 255.);
+
+		              		bool brillance = false;
+
+		              		for(unsigned k = 0; k < objets.size(); k++)
+						    {
+								  if(objets[k]->intersect(transp, tem))
+								  {
+																
+										rt::Position pos = objets[k]->getIntersection(transp, tem);
+										if(k != o)
+										{
+											if(brillance)
+											{
+										        if(transp.distance(pos) < transp.distance(brill))
+										        {
+										           brill = pos;
+										           e = k;
+										        }
+
+											}
+											else
+											{
+												brillance = true;
+												brill = pos;
+												e = k;
+											}
+											printf("J'intersecte youpi avec %d, sachant que j'appartiend à %d\n", e, o);
+										}
+										
+						           }
+						     }
+						     if(brillance)
+							{
+						  		for(int k = 0; k < lampes.size(); ++k)
+							  	{
+							  		o1 += lampes[k]->illuminateR(brill, objets[e], brill.vectTo(p).unit());
+							  		o2 += lampes[k]->illuminateG(brill, objets[e], brill.vectTo(p).unit());
+							  		o3 += lampes[k]->illuminateB(brill, objets[e], brill.vectTo(p).unit());
+							  	}
+							  	o1 = std::min(o1, 255.);							  
+							  	o2 = std::min(o2, 255.);
+							  	o3 = std::min(o3, 255.);
+							  	//o2 = 255.;
+						  	}
+		              	}
+
+                    s.set_pixel(i, j, color((int)std::min((l1 + objets[o]->getTexture().getTransparence() * m1 + (1 - objets[o]->getTexture().getTransparence()) * n1 + objets[o]->getTexture().getTransparence() * o1), 255.), (int)std::min((l2 + objets[o]->getTexture().getTransparence() * m2 + (1 - objets[o]->getTexture().getTransparence()) * n2 + objets[o]->getTexture().getTransparence() * o2), 255.), (int)std::min((l3 + objets[o]->getTexture().getTransparence() * m3 + (1 - objets[o]->getTexture().getTransparence()) * n3 + objets[o]->getTexture().getTransparence() * o3), 255.)));
+				  }*/
+
+		        }
         }
     }
 }

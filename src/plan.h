@@ -26,6 +26,8 @@ namespace rt
 			
 			bool intersect(const Position& pos, const vector& vect);
 			
+			Position autreCote(const Position& point, const vector& vect, const Position& act) const;
+			
 			Position getIntersection(const Position& pos, const vector& vect);
 		
 	};

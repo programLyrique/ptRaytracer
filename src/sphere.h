@@ -50,6 +50,12 @@ namespace rt
             */
             Position getIntersection(const Position& point, const vector& vect);
             
+            
+            Position autreCote(const Position& point, const vector& vect, const Position& act) const;
+            
+            /** Return the normal at p at the sphere
+            * \return vector
+            */
             vector getNormal(const Position& p, const vector& vect) const;
 
             /** Accessor
