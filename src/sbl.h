@@ -57,17 +57,18 @@ namespace rt
              */
              void registerCameraParser(const string& name, Parser<Light>* parser);
 
-             /**
-              * To
-              */
             /**
              * Splits a string on whitespaces
              */
             static vector<string> split(const string& str);
 
-    ;    protected:
+            static Texture addTexture
+
+        protected:
         private:
-            map<const string&, Parser<Mesh> > meshInstr;
+            map<string, Parser<Mesh> > meshInstr;
+            map<string,Parser<Light> > lightInstr;
+            map<string, Parser<Camera> > cameraInstr;
     };
 
 }
