@@ -1,6 +1,8 @@
 #include "scene.h"
 
 #include <cmath>
+#include <ctime>
+
 #include <iostream>
 
 namespace rt
@@ -69,12 +71,12 @@ namespace rt
 				  	l1 = std::min(l1, 255.);
 				  	l2 = std::min(l2, 255.);
 				  	l3 = std::min(l3, 255.);
-				  	
+
 				  	vector reflection = (2 * (tem | objets[o]->getNormal(p)) * objets[o]->getNormal(p) - tem).unit();
 				  	bool reflect = false;
 				  	Position brill;
 				  	int e = 0;
-				  	
+
 				  	for(unsigned k = 0; k < objets.size(); k++)
 		            {
 						  if(objets[k]->intersect(p, reflection))
@@ -104,11 +106,11 @@ namespace rt
 								}
 		                   }
 		              }
-		              
+
 		              	double n1 = 0;
 				  		double n2 = 0;
 				  		double n3 = 0;
-				  		
+
 						if(reflect)
 						{
 					  		for(int k = 0; k < lampes.size(); ++k)
@@ -122,10 +124,10 @@ namespace rt
 						  	n2 = std::min(n2, 255.);
 						  	n3 = std::min(n3, 255.);
 					  	}
-					  	
+
 		                if( (1./(objets[o]->getTexture().getIndice()) * (v.unit()^objets[o]->getNormal(p).unit()).norm()) > 1)
 		                {
-		                	printf("brix will be shit\n");
+		                	//printf("brix will be shit\n");
 		                }
 		                //printf("GoGo transparence:");
 		                //printf("%4f %4f %4f ", v.unit().x, v.unit().y, v.unit().z);
@@ -144,14 +146,14 @@ namespace rt
 				  		double m1 = 0;
 				  		double m2 = 0;
 				  		double m3 = 0;
-						
+
 						double o1 = 0;
 						double o2 = 0;
 						double o3 = 0;
-						
+
 						if(objets[o]->getTexture().getTransparence() != 0)
 						{
-						
+
 					  		for(int k = 0; k < lampes.size(); ++k)
 						  	{
 						  		m1 += lampes[k]->illuminateR(transp, objets[o], tem);
@@ -162,9 +164,9 @@ namespace rt
 						  	m1 = std::min(m1, 255.);
 						  	m2 = std::min(m2, 255.);
 						  	m3 = std::min(m3, 255.);
-		              
+
 		              		bool brillance = false;
-		              		
+
 		              		for(unsigned k = 0; k < objets.size(); k++)
 						    {
 								  if(objets[k]->intersect(transp, tem))
@@ -229,7 +231,7 @@ namespace rt
     {
         std::cout << "Rendering with " << nbThreads <<  " threads." << std::endl;
         // Most of the times, the number of procs is a power of 2.
-        // Anyway, it's rarely a prime number (except 2...).
+        // Anyway, it's rarely a prime number (except 2... !).
         int p2 = std::log(nbThreads) / std::log(2);//More efficient to detect the most significant bit
         int nb_w = 0; // Nombre de divisions de la largeur
         int nb_h = 0; // Nombre de morceaux en hauteur
@@ -262,6 +264,8 @@ namespace rt
                 //renderArea(i,j,w ,h,s);
                 k++;
             }
+
+        std::time_t beginning  = std::time(NULL);
         for(k=0; k < nbThreads ;k++)
         {
             std::cout << "Launching thread n." << k + 1<< std::endl;
@@ -282,7 +286,8 @@ namespace rt
             renderArea(i, limit_h, w, s.height() - h, s);
         for(unsigned j=0; j < limit_h; j += h)
             renderArea(limit_w, j, s.width() - h, h, s);*/
-        std::cout << "End of rendering" << std::endl;
+        std::time_t end = std::time(NULL);
+        std::cout << "End of rendering. Took " << end - beginning << " seconds." << std::endl;
  	}
 
     void Scene::render(screen& s)

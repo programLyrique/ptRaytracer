@@ -9,7 +9,7 @@
 
 #include <cmath>
 
-#define NB_SPHERES 100
+#define NB_SPHERES 1000
 
 int main(void)
 {
