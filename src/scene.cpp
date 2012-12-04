@@ -221,9 +221,9 @@ void Scene::renderArea(int x, int y, int width, int height, screen& s, bool over
 		              	}
 
                     s.set_pixel(i, j, color((int)std::min((l1 + objets[o]->getTexture().getTransparence() * m1 + (1 - objets[o]->getTexture().getTransparence()) * n1 + objets[o]->getTexture().getTransparence() * o1), 255.), (int)std::min((l2 + objets[o]->getTexture().getTransparence() * m2 + (1 - objets[o]->getTexture().getTransparence()) * n2 + objets[o]->getTexture().getTransparence() * o2), 255.), (int)std::min((l3 + objets[o]->getTexture().getTransparence() * m3 + (1 - objets[o]->getTexture().getTransparence()) * n3 + objets[o]->getTexture().getTransparence() * o3), 255.)));
-				  }*/
+				  }
 
-		        }
+		        }*/
         }
     }
 }

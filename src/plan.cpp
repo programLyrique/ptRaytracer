@@ -24,5 +24,10 @@ namespace rt
 			return normal;
 		return -1 * normal;
 	}
+	
+	Position Plan::autreCote(const Position& point, const vector& vect, const Position& act) const
+	{
+		return act;
+	}
 
 }
