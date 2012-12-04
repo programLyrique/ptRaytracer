@@ -106,6 +106,9 @@ namespace rt
              * @todo Handling the case when nbThreads is not a power of two !
              */
             void render(screen& s, int nbThreads);
+            double getIlluminationR(const Position& p, int o, const vector& v, int nbR, int nbTrans) const;
+            double getIlluminationB(const Position& p, int o, const vector& v, int nbR, int nbTrans) const;
+            double getIlluminationG(const Position& p, int o, const vector& v, int nbR, int nbTrans) const;            
     };
 }
 
