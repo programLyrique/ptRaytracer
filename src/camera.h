@@ -48,8 +48,6 @@ namespace rt
 		     * \param val New value to set
 		     */
 		    void setUp(vector val) { up = val; };
-		    /** generate the scene from the point of view of the camera */
-		    void generate(int height, int width);
 
 		protected:
 		private:

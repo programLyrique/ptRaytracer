@@ -1,4 +1,5 @@
 #include "light.h"
+#include "scene.h"
 
 namespace rt
 {

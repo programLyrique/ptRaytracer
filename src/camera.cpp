@@ -8,9 +8,6 @@ namespace rt
 		//parent = par;
     }
 
-    void Camera::generate(int height, int width)
-    {
-        
-    }
+
 
 }

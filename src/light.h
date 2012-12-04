@@ -28,7 +28,7 @@ namespace rt
             virtual ~Light();
 
             /** Constructor
-            * @aram power
+            * @param power
             * @param Parent scene
             */
             Light(color c, Scene* parent);
@@ -39,7 +39,7 @@ namespace rt
             */
             virtual double illuminateR(const Position& position, const Mesh* m, const vector vision) = 0;
             virtual double illuminateG(const Position& position, const Mesh* m, const vector vision) = 0;
-            virtual double illuminateB(const Position& position, const Mesh* m, const vector vision) = 0;                        
+            virtual double illuminateB(const Position& position, const Mesh* m, const vector vision) = 0;
 
     };
 }
