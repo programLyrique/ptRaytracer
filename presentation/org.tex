@@ -42,6 +42,24 @@
 }
 \end{frame}
 
+\begin{frame}[fragile]
+\frametitle{Documentation}
+\framesubtitle{Doxygen}
+\begin{verbatim}
+/**
+ * Renders a rectangle of the scene.
+ * @param x x-coordinate of the left-upper vertex
+ * @param y y-coordinate of the left-upper vertex
+ * @param width width of the rectangle
+ * @param height of the rectangle
+ * @param oversampling if true, calculate 9 virtual pixels
+ */
+ void renderArea(int x, int y, int width, 
+ 	int height, screen& s, bool oversampling);
+\end{verbatim}
+
+\end{frame}
+
 \begin{frame}{Principe du lancer de rayons}
 
 \begin{itemize}
@@ -69,6 +87,34 @@
 
 
 \begin{frame}[fragile]
+\frametitle{Créer des objets ou des lumières.}
+
+\begin{block}{Objets}
+Hériter de la classe Mesh, et implémenter :
+\begin{verbatim}
+ virtual bool intersect(const Position& pos, 
+ 	const vector& vect) = 0;
+\end{verbatim}
+\end{block}
+
+\begin{block}{Lights}
+Hériter de la classe Light, et implémenter :
+\begin{verbatim}
+virtual double illuminateR(const Position& position, 
+	 const Mesh* m, const vector vision) = 0;
+virtual double illuminateG(const Position& position, 
+	const Mesh* m, const vector vision) = 0;
+virtual double illuminateB(const Position& position, 
+	const Mesh* m, const vector vision) = 0;
+\end{verbatim}
+
+\end{block}
+
+Idem pour Camera.
+
+\end{frame}
+
+\begin{frame}[fragile]
 \frametitle{Structures de données}
 
 \begin{verbatim}
@@ -94,4 +140,5 @@ std::vector<Light*> lights;
 }
 
 \end{frame}
+
 

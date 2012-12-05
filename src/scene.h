@@ -51,8 +51,7 @@ namespace rt
              * @param y y-coordinate of the left-upper vertex
              * @param width width of the rectangle
              * @param height of the rectangle
-             * @param oversampling if true, calculate 4 virtual pixels
-             * @todo oversampling with 8 pixels
+             * @param oversampling if true, calculate 9 virtual pixels
              */
             void renderArea(int x, int y, int width, int height, screen& s, bool oversampling);
         public:
@@ -108,7 +107,7 @@ namespace rt
             void render(screen& s, int nbThreads);
             double getIlluminationR(const Position& p, int o, const vector& v, int nbR, int nbTrans) const;
             double getIlluminationB(const Position& p, int o, const vector& v, int nbR, int nbTrans) const;
-            double getIlluminationG(const Position& p, int o, const vector& v, int nbR, int nbTrans) const;            
+            double getIlluminationG(const Position& p, int o, const vector& v, int nbR, int nbTrans) const;
     };
 }
 
