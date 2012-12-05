@@ -1,0 +1,80 @@
+\begin{frame}[fragile]
+\frametitle{Threads}
+
+\begin{block}{Posix threads}
+Une bibliothèque de threads C : créer un \emph{wrapper} C++ pour être plus idiomatique.
+\end{block}
+
+\begin{block}{Utilisation du \emph{wrapper}}
+Hériter de la classe Thread, et implémenter :
+\begin{verbatim}
+virtual void run() = 0;
+\end{verbatim}
+\end{block}
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{\emph{Wrapper}}
+\begin{verbatim}
+class Thread
+{
+    public:
+        Thread();
+        virtual ~Thread();
+        pthread_t getHandle() const { return thread; }
+        bool exec();
+        bool join();
+        static unsigned int nbCores();
+    protected:
+        virtual void run() = 0;
+    private:
+        pthread_t thread;
+        static void * startRoutine(void * obj);
+};
+\end{verbatim}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Parallélisation du lancer de rayon}
+
+\begin{block}{Facilement parallélisable}
+Chaque pixel est rendu indépendamment des autres.
+\end{block}
+
+\begin{block}{Paralléliser}
+\begin{itemize}
+\item Détecter le nombre de coeurs.
+\item Calcul du découpage\footnote{Oui, une puissance de 2 pour l'instant.} de l'image : $n \times m $ où $ n = \log_2(nbThreads) $ et $ m = nbThreads / n$.
+\item Lancer un \emph{thread} par partie de l'image.
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Performances}
+\begin{tabular}{|c|c|c|c|c|}
+\hline 
+Nombre de threads & 1 & 2 & 4 & 8 \\ 
+\hline 
+Temps (s) & 91 & 47 & 35 & 23 \\ 
+\hline 
+\end{tabular} 
+\begin{block}{Banc de mesure}
+\begin{tikzpicture}
+\draw plot file {benchmark.txt};;
+\end{tikzpicture}
+\end{block}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Améliorations}
+
+\begin{itemize}
+\item Découper l'image de façon adaptative.
+\item Problèmes de synchronisation entre threads, et de conflit sur les données.
+\end{itemize}
+\end{frame}
