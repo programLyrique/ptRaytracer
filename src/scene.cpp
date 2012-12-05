@@ -72,9 +72,9 @@ void Scene::renderArea(int x, int y, int width, int height, screen& s, bool over
 
                     if(inter)
                     {
-                        mL1 += getIlluminationR(p, o, v, 0, 0);
-                        mL2 += getIlluminationG(p, o, v, 0, 0);
-                        mL3 += getIlluminationB(p, o, v, 0, 0);
+                        mL1 += getIlluminationR(p, o, v, 1, 0);
+                        mL2 += getIlluminationG(p, o, v, 1, 0);
+                        mL3 += getIlluminationB(p, o, v, 1, 0);
                     }
                 }
             if(oversampling)
@@ -245,6 +245,7 @@ double Scene::getIlluminationR(const Position& p, int o, const vector& vect, int
 	  		}
 
 			reflechie = std::min(reflechie, 255.);
+			//reflechie = 255;
 		}
 	}
 	if(nbTrans > 0)
@@ -310,7 +311,7 @@ double Scene::getIlluminationR(const Position& p, int o, const vector& vect, int
 			}
 		}
 	}
-	return std::min((phong + objets[o]->getTexture().getTransparence() * reflechie + (1 - objets[o]->getTexture().getTransparence()) * transparenceLumiere + objets[o]->getTexture().getTransparence() * transparenceObjet), 255.);
+	return std::min((phong + (1 - objets[o]->getTexture().getTransparence()) * reflechie + objets[o]->getTexture().getTransparence() * transparenceLumiere + objets[o]->getTexture().getTransparence() * transparenceObjet), 255.);
 }
 
 double Scene::getIlluminationG(const Position& p, int o, const vector& vect, int nbR, int nbTrans) const
@@ -437,7 +438,7 @@ double Scene::getIlluminationG(const Position& p, int o, const vector& vect, int
 			}
 		}
 	}
-	return std::min((phong + objets[o]->getTexture().getTransparence() * reflechie + (1 - objets[o]->getTexture().getTransparence()) * transparenceLumiere + objets[o]->getTexture().getTransparence() * transparenceObjet), 255.);
+	return std::min((phong + (1 - objets[o]->getTexture().getTransparence()) * reflechie + objets[o]->getTexture().getTransparence() * transparenceLumiere + objets[o]->getTexture().getTransparence() * transparenceObjet), 255.);
 }
 
 double Scene::getIlluminationB(const Position& p, int o, const vector& vect, int nbR, int nbTrans) const
@@ -563,7 +564,7 @@ double Scene::getIlluminationB(const Position& p, int o, const vector& vect, int
 			}
 		}
 	}
-	return std::min((phong + objets[o]->getTexture().getTransparence() * reflechie + (1 - objets[o]->getTexture().getTransparence()) * transparenceLumiere + objets[o]->getTexture().getTransparence() * transparenceObjet), 255.);
+	return std::min((phong + (1 - objets[o]->getTexture().getTransparence()) * reflechie + objets[o]->getTexture().getTransparence() * transparenceLumiere + objets[o]->getTexture().getTransparence() * transparenceObjet), 255.);
 }
 
 }
