@@ -27,8 +27,11 @@ int main(int argc, char** argv)
         scene.addMesh(new rt::Sphere(rt::Position(0 * cos(k), 20 + 35* cos(k), 25 * cos(k) ), 3, rt::Texture(rt::color::RED, rt::color::BLUE, 1, 0, 1)));
     }
     scene.addMesh(new rt::Plan(rt::Texture(rt::color::WHITE, rt::color::WHITE, 1, 0, 1), rt::Position(0, 0, 10), rt::vector(0, 0, -1)));*/
-	scene.addMesh(new rt::Sphere(rt::Position(0, 20, 0), 3, rt::Texture(rt::color::RED, rt::color::WHITE, 100, 0, 1)));
-	scene.addMesh(new rt::Sphere(rt::Position(6, 20.1, 0), 3, rt::Texture(rt::color::GREEN, rt::color::WHITE, 100, 0, 1)));
+	scene.addMesh(new rt::Sphere(rt::Position(3, 20, 0), 3, rt::Texture(rt::color(255, 255, 0), rt::color::WHITE, 1000, 0, 1)));
+	scene.addMesh(new rt::Sphere(rt::Position(-3, 20, 3), 3, rt::Texture(rt::color(255, 0, 255), rt::color::WHITE, 1000, 0, 1)));
+	scene.addMesh(new rt::Sphere(rt::Position(-3, 20, -3), 3, rt::Texture(rt::color(0, 255, 255), rt::color::WHITE, 1000, 0, 1)));
+	//scene.addMesh(new rt::Sphere(rt::Position(0, 15, 0), 3, rt::Texture(rt::color::WHITE, rt::color::WHITE, 1000, 0.9, 1)));
+	scene.addMesh(new rt::Sphere(rt::Position(3, 20, 6), 3, rt::Texture(rt::color::RED, rt::color::WHITE, 1000, 0, 1)));
 
 
     std::cout << "Nombre de param : " << argc << std::endl;

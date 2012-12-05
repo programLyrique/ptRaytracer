@@ -72,9 +72,9 @@ void Scene::renderArea(int x, int y, int width, int height, screen& s, bool over
 
                     if(inter)
                     {
-                        mL1 += getIlluminationR(p, o, v, 1, 0);
-                        mL2 += getIlluminationG(p, o, v, 1, 0);
-                        mL3 += getIlluminationB(p, o, v, 1, 0);
+                        mL1 += getIlluminationR(p, o, v, 3, 2);
+                        mL2 += getIlluminationG(p, o, v, 3, 2);
+                        mL3 += getIlluminationB(p, o, v, 3, 2);
                     }
                 }
             if(oversampling)
@@ -311,7 +311,7 @@ double Scene::getIlluminationR(const Position& p, int o, const vector& vect, int
 			}
 		}
 	}
-	return std::min((phong + (1 - objets[o]->getTexture().getTransparence()) * reflechie + objets[o]->getTexture().getTransparence() * transparenceLumiere + objets[o]->getTexture().getTransparence() * transparenceObjet), 255.);
+	return std::min(((1 - objets[o]->getTexture().getTransparence()) * phong + (1 - objets[o]->getTexture().getTransparence()) * reflechie + objets[o]->getTexture().getTransparence() * transparenceLumiere + objets[o]->getTexture().getTransparence() * transparenceObjet), 255.);
 }
 
 double Scene::getIlluminationG(const Position& p, int o, const vector& vect, int nbR, int nbTrans) const
@@ -438,7 +438,7 @@ double Scene::getIlluminationG(const Position& p, int o, const vector& vect, int
 			}
 		}
 	}
-	return std::min((phong + (1 - objets[o]->getTexture().getTransparence()) * reflechie + objets[o]->getTexture().getTransparence() * transparenceLumiere + objets[o]->getTexture().getTransparence() * transparenceObjet), 255.);
+	return std::min(((1 - objets[o]->getTexture().getTransparence()) * phong + (1 - objets[o]->getTexture().getTransparence()) * reflechie + objets[o]->getTexture().getTransparence() * transparenceLumiere + objets[o]->getTexture().getTransparence() * transparenceObjet), 255.);
 }
 
 double Scene::getIlluminationB(const Position& p, int o, const vector& vect, int nbR, int nbTrans) const
@@ -518,11 +518,12 @@ double Scene::getIlluminationB(const Position& p, int o, const vector& vect, int
 		vector normal2 = objets[o]->getNormal(transp, r).unit();
 		tem = (n1n2 * r - (n1n2 * (r | normal2) - std::sqrt(1 - n1n2 * n1n2 * (1 - (r | normal2) *(r | normal2)))) * normal2).unit();
 				            //printf("%4f %4f %4f\n", tem.unit().x, tem.unit().y, tem.unit().z);
+				    
 		if(objets[o]->getTexture().getTransparence() != 0)
 		{
 	  		for(int k = 0; k < lights.size(); ++k)
 		  	{
-		  		transparenceLumiere += lights[k]->illuminateB(transp, objets[o], tem);
+		  		transparenceLumiere += lights[k]->illuminateB(transp, objets[o], (-1 * tem));
 			}
 
 		  	transparenceLumiere = std::min(transparenceLumiere, 255.);
@@ -558,13 +559,14 @@ double Scene::getIlluminationB(const Position& p, int o, const vector& vect, int
 			{
 		  		for(int k = 0; k < lights.size(); ++k)
 			  	{
-			  		transparenceObjet += getIlluminationB(brill, e, brill.vectTo(p).unit(), nbR, nbTrans - 1);
+			  		transparenceObjet += getIlluminationB(brill, e, brill.vectTo(transp).unit(), nbR, nbTrans - 1);
 			  	}
 			  	transparenceObjet = std::min(transparenceObjet, 255.);							  
+			  	//transparenceObjet = 255;
 			}
 		}
 	}
-	return std::min((phong + (1 - objets[o]->getTexture().getTransparence()) * reflechie + objets[o]->getTexture().getTransparence() * transparenceLumiere + objets[o]->getTexture().getTransparence() * transparenceObjet), 255.);
+	return std::min(((1 - objets[o]->getTexture().getTransparence()) * phong + (1 - objets[o]->getTexture().getTransparence()) * reflechie + objets[o]->getTexture().getTransparence() * transparenceLumiere + objets[o]->getTexture().getTransparence() * transparenceObjet), 255.);
 }
 
 }
