@@ -7,9 +7,14 @@
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{lmodern}
+\usepackage{multicol}
+\usepackage{tikz}
 
 \author{Pierre \bsc{Donat-Bouillud} Thibaud \bsc{Ehret}}
 \title{Lancer de rayons}
+
+\usetheme{Antibes}
+\usecolortheme{beaver}
 
 \begin{document}
 
@@ -17,20 +22,21 @@
 
 \frame{\tableofcontents}
 
-\begin{frame}
-
-\end{frame}
-
-
 \section{Organisation générale.}
 \input{org.tex}
+
+\frame{\tableofcontents}
 
 \section{Illumination}
 \input{illumi.tex}
 
-\section{Multithreading} % Ou améliorations pour pouvoir caser l'anti-aliasing ?
+\frame{\tableofcontents}
+
+\section{Multithreading} 
 \input{multith.tex}
 
+\section{Anti-aliasing}
+\input{antialias.tex}
 %S'il j'ai eu le temps de l'implémenter
 %\section{SBL}
 %\input{sbl.tex}
