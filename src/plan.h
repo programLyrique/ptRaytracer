@@ -31,9 +31,14 @@ namespace rt
 			Point point;
 			vector normal;
 		public:
-			/** Constructor */
+
 			Plan() {}
 			~Plan() {}
+			/** Constructor
+			* @param t texture
+			* @param p point of the plane
+			* @param n normal vector to the plane
+			*/
 			Plan(Texture t, const Point& p, vector n) : Solid(t), point(p), normal(n.unit()) {}
 
 			vector getNormal(const Point& p, const vector& vect) const;
