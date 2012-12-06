@@ -16,20 +16,20 @@
 #define SPHERE_H
 
 #include <cmath>
-#include "position.h"
-#include "mesh.h"
+#include "point.h"
+#include "solid.h"
 #include "texture.h"
 
 namespace rt
 {
     /**
-     * A mesh that is a sphere.
+     * A solid that is a sphere.
      */
-    class Sphere:   public Mesh
+    class Sphere:   public Solid
     {
         protected:
             /** Center of the sphere */
-            Position centre;
+            Point centre;
 
             /// Size of the sphere
             double radius;
@@ -48,36 +48,36 @@ namespace rt
             * @param center
             * @param radius
             */
-            Sphere(Position centre, double radius, Texture text);
+            Sphere(Point centre, double radius, Texture text);
 
             /**
              * Whether the given ray intersects the sphere
              * @param point the beginning of the ray
              * @param vect a directing vector of the ray
              */
-            bool intersect(const Position& point, const vector& vect);
+            bool intersect(const Point& point, const vector& vect);
 
             /** get intersection between the sphere and a line if it exists
             * @param point the beginning of the ray
             * @param vect a directing vector of the ray
             * \return the intersection if it exists
             */
-            Position getIntersection(const Position& point, const vector& vect);
-            
+            Point getIntersection(const Point& point, const vector& vect);
+
             /**	get the point on the other side of the object
             *	\return the point
             */
-            Position autreCote(const Position& point, const vector& vect, const Position& act) const;
-            
+            Point autreCote(const Point& point, const vector& vect, const Point& act) const;
+
             /** Return the normal at p at the sphere
             * \return vector
             */
-            vector getNormal(const Position& p, const vector& vect) const;
+            vector getNormal(const Point& p, const vector& vect) const;
 
             /** Accessor
             * \return centre
             */
-            Position getCentre() const { return centre; }
+            Point getCentre() const { return centre; }
 
     };
 }

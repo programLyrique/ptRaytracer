@@ -15,10 +15,10 @@
 #ifndef POINTLIGHT_H
 #define POINTLIGHT_H
 
-#include "position.h"
+#include "point.h"
 #include "light.h"
 #include "scene.h"
-#include "mesh.h"
+#include "solid.h"
 #include <vector>
 #include <algorithm>
 #include "color.hpp"
@@ -28,7 +28,7 @@ namespace rt
     /**
      * A simple light : only one point, and isotropic.
      */
-    class PointLight : public Light, public Position
+    class PointLight : public Light, public Point
     {
         protected:
         private:
@@ -40,7 +40,7 @@ namespace rt
             ~PointLight() {}
 
             /**
-            * Constructor from a position
+            * Constructor from a point
             * @param x
             * @param y
             * @param z
@@ -49,7 +49,7 @@ namespace rt
             */
             PointLight(double x, double y, double z, color c, Scene* parent);
 
-            color illuminate(const Position& p, const Mesh* m, const vector vision) const;
+            color illuminate(const Point& p, const Solid* m, const vector vision) const;
 
 
     };

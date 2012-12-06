@@ -1,40 +1,40 @@
-#include "position.h"
+#include "point.h"
 
 namespace rt
 {
-    Position::Position(double _x, double _y, double _z)
+    Point::Point(double _x, double _y, double _z)
     {
         x = _x;
         y = _y;
         z = _z;
     }
 
-    double Position::getX() const
+    double Point::getX() const
     {
         return x;
     }
 
-    double Position::getY() const
+    double Point::getY() const
     {
         return y;
     }
 
-    double Position::getZ() const
+    double Point::getZ() const
     {
         return z;
     }
 
-    double Position::distance(const Position& p) const
+    double Point::distance(const Point& p) const
     {
         return (x - p.getX()) * (x - p.getX()) + (y - p.getY()) * (y - p.getY()) + (z - p.getZ()) * (z - p.getZ());
     }
-    
-    vector Position::vectTo(const Position& p) const
+
+    vector Point::vectTo(const Point& p) const
     {
         return vector(p.getX() - x, p.getY() - y, p.getZ() - z);
     }
-    
-    bool Position::operator!=(const Position& p) const
+
+    bool Point::operator!=(const Point& p) const
     {
     	return (std::fabs(x - p.getX()) > 0.0001)||(std::fabs(y - p.getY()) > 0.0001)||(std::fabs(z - p.getZ()) > 0.0001);
     }

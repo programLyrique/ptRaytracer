@@ -20,7 +20,7 @@
 namespace rt
 {
     /**
-     * To give a texture to your meshes.
+     * To give a texture to your solides.
      * Supports only uniform color map.
      * @todo Supporting bump maps, normal maps etc.
      */
@@ -28,7 +28,7 @@ namespace rt
 	{
 		protected:
 		private:
-		    /** colors of the object: 
+		    /** colors of the object:
 		    * cB: Color when illuminated
 		    * cN: inner color
 		    */
@@ -37,7 +37,7 @@ namespace rt
 			color cN;
 			/** Parameter for the Phong reflection */
 			int brillance;
-			
+
 			/** transparency of the object */
 			double transparence;
 			/** refraction parameter*/
@@ -48,7 +48,7 @@ namespace rt
 			Texture() {};
 			/** default destructor */
 			~Texture() {};
-			
+
 			/** Constructor
 			* @param cB color when illuminated
 			* @param cN inner color
@@ -57,7 +57,7 @@ namespace rt
 			* @param n refraction parameter
 			*/
 			Texture(color colB, color colN, int b, double t, double n) : cB(colB), cN(colN), brillance(b), transparence(t), indice(n) {};
-			
+
 			/** \return brillance color */
 			color getColorB() const { return cB; }
 			/** \return inner color */
@@ -68,7 +68,7 @@ namespace rt
 			double getTransparence() { return transparence; }
 			/** \return refraction parameter */
 			double getIndice() { return indice; }
-									
+
 
 	};
 }

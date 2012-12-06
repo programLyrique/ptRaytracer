@@ -18,8 +18,8 @@
 class Scene;
 
 #include "scene.h"
-#include "position.h"
-#include "mesh.h"
+#include "point.h"
+#include "solid.h"
 #include "sphere.h"
 #include "color.hpp"
 
@@ -50,11 +50,11 @@ namespace rt
 
             /**
             * Return the illumination of a point in a scene
-            * @param position the position wanted
+            * @param point the point wanted
             * @param m the object illuminated
             * @param vision the vector directing the vision
             */
-            virtual color illuminate(const Position& position, const Mesh* m, const vector vision) const = 0;
+            virtual color illuminate(const Point& point, const Solid* m, const vector vision) const = 0;
 
     };
 }

@@ -16,33 +16,33 @@
 #define PLAN_H
 
 #include "texture.h"
-#include "mesh.h"
-#include "position.h"
+#include "solid.h"
+#include "point.h"
 #include "vector.hpp"
 
 namespace rt
 {
-	class Plan :	public Mesh {
+	class Plan :	public Solid {
 
 		protected:
 
 
 		private:
-			Position point;
+			Point point;
 			vector normal;
 		public:
 			/** Constructor */
 			Plan() {}
 			~Plan() {}
-			Plan(Texture t, const Position& p, vector n) : Mesh(t), point(p), normal(n.unit()) {}
+			Plan(Texture t, const Point& p, vector n) : Solid(t), point(p), normal(n.unit()) {}
 
-			vector getNormal(const Position& p, const vector& vect) const;
+			vector getNormal(const Point& p, const vector& vect) const;
 
-			bool intersect(const Position& pos, const vector& vect);
+			bool intersect(const Point& pos, const vector& vect);
 
-			Position autreCote(const Position& point, const vector& vect, const Position& act) const;
+			Point autreCote(const Point& point, const vector& vect, const Point& act) const;
 
-			Position getIntersection(const Position& pos, const vector& vect);
+			Point getIntersection(const Point& pos, const vector& vect);
 
 	};
 }

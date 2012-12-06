@@ -2,12 +2,12 @@
 
 namespace rt
 {
-  Sphere::Sphere(Position c, double r, Texture text) : Mesh(text), centre(c), radius(r)
+  Sphere::Sphere(Point c, double r, Texture text) : Solid(text), centre(c), radius(r)
     {
     }
 
 
-    bool Sphere::intersect(const Position& point, const vector& vect)
+    bool Sphere::intersect(const Point& point, const vector& vect)
     {
         double delta = (vect.x * (Sphere::centre.getX() - point.getX()) + vect.y * (Sphere::centre.getY() - point.getY()) + vect.z * (Sphere::centre.getZ() - point.getZ()))
         * (vect.x * (Sphere::centre.getX() - point.getX()) + vect.y * (Sphere::centre.getY() - point.getY()) + vect.z * (Sphere::centre.getZ() - point.getZ()))
@@ -22,7 +22,7 @@ namespace rt
         return false;
     }
 
-    Position Sphere::getIntersection(const Position& point, const vector& vect)
+    Point Sphere::getIntersection(const Point& point, const vector& vect)
     {
         double delta = (vect.x * (Sphere::centre.getX() - point.getX()) + vect.y * (Sphere::centre.getY() - point.getY()) + vect.z * (Sphere::centre.getZ() - point.getZ()))
         * (vect.x * (Sphere::centre.getX() - point.getX()) + vect.y * (Sphere::centre.getY() - point.getY()) + vect.z * (Sphere::centre.getZ() - point.getZ()))
@@ -31,19 +31,19 @@ namespace rt
         //Calcul du discriminant
         double t1 = (-((vect.x * (Sphere::centre.getX() - point.getX()) + vect.y * (Sphere::centre.getY() - point.getY()) + vect.z * (Sphere::centre.getZ() - point.getZ()))) - std::sqrt(delta)) / (vect.x * vect.x + vect.y * vect.y + vect.z * vect.z);
         double t2 = (-((vect.x * (Sphere::centre.getX() - point.getX()) + vect.y * (Sphere::centre.getY() - point.getY()) + vect.z * (Sphere::centre.getZ() - point.getZ()))) + std::sqrt(delta)) / (vect.x * vect.x + vect.y * vect.y + vect.z * vect.z);
-        Position p1(point.getX() - t1 * vect.x, point.getY() - t1 * vect.y, point.getZ() - t1 * vect.z);
-        Position p2(point.getX() - t2 * vect.x, point.getY() - t2 * vect.y, point.getZ() - t2 * vect.z);
+        Point p1(point.getX() - t1 * vect.x, point.getY() - t1 * vect.y, point.getZ() - t1 * vect.z);
+        Point p2(point.getX() - t2 * vect.x, point.getY() - t2 * vect.y, point.getZ() - t2 * vect.z);
         //printf("---------------\n");
         //p1.print();
         //p2.print();
-        
+
         if(p1.distance(point) < p2.distance(point))
         	return p1;
 		else
         	return p2;
     }
-    
-    Position Sphere::autreCote(const Position& point, const vector& vect, const Position& act) const
+
+    Point Sphere::autreCote(const Point& point, const vector& vect, const Point& act) const
     {
      double delta = (vect.x * (Sphere::centre.getX() - point.getX()) + vect.y * (Sphere::centre.getY() - point.getY()) + vect.z * (Sphere::centre.getZ() - point.getZ()))
         * (vect.x * (Sphere::centre.getX() - point.getX()) + vect.y * (Sphere::centre.getY() - point.getY()) + vect.z * (Sphere::centre.getZ() - point.getZ()))
@@ -52,16 +52,16 @@ namespace rt
         //Calcul du discriminant
         double t1 = (-((vect.x * (Sphere::centre.getX() - point.getX()) + vect.y * (Sphere::centre.getY() - point.getY()) + vect.z * (Sphere::centre.getZ() - point.getZ()))) - std::sqrt(delta)) / (vect.x * vect.x + vect.y * vect.y + vect.z * vect.z);
         double t2 = (-((vect.x * (Sphere::centre.getX() - point.getX()) + vect.y * (Sphere::centre.getY() - point.getY()) + vect.z * (Sphere::centre.getZ() - point.getZ()))) + std::sqrt(delta)) / (vect.x * vect.x + vect.y * vect.y + vect.z * vect.z);
-        Position p1(point.getX() - t1 * vect.x, point.getY() - t1 * vect.y, point.getZ() - t1 * vect.z);
-        Position p2(point.getX() - t2 * vect.x, point.getY() - t2 * vect.y, point.getZ() - t2 * vect.z);
-        
+        Point p1(point.getX() - t1 * vect.x, point.getY() - t1 * vect.y, point.getZ() - t1 * vect.z);
+        Point p2(point.getX() - t2 * vect.x, point.getY() - t2 * vect.y, point.getZ() - t2 * vect.z);
+
         if(((std::abs(p1.getX() - act.getX()) > 0.0001)||(std::abs(p1.getY() - act.getY()) > 0.0001)||(std::abs(p1.getZ() - act.getZ()) > 0.0001)))
          return p1;
 else
          return p2;
     }
-    
-    vector Sphere::getNormal(const Position& p, const vector& vect) const
+
+    vector Sphere::getNormal(const Point& p, const vector& vect) const
     {
     	return centre.vectTo(p).unit();
     }

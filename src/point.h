@@ -23,14 +23,14 @@
 namespace rt
 {
     /**
-     * Position of a point in 3Ds.
+     * Point of a point in 3Ds.
      */
-    class Position
+    class Point
     {
         protected:
         private:
             /**
-            *  Coordinates correponding of the position in space
+            *  Coordinates correponding of the point in space
             */
             double x;
             double y;
@@ -38,10 +38,10 @@ namespace rt
         public:
 
             /** default constructor */
-            Position(){};
+            Point(){};
 
             /** default destructor */
-            ~Position(){};
+            ~Point(){};
 
             /**
             * Constructor
@@ -49,7 +49,7 @@ namespace rt
             * @param y
             * @param z
             */
-            Position(double _x, double _y, double _z);
+            Point(double _x, double _y, double _z);
 
             /** Accessors
             * \return x
@@ -67,23 +67,23 @@ namespace rt
             /** distances between 2 points
             * @arg other point
             */
-            double distance(const Position& p) const;
-            
-            
+            double distance(const Point& p) const;
+
+
             /** Create a vector for current point to given point
             * @param point
             * \return vector
             */
-            vector vectTo(const Position& p) const;
-            
+            vector vectTo(const Point& p) const;
+
             /**
             * Print the coordinates of the point
             */
             void print() const {
             	printf("%f %f %f\n", x, y, z);
             }
-            
-    		virtual bool operator!=(const Position& p) const;
+
+    		virtual bool operator!=(const Point& p) const;
     };
 
 }

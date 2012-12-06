@@ -15,17 +15,17 @@
 #ifndef MESH_H
 #define MESH_H
 
-#include "position.h"
+#include "point.h"
 #include "vector.hpp"
 #include "texture.h"
 
 namespace rt
 {
 
-class Mesh
+class Solid
 {
     /**
-     * One of the building block of a scene : mesh.
+     * One of the building block of a scene : solid.
      * Can be a sphere ( @see Sphere ), or a cube...
      */
     protected:
@@ -35,21 +35,21 @@ class Mesh
         /** angle de réfraction*/
         double refraction;
 
-        /** Texture of the mesh*/
+        /** Texture of the solid*/
         Texture t;
     private:
     public:
         /** Default constructor : puts uniform balck as a texture. */
-        Mesh();
+        Solid();
 
-        /** @param texture the texture for the mesh*/
-        Mesh(Texture texture);
+        /** @param texture the texture for the solid*/
+        Solid(Texture texture);
 
-        /** Wether the line defined by a vector and a point intersects the mesh.
+        /** Wether the line defined by a vector and a point intersects the solid.
         *    @param pos the point
         *    @param vect the vector
         */
-        virtual bool intersect(const Position& pos, const vector& vect) = 0;
+        virtual bool intersect(const Point& pos, const vector& vect) = 0;
 
 
         /** get intersection between the object and a line if it exists
@@ -57,22 +57,22 @@ class Mesh
         * @param vect a directing vector of the ray
         * \return the intersection if it exists
         */
-        virtual Position getIntersection(const Position& point, const vector& vect) = 0;
+        virtual Point getIntersection(const Point& point, const vector& vect) = 0;
 
-        /** Return the point on the other side of the mesh
+        /** Return the point on the other side of the solid
         * \return point
      	*/
-        virtual Position autreCote(const Position& point, const vector& vect, const Position& act) const = 0;
+        virtual Point autreCote(const Point& point, const vector& vect, const Point& act) const = 0;
 
 
         /** Retourne un vecteur normal a la surface
         * @param point of the object
         * \return vector
         */
-        virtual vector getNormal(const Position& p, const vector& v) const = 0;
+        virtual vector getNormal(const Point& p, const vector& v) const = 0;
 
         /** Accessor
-        * \return texture of the mesh
+        * \return texture of the solid
         */
         Texture getTexture() const { return t; } ;
 

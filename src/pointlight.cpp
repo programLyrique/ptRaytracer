@@ -2,19 +2,19 @@
 
 namespace rt
 {
-    PointLight::PointLight(double x, double y, double z, color c, Scene* scene) : Light(c, scene), Position(x, y, z)
+    PointLight::PointLight(double x, double y, double z, color c, Scene* scene) : Light(c, scene), Point(x, y, z)
     {
 
     }
 
-    double PointLight::illuminate(const Position& p, const Mesh* m, const vector vision)
+    double PointLight::illuminate(const Point& p, const Solid* m, const vector vision)
     {
         /** nee to create a function intersect in scene so just do scene->existInter() */
-    	for(std::vector<Mesh*>::const_iterator it = scene->getDebObjets(); it != scene->getFinObjets(); ++it)
+    	for(std::vector<Solid*>::const_iterator it = scene->getDebObjets(); it != scene->getFinObjets(); ++it)
     	{
     	    if((*it)->intersect(*this, this->vectTo(p)))
     	    {
-    	    	Position q = (*it)->getIntersection(*this, this->vectTo(p));
+    	    	Point q = (*it)->getIntersection(*this, this->vectTo(p));
     	    	if((q.distance(*this) < p.distance(*this)) && (p != q))
     	    	{
     	        	return 0;
