@@ -3,6 +3,8 @@
 
 #include "vector.hpp"
 #include <cstdio>
+#include <algorithm>
+#include <cmath>
 
 namespace rt
 {
@@ -13,7 +15,7 @@ namespace rt
     {
         protected:
         private:
-            /*!
+            /**
             *  Coordinates correponding of the position in space
             */
             double x;
@@ -60,11 +62,14 @@ namespace rt
             */
             vector vectTo(const Position& p) const;
             
+            /**
+            * Print the coordinates of the point
+            */
             void print() const {
             	printf("%f %f %f\n", x, y, z);
             }
             
-    		virtual bool operator!=(const Position& p/*, const Position& q*/) const;
+    		virtual bool operator!=(const Position& p) const;
     };
 
 }
