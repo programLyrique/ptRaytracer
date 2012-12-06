@@ -1,6 +1,6 @@
 \begin{frame}
 \frametitle{Organisation pratique}
-
+\framesubtitle{150 commits !}
 \only<1>{
 \begin{block}{Git et github}
 	\begin{multicols}{2}
@@ -63,8 +63,8 @@
 \begin{frame}{Principe du lancer de rayons}
 
 \begin{itemize}
-\item Lancer un rayon depuis la caméra, passant par un pixel de l'écran \footnote{Certaines techniques de lancer de rayon demandent un lancer de rayon depuis la caméra.}
-\item Renvoyer le rayon vers les sources de lumière, en prenant en compte les éventuels réflexions, et réfractions.
+\item Lancer un rayon depuis la caméra, passant par un pixel de l'écran \footnote{Certaines techniques de lancer de rayons demandent un lancer de rayons depuis les lampes.}
+\item Renvoyer le rayon vers les sources de lumière, en prenant en compte les éventuelles réflexions, et réfractions.
 \item Prendre en compte la texture de l'objet (couleur, rugosité).
 \item Combiner les informations de couleur.
 \end{itemize}
@@ -135,10 +135,22 @@ std::vector<Light*> lights;
 \uncover<3->
 {
 	\begin{block}{Des structures de données plus efficaces}
-	Utiliser des octrees pour subdiviser l'espace, et effectuer l'intersection avec des noeuds ( « bounding boxes »), de l'arbre.
+	Utiliser des octrees pour subdiviser l'espace, et effectuer l'intersection avec des noeuds ( « bounding boxes ») de l'arbre.
 	\end{block}
 }
 
+
 \end{frame}
+
+\begin{frame}
+\frametitle{Caméra}
+
+\begin{itemize}
+\item Une caméra à la \emph{OpenGL} : oeil, direction de visée, vecteur selon la verticale
+\item distance focale
+\end{itemize}
+
+\end{frame}
+
 
 

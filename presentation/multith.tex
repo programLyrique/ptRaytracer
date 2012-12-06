@@ -37,16 +37,16 @@ class Thread
 
 
 \begin{frame}
-\frametitle{Parallélisation du lancer de rayon}
+\frametitle{Parallélisation du lancer de rayon.}
 
 \begin{block}{Facilement parallélisable}
-Chaque pixel est rendu indépendamment des autres.
+Chaque pixel est rendu indépendamment des autres !
 \end{block}
 
 \begin{block}{Paralléliser}
 \begin{itemize}
 \item Détecter le nombre de coeurs.
-\item Calcul du découpage\footnote{Oui, une puissance de 2 pour l'instant.} de l'image : $n \times m $ où $ n = \log_2(nbThreads) $ et $ m = nbThreads / n$.
+\item Calcul du découpage\footnote{Oui, une puissance de 2 pour l'instant...} de l'image : $n \times m $ où $ n = \log_2(nbThreads) $ et $ m = nbThreads / n$.
 \item Lancer un \emph{thread} par partie de l'image.
 \end{itemize}
 \end{block}
