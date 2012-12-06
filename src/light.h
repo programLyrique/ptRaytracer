@@ -33,6 +33,7 @@ namespace rt
         protected:
             /** Parent scene */
             Scene* scene;
+            /** color of the light */
             color couleur;
         private:
         public:
@@ -49,11 +50,11 @@ namespace rt
 
             /**
             * Return the illumination of a point in a scene
-            * @param the position wanted
+            * @param position the position wanted
+            * @param m the object illuminated
+            * @param vision the vector directing the vision
             */
-            virtual double illuminateR(const Position& position, const Mesh* m, const vector vision) = 0;
-            virtual double illuminateG(const Position& position, const Mesh* m, const vector vision) = 0;
-            virtual double illuminateB(const Position& position, const Mesh* m, const vector vision) = 0;
+            virtual color illuminate(const Position& position, const Mesh* m, const vector vision) = 0;
 
     };
 }

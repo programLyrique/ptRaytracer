@@ -3,9 +3,8 @@
 namespace rt
 {
 
-    Camera::Camera(Position _eye, Position _centre, vector _up/*,rt::Scene* par*/) : eye(_eye), centre(_centre), up(_up)
+    Camera::Camera(Position _eye, Position _centre, vector _up) : eye(_eye), centre(_centre), up(_up)
     {
-		//parent = par;
     }
 
 

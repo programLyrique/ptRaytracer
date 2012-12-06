@@ -17,6 +17,8 @@
 
 #include "vector.hpp"
 #include <cstdio>
+#include <algorithm>
+#include <cmath>
 
 namespace rt
 {
@@ -27,7 +29,7 @@ namespace rt
     {
         protected:
         private:
-            /*!
+            /**
             *  Coordinates correponding of the position in space
             */
             double x;
@@ -43,9 +45,9 @@ namespace rt
 
             /**
             * Constructor
-            * @arg x
-            * @arg y
-            * @arg z
+            * @param x
+            * @param y
+            * @param z
             */
             Position(double _x, double _y, double _z);
 
@@ -66,19 +68,22 @@ namespace rt
             * @arg other point
             */
             double distance(const Position& p) const;
-
-
+            
+            
             /** Create a vector for current point to given point
             * @param point
             * \return vector
             */
             vector vectTo(const Position& p) const;
-
+            
+            /**
+            * Print the coordinates of the point
+            */
             void print() const {
             	printf("%f %f %f\n", x, y, z);
             }
-
-    		virtual bool operator!=(const Position& p/*, const Position& q*/) const;
+            
+    		virtual bool operator!=(const Position& p) const;
     };
 
 }
