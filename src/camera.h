@@ -54,7 +54,6 @@ namespace rt
 		    Position eye; //!< Member variable "eye"
 		    Position centre; //!< Member variable "centre"
 		    vector up; //!< Member variable "up"
-		    Scene* parent;
 		};
 
 }
