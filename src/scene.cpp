@@ -19,10 +19,12 @@ namespace rt
         {
             delete (*it);
         }
+        objets.~vector();
         for(std::vector<Light*>::iterator it = lights.begin(); it != lights.end(); ++it)
         {
             delete (*it);
         }
+        lights.~vector();
     }
 
     void Scene::renderArea(int x, int y, int width, int height, screen& s, bool oversampling = true)
