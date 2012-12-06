@@ -49,9 +49,8 @@ namespace rt
             */
             PointLight(double x, double y, double z, color c, Scene* parent);
 
-            double illuminateR(const Position& p, const Mesh* m, const vector vision);
-            double illuminateG(const Position& p, const Mesh* m, const vector vision);
-            double illuminateB(const Position& p, const Mesh* m, const vector vision);
+            color illuminate(const Position& p, const Mesh* m, const vector vision) const;
+
 
     };
 

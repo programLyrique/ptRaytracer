@@ -54,7 +54,7 @@ namespace rt
             * @param m the object illuminated
             * @param vision the vector directing the vision
             */
-            virtual color illuminate(const Position& position, const Mesh* m, const vector vision) = 0;
+            virtual color illuminate(const Position& position, const Mesh* m, const vector vision) const = 0;
 
     };
 }
