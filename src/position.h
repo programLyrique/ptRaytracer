@@ -1,3 +1,17 @@
+/**
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 #ifndef POSITION_H
 #define POSITION_H
 
@@ -52,18 +66,18 @@ namespace rt
             * @arg other point
             */
             double distance(const Position& p) const;
-            
-            
+
+
             /** Create a vector for current point to given point
             * @param point
             * \return vector
             */
             vector vectTo(const Position& p) const;
-            
+
             void print() const {
             	printf("%f %f %f\n", x, y, z);
             }
-            
+
     		virtual bool operator!=(const Position& p/*, const Position& q*/) const;
     };
 
