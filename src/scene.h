@@ -133,12 +133,12 @@ namespace rt
 
             /** determine the illumination of the point on the solid
             * @param p the point
-            * @param m the solid
+            * @param o the solid
             * @param v the vision direction
             * @param nbR the number of reflection
             * @param nbTrans the number of transmissions
             */
-            color getIllumination(const Point& p, int o, const vector& v, int nbR, int nbTrans) const;
+            color getIllumination(const Point& p, Solid* o, const vector& v, int nbR, int nbTrans) const;
     };
 }
 
