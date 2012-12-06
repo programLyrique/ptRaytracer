@@ -18,7 +18,7 @@
 class Camera;
 class Light;
 
-#include "mesh.h"
+#include "solid.h"
 #include "light.h"
 #include "camera.h"
 #include "screen.hpp"

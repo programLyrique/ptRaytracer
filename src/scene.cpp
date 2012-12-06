@@ -12,11 +12,24 @@ namespace rt
 
     }
 
+    Scene::~Scene()
+    {
+        delete cam;
+        for(std::vector<Solid*>::iterator it = objets.begin(); it != objets.end(); ++it)
+        {
+            delete (*it);
+        }
+        for(std::vector<Light*>::iterator it = lights.begin(); it != lights.end(); ++it)
+        {
+            delete (*it);
+        }
+    }
+
     void Scene::renderArea(int x, int y, int width, int height, screen& s, bool oversampling = true)
     {
         vector up = cam->getUp() ;
-        Position centre = cam->getCentre();
-        Position eye = cam->getEye();
+        Point centre = cam->getCentre();
+        Point eye = cam->getEye();
         vector _up = up.unit();
         vector vcenter = vector(centre.getX() - eye.getX(), centre.getY() - eye.getY(), centre.getZ() - eye.getZ());
         vector right = vcenter.unit() ^ _up;
@@ -43,15 +56,14 @@ namespace rt
                         }
                         //  std::cout  << ho << " et " << ve << std::endl;
                         bool inter = false;
-                        rt::Position p;
+                        Point p;
                         int o = 0;
                         vector v = (vcenter + (ho - s.width() / 2.0) * right + (ve - s.height() / 2.0) * _up).unit();
                         for(unsigned k = 0; k < objets.size(); k++)
                         {
                             if(objets[k]->intersect(eye, v))
                             {
-
-                                rt::Position pos = objets[k]->getIntersection(eye, v);
+                                Point pos = objets[k]->getIntersection(eye, v);
                                 if(inter)
                                 {
                                     if(eye.distance(pos) < eye.distance(p))
@@ -59,7 +71,6 @@ namespace rt
                                         p = pos;
                                         o = k;
                                     }
-
                                 }
                                 else
                                 {
@@ -69,7 +80,6 @@ namespace rt
                                 }
                             }
                         }
-
                         if(inter)
                         {
                             color temp = getIllumination(p, o, v, 1, 3);
@@ -172,9 +182,9 @@ namespace rt
         render(s, Thread::nbCores());
     }
 
-    void Scene::addMesh(Mesh* mesh)
+    void Scene::addSolid(Solid* solid)
     {
-        objets.push_back(mesh);
+        objets.push_back(solid);
     }
 
     void Scene::addLight(Light* light)
@@ -222,14 +232,14 @@ namespace rt
 
         vector reflection = (2 * (tem | o->getNormal(p, v)) * o->getNormal(p, v) - tem).unit();
         bool reflect = false;
-        Position brill;
+        Point brill;
         int e = 0;
 
         for(unsigned k = 0; k < objets.size(); k++)
         {
             if(objets[k]->intersect(p, reflection))
             {
-                rt::Position pos = objets[k]->getIntersection(p, reflection);
+                Point pos = objets[k]->getIntersection(p, reflection);
                 if(objets[k] != o)
                 {
                     if(reflect)
@@ -266,7 +276,7 @@ namespace rt
             v = v.unit();
             vector normal = o->getNormal(p, v).unit();
             vector r =  (n1n2 * v - (- n1n2 * (v | normal) - std::sqrt(1 - n1n2 * n1n2 * (1 - (v | normal) *(v | normal)))) * normal).unit();
-            Position transp(o->autreCote(p, r, p));
+            Point transp(o->autreCote(p, r, p));
             vector normal2 = o->getNormal(transp, r).unit();
             tem = (n1n2 * r - (n1n2 * (r | normal2) - std::sqrt(1 - n1n2 * n1n2 * (1 - (r | normal2) *(r | normal2)))) * normal2).unit();
 
@@ -283,7 +293,7 @@ namespace rt
                 {
                     if(objets[k]->intersect(transp, tem))
                     {
-                        rt::Position pos = objets[k]->getIntersection(transp, tem);
+                        Point pos = objets[k]->getIntersection(transp, tem);
                         if(objets[k] != o)
                         {
                             if(brillance)
