@@ -24,7 +24,6 @@ class Light;
 #include "screen.hpp"
 #include "sphere.h"
 #include "thread.h"
-
 #include <vector>
 
 
@@ -98,8 +97,20 @@ namespace rt
              */
             void render(screen& s);
 
+            /*
             std::vector<Mesh*>::const_iterator getDebObjets() const { return objets.begin(); }
             std::vector<Mesh*>::const_iterator getFinObjets() const { return objets.end(); }
+            */
+
+            /** Wether an solid exist between them
+            * @param deb the first point
+            * @param end the second point
+            */
+            bool existInterBetween(Point& begin, Point& end) const;
+
+            /** Accessor
+            * \return camera
+            */
 
             Camera* getCamera() { return cam; }
 
@@ -119,9 +130,15 @@ namespace rt
              * @todo Handling the case when nbThreads is not a power of two !
              */
             void render(screen& s, int nbThreads);
-            double getIlluminationR(const Position& p, int o, const vector& v, int nbR, int nbTrans) const;
-            double getIlluminationB(const Position& p, int o, const vector& v, int nbR, int nbTrans) const;
-            double getIlluminationG(const Position& p, int o, const vector& v, int nbR, int nbTrans) const;
+
+            /** determine the illumination of the point on the solid
+            * @param p the point
+            * @param m the solid
+            * @param v the vision direction
+            * @param nbR the number of reflection
+            * @param nbTrans the number of transmissions
+            */
+            color getIllumination(const Point& p, int o, const vector& v, int nbR, int nbTrans) const;
     };
 }
 

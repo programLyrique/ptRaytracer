@@ -9,7 +9,7 @@ namespace rt
 
     double PointLight::illuminate(const Point& p, const Solid* m, const vector vision)
     {
-        /** nee to create a function intersect in scene so just do scene->existInter() */
+        /** need to create a function intersect in scene so just do scene->existInter() */
     	for(std::vector<Solid*>::const_iterator it = scene->getDebObjets(); it != scene->getFinObjets(); ++it)
     	{
     	    if((*it)->intersect(*this, this->vectTo(p)))

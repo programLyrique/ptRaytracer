@@ -72,9 +72,10 @@ void Scene::renderArea(int x, int y, int width, int height, screen& s, bool over
 
                     if(inter)
                     {
-                        mL1 += getIlluminationR(p, o, v, 1, 3);
-                        mL2 += getIlluminationG(p, o, v, 1, 3);
-                        mL3 += getIlluminationB(p, o, v, 1, 3);
+                        color temp = getIllumination(p, o, v, 1, 3);
+                        mL1 += temp.get_red();
+                        mL2 += temp.get_green();
+                        mL3 += temp.get_blue();
                     }
                 }
             if(oversampling)
@@ -201,7 +202,7 @@ double Scene::getIlluminationR(const Position& p, int o, const vector& vect, int
     }
 
     phong = std::min(phong, 255.);
-                        
+
     vector reflection = (2 * (tem | objets[o]->getNormal(p, v)) * objets[o]->getNormal(p, v) - tem).unit();
 	bool reflect = false;
 	Position brill;
@@ -219,17 +220,17 @@ double Scene::getIlluminationR(const Position& p, int o, const vector& vect, int
 				{
 					if(p.distance(pos) < p.distance(brill))
 					{
-						
+
 						brill = pos;
-						e = k;						
+						e = k;
 					}
 
-				}			
+				}
 				else
 				{
 					reflect = true;
 					brill = pos;
-					e = k;					
+					e = k;
 				}
 			}
 		}
@@ -257,7 +258,7 @@ double Scene::getIlluminationR(const Position& p, int o, const vector& vect, int
 				            printf("%4f %4f %4f \n", r.x, r.y, r.z);
 		Position transp(objets[o]->autreCote(p, r, p));
 				            //printf(" %f %f %f\n", transp.getX(), transp.getY(), transp.getZ());
-				           
+
 		vector normal2 = objets[o]->getNormal(transp, r).unit();
 		tem = (n1n2 * r - (n1n2 * (r | normal2) - std::sqrt(1 - n1n2 * n1n2 * (1 - (r | normal2) *(r | normal2)))) * normal2).unit();
 				            printf("%4f %4f %4f\n", tem.unit().x, tem.unit().y, tem.unit().z);
@@ -275,7 +276,7 @@ double Scene::getIlluminationR(const Position& p, int o, const vector& vect, int
 	   		for(unsigned k = 0; k < objets.size(); k++)
 			{
 				if(objets[k]->intersect(transp, tem))
-	   	        {												
+	   	        {
 					rt::Position pos = objets[k]->getIntersection(transp, tem);
 					if(k != o)
 					{
@@ -295,13 +296,13 @@ double Scene::getIlluminationR(const Position& p, int o, const vector& vect, int
 							e = k;
 						}
 					}
-								
+
 				}
 			}
 			if(brillance)
 			{
 			  		transparenceObjet += ((double) objets[e]->getTexture().getColorN().get_red() / ((double) 255)) * getIlluminationR(brill, e, tem, nbR, nbTrans - 1);
-			  	transparenceObjet = std::min(transparenceObjet, 255.);							  
+			  	transparenceObjet = std::min(transparenceObjet, 255.);
 			}
 		}
 	}
@@ -313,7 +314,7 @@ double Scene::getIlluminationG(const Position& p, int o, const vector& vect, int
 	vector v = vect;
 	vector tem = (-1 * v).unit();
 	double phong = 0;
-	double transparenceLumiere = 0;	
+	double transparenceLumiere = 0;
 	double transparenceObjet = 0;
 	double reflechie = 0;
 
@@ -323,7 +324,7 @@ double Scene::getIlluminationG(const Position& p, int o, const vector& vect, int
     }
 
     phong = std::min(phong, 255.);
-                        
+
     vector reflection = (2 * (tem | objets[o]->getNormal(p, v)) * objets[o]->getNormal(p, v) - tem).unit();
 	bool reflect = false;
 	Position brill;
@@ -341,23 +342,23 @@ double Scene::getIlluminationG(const Position& p, int o, const vector& vect, int
 				{
 					if(p.distance(pos) < p.distance(brill))
 					{
-						
+
 						brill = pos;
-						e = k;						
+						e = k;
 					}
 
-				}			
+				}
 				else
 				{
 					reflect = true;
 					brill = pos;
-					e = k;					
+					e = k;
 				}
 			}
 		}
 	}
 	if(nbR > 0)
-	{		
+	{
 
 		if(reflect)
 		{
@@ -395,7 +396,7 @@ double Scene::getIlluminationG(const Position& p, int o, const vector& vect, int
 	   		for(unsigned k = 0; k < objets.size(); k++)
 			{
 				if(objets[k]->intersect(transp, tem))
-	   	        {												
+	   	        {
 					rt::Position pos = objets[k]->getIntersection(transp, tem);
 					if(k != o)
 					{
@@ -415,13 +416,13 @@ double Scene::getIlluminationG(const Position& p, int o, const vector& vect, int
 							e = k;
 						}
 					}
-								
+
 				}
 			}
 			if(brillance)
 			{
 			  		transparenceObjet += ((double) objets[e]->getTexture().getColorN().get_green() / ((double) 255)) * getIlluminationG(brill, e, tem, nbR, nbTrans - 1);
-			  	transparenceObjet = std::min(transparenceObjet, 255.);							  
+			  	transparenceObjet = std::min(transparenceObjet, 255.);
 			}
 		}
 	}
@@ -438,14 +439,14 @@ double Scene::getIlluminationB(const Position& p, int o, const vector& vect, int
 	double transparenceLumiere = 0;
 	double transparenceObjet = 0;
 	double reflechie = 0;
-	
+
     for(int k = 0; k < lights.size(); ++k)
     {
     	phong += lights[k]->illuminateB(p, objets[o], tem);
     }
 
     phong = std::min(phong, 255.);
-                        
+
     vector reflection = (2 * (tem | objets[o]->getNormal(p, v)) * objets[o]->getNormal(p, v) - tem).unit();
 	bool reflect = false;
 	Position brill;
@@ -463,17 +464,17 @@ double Scene::getIlluminationB(const Position& p, int o, const vector& vect, int
 				{
 					if(p.distance(pos) < p.distance(brill))
 					{
-						
+
 						brill = pos;
-						e = k;						
+						e = k;
 					}
 
-				}			
+				}
 				else
 				{
 					reflect = true;
 					brill = pos;
-					e = k;					
+					e = k;
 				}
 			}
 		}
@@ -519,7 +520,7 @@ double Scene::getIlluminationB(const Position& p, int o, const vector& vect, int
 	   		for(unsigned k = 0; k < objets.size(); k++)
 			{
 				if(objets[k]->intersect(transp, tem))
-	   	        {												
+	   	        {
 					rt::Position pos = objets[k]->getIntersection(transp, tem);
 					if(k != o)
 					{
@@ -539,7 +540,7 @@ double Scene::getIlluminationB(const Position& p, int o, const vector& vect, int
 							e = k;
 						}
 					}
-								
+
 				}
 			}
 			if(brillance)
@@ -547,7 +548,7 @@ double Scene::getIlluminationB(const Position& p, int o, const vector& vect, int
 				//printf("Brillance sur %d %d\n", e, o);
 		  		transparenceObjet += ((double) objets[e]->getTexture().getColorN().get_blue() / ((double) 255)) * getIlluminationB(brill, e, tem, nbR, nbTrans - 1); //changer les coefficiants !!!!!
 //			  		printf("%f %d %d\n", getIlluminationB(brill, e, transp.vectTo(brill).unit(), nbR, nbTrans - 1), nbR, nbTrans);
-			  	transparenceObjet = std::min(transparenceObjet, 255.);							  
+			  	transparenceObjet = std::min(transparenceObjet, 255.);
 			  	//transparenceObjet = objets[e]->getTexture().getColorN().get_green();
 			}
 		}
