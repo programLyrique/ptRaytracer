@@ -31,9 +31,9 @@ namespace rt
 
             /**
             * Constructor
-            * @arg x
-            * @arg y
-            * @arg z
+            * @param x
+            * @param y
+            * @param z
             */
             Position(double _x, double _y, double _z);
 
