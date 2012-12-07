@@ -9,7 +9,8 @@ namespace rt
 
     color PointLight::illuminate(const Point& p, const Solid* m, const vector vision) const
     {
-        if(scene->existInterBetween( *(static_cast<const Point*>(this)), p))
+    	double t = scene->existInterBetween( *(static_cast<const Point*>(this)), p);
+        if(0. == t)
         {
             return color::BLACK;
         }
@@ -41,9 +42,9 @@ namespace rt
                                   | (2 * (m->getNormal(p, vision.unit()).unit()
                                          | p.vectTo(*this).unit()) * m->getNormal(p, vision.unit()) - p.vectTo(*this).unit()).unit())
                                   , m->getTexture().getBrillance());
-        return color((int) std::min(couleur.get_red() * (reda + redb), 255.),
-                     (int) std::min(couleur.get_green() * (greena + greenb), 255.),
-                     (int) std::min(couleur.get_blue() * (bluea + blueb), 255.));
+        return color((int) (t * std::min(couleur.get_red() * (reda + redb), 255.)),
+                     (int) (t * std::min(couleur.get_green() * (greena + greenb), 255.)),
+                     (int) (t * std::min(couleur.get_blue() * (bluea + blueb), 255.)));
 
     }
 

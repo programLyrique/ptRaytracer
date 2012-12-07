@@ -84,7 +84,7 @@ namespace rt
                         }
                         if(inter)
                         {
-                            color temp = getIllumination(p, objets[o], v, 2, 2);
+                            color temp = getIllumination(p, objets[o], v, 0, 1);
                             mL1 += temp.get_red();
                             mL2 += temp.get_green();
                             mL3 += temp.get_blue();
@@ -198,7 +198,7 @@ namespace rt
     {
         cam = camera;
     }
-
+	/*
     bool Scene::existInterBetween(const Point& begin, const Point& end) const
     {
         vector v = begin.vectTo(end);
@@ -215,7 +215,7 @@ namespace rt
     	}
     	return false;
     }
-
+	*/
     color Scene::getIllumination(const Point& p, Solid* o, const vector& vect, int nbR, int nbTrans) const
     {
         vector v = vect;
@@ -338,6 +338,27 @@ namespace rt
                      std::min(((1 - t) * phong.get_blue()
                                + (1 - t) * reflechie.get_blue()
                                + t * transparenceObjet.get_blue()), 255.));
+    }
+    
+    double Scene::existInterBetween(const Point& begin, const Point& end) const
+    {
+    	double t = 1;
+        vector v = begin.vectTo(end);
+        for(std::vector<Solid*>::const_iterator it = objets.begin(); it != objets.end(); ++it)
+    	{
+    	    if((*it)->intersect(begin, v))
+    	    {
+    	    	Point q = (*it)->getIntersection(begin, v);
+    	    	if((q.distance(begin) < end.distance(begin)) && (end != q))
+    	    	{
+    	    		double te = (*it)->getTexture().getTransparence();
+    	    		if(0. == te)
+    	    			return 0.;
+    	        	t *= te;
+    	        }
+    	    }
+    	}
+    	return t;
     }
 
 }
