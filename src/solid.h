@@ -44,6 +44,8 @@ class Solid
 
         /** @param texture the texture for the solid*/
         Solid(Texture texture);
+        
+        virtual ~Solid() {}
 
         /** Wether the line defined by a vector and a point intersects the solid.
         *    @param pos the point

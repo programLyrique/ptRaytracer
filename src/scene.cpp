@@ -84,7 +84,7 @@ namespace rt
                         }
                         if(inter)
                         {
-                            color temp = getIllumination(p, objets[o], v, 2, 0);
+                            color temp = getIllumination(p, objets[o], v, 2, 2);
                             mL1 += temp.get_red();
                             mL2 += temp.get_green();
                             mL3 += temp.get_blue();
@@ -225,7 +225,7 @@ namespace rt
         color transparenceLumiere;
         color transparenceObjet;
 
-        for(int k = 0; k < lights.size(); ++k)
+        for(unsigned k = 0; k < lights.size(); ++k)
         {
             color temp = lights[k]->illuminate(p, o, tem);
             phong.set_red(std::min(temp.get_red() + phong.get_red(), 255));
@@ -237,7 +237,7 @@ namespace rt
         Point brill;
         int e = 0;
 
-        for(int k = 0; k < objets.size(); k++)
+        for(unsigned k = 0; k < objets.size(); k++)
         {
             if(objets[k]->intersect(p, reflection))
             {
@@ -266,10 +266,11 @@ namespace rt
         {
             if(reflect)
             {
+            	color cB = o->getTexture().getColorB();
                 color temp = getIllumination(brill, objets[e], reflection, nbR - 1, nbTrans);
-                reflechie.set_red(std::min(reflechie.get_red() + temp.get_red(), 255));
-                reflechie.set_green(std::min(reflechie.get_green() + temp.get_green(), 255));
-                reflechie.set_blue(std::min(reflechie.get_blue() + temp.get_blue(), 255));
+                reflechie.set_red(std::min((int) ((cB.get_red() / 255.) * (reflechie.get_red() + temp.get_red())), 255));
+                reflechie.set_green(std::min((int) ((cB.get_green() / 255.) * (reflechie.get_green() + temp.get_green())), 255));
+                reflechie.set_blue(std::min((int) ((cB.get_red() / 255.) * (reflechie.get_blue() + temp.get_blue())), 255));
             }
         }
         if(nbTrans > 0)
@@ -284,14 +285,14 @@ namespace rt
 
             if(o->getTexture().getTransparence() != 0)
             {
-                for(int k = 0; k < lights.size(); ++k)
+                for(unsigned k = 0; k < lights.size(); ++k)
                 {
                     color temp = lights[k]->illuminate(transp, o, tem);
                     transparenceLumiere.set_red(std::min(transparenceLumiere.get_red() + temp.get_red(), 255));
                 }
 
                 bool brillance = false;
-                for(int k = 0; k < objets.size(); k++)
+                for(unsigned k = 0; k < objets.size(); k++)
                 {
                     if(objets[k]->intersect(transp, tem))
                     {
