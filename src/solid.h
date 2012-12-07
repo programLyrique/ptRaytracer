@@ -29,17 +29,11 @@ class Solid
      * Can be a sphere ( @see Sphere ), or a cube...
      */
     protected:
-        /** Coefficient de reflexion */
-        double reflexion;
-
-        /** angle de réfraction*/
-        double refraction;
-
         /** Texture of the solid*/
         Texture t;
     private:
     public:
-        /** Default constructor : puts uniform balck as a texture. */
+        /** Default constructor*/
         Solid();
 
         /** @param texture the texture for the solid*/
@@ -51,7 +45,7 @@ class Solid
         *    @param pos the point
         *    @param vect the vector
         */
-        virtual bool intersect(const Point& pos, const vector& vect) = 0;
+        virtual bool intersect(const Point& pos, const vector& vect) const = 0;
 
 
         /** get intersection between the object and a line if it exists
@@ -59,16 +53,20 @@ class Solid
         * @param vect a directing vector of the ray
         * \return the intersection if it exists
         */
-        virtual Point getIntersection(const Point& point, const vector& vect) = 0;
+        virtual Point getIntersection(const Point& point, const vector& vect) const = 0;
 
-        /** Return the point on the other side of the solid
+        /** Return the point on the other side of the solid according to a line
+     	* @param p point of the line
+     	* @param v the vector
+     	* @param act the current point
         * \return point
      	*/
         virtual Point autreCote(const Point& point, const vector& vect, const Point& act) const = 0;
 
 
         /** Retourne un vecteur normal a la surface
-        * @param point of the object
+        * @param p point of the object
+        * @param v the vision vector
         * \return vector
         */
         virtual vector getNormal(const Point& p, const vector& v) const = 0;

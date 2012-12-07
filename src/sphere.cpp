@@ -7,7 +7,7 @@ namespace rt
     }
 
 
-    bool Sphere::intersect(const Point& point, const vector& vect)
+    bool Sphere::intersect(const Point& point, const vector& vect) const
     {
         //Calcul du discriminant
          double delta = (vect.x * (Sphere::centre.getX() - point.getX())
@@ -37,7 +37,7 @@ namespace rt
         return false;
     }
 
-    Point Sphere::getIntersection(const Point& point, const vector& vect)
+    Point Sphere::getIntersection(const Point& point, const vector& vect) const
     {
         //Calcul du discriminant
          double delta = (vect.x * (Sphere::centre.getX() - point.getX())

@@ -45,8 +45,9 @@ namespace rt
 
             /**
             * Constructor
-            * @param center
-            * @param radius
+            * @param center the center of the sphere
+            * @param radius the radius of the sphere
+            * @param text the texture of the sphere
             */
             Sphere(Point centre, double radius, Texture text);
 
@@ -55,21 +56,21 @@ namespace rt
              * @param point the beginning of the ray
              * @param vect a directing vector of the ray
              */
-            bool intersect(const Point& point, const vector& vect);
+            bool intersect(const Point& point, const vector& vect) const;
 
             /** get intersection between the sphere and a line if it exists
             * @param point the beginning of the ray
             * @param vect a directing vector of the ray
             * \return the intersection if it exists
             */
-            Point getIntersection(const Point& point, const vector& vect);
+            Point getIntersection(const Point& point, const vector& vect) const;
 
             /**	get the point on the other side of the object
             *	\return the point
             */
             Point autreCote(const Point& point, const vector& vect, const Point& act) const;
 
-            /** Return the normal at p at the sphere
+            /** Return the normal passing through p at the sphere
             * \return vector
             */
             vector getNormal(const Point& p, const vector& vect) const;

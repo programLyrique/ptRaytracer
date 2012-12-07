@@ -41,11 +41,11 @@ namespace rt
 
             /**
             * Constructor from a point
-            * @param x
-            * @param y
-            * @param z
-            * @param color
-            * @param parent
+            * @param x x coordinates
+            * @param y y coordinates
+            * @param z z coordinates
+            * @param color color of the light
+            * @param parent	parent scene
             */
             PointLight(double x, double y, double z, color c, Scene* parent);
 

@@ -43,8 +43,8 @@ namespace rt
             virtual ~Light();
 
             /** Constructor
-            * @param power
-            * @param Parent scene
+            * @param c color of the light
+            * @param parent Parent scene
             */
             Light(color c, Scene* parent);
 

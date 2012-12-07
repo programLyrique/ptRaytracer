@@ -45,9 +45,9 @@ namespace rt
 
             /**
             * Constructor
-            * @param x
-            * @param y
-            * @param z
+            * @param x x coordinates
+            * @param y y coordinates
+            * @param z z coordinates
             */
             Point(double _x, double _y, double _z);
 
@@ -65,13 +65,13 @@ namespace rt
             double getZ() const;
 
             /** distances between 2 points
-            * @arg other point
+            * @arg p other point
             */
             double distance(const Point& p) const;
 
 
             /** Create a vector for current point to given point
-            * @param point
+            * @param p point
             * \return vector
             */
             vector vectTo(const Point& p) const;
@@ -82,7 +82,8 @@ namespace rt
             void print() const {
             	printf("%f %f %f\n", x, y, z);
             }
-
+			
+			/** Overide != operator, true si the point is close enough*/
     		virtual bool operator!=(const Point& p) const;
     };
 
