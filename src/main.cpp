@@ -23,7 +23,7 @@ int main(int argc, char** argv)
     scene.addLight(new rt::PointLight(0., 0., 0., rt::color::WHITE, &scene));
     //scene.addLight(new rt::PointLight(-20, -25, 0, rt::color::WHITE, &scene));
 	
-	scene.addSolid(new rt::Sphere(rt::Point(3, 20, 6), 3, rt::Texture(rt::color::WHITE, rt::color(0, 255, 255), 1000, 0, 1)));
+	scene.addSolid(new rt::Sphere(rt::Point(3, 20, 6), 3, rt::Texture(rt::color::WHITE, rt::color(0, 255, 255), 2, 0, 1)));
 	
 
 
