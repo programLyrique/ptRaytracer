@@ -9,8 +9,8 @@ namespace rt
 
     color PointLight::illuminate(const Point& p, const Solid* m, const vector vision) const
     {
-        if(scene->existInterBetween((Point) (*this), p))
-            return 0;
+        if(scene->existInterBetween( *(static_cast<const Point*>(this)), p))
+            return color::BLACK;
         
         color cN = m->getTexture().getColorN();
         color cB = m->getTexture().getColorB();

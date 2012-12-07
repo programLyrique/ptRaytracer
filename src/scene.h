@@ -72,7 +72,7 @@ namespace rt
             Scene();
 
             /** default destructor */
-            virtual ~Scene(){};
+            virtual ~Scene();
 
             /**
             * Add a mesh in the scene.
@@ -106,7 +106,7 @@ namespace rt
             * @param deb the first point
             * @param end the second point
             */
-            bool existInterBetween(Point& begin, Point& end) const;
+            bool existInterBetween(const Point& begin, const Point& end) const;
 
             /** Accessor
             * \return camera

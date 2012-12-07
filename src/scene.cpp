@@ -84,7 +84,7 @@ namespace rt
                         }
                         if(inter)
                         {
-                            color temp = getIllumination(p, o, v, 1, 3);
+                            color temp = getIllumination(p, objets[o], v, 1, 3);
                             mL1 += temp.get_red();
                             mL2 += temp.get_green();
                             mL3 += temp.get_blue();
@@ -199,10 +199,10 @@ namespace rt
         cam = camera;
     }
 
-    bool Scene::existInterBetween(Point& begin, Point& end) const
+    bool Scene::existInterBetween(const Point& begin, const Point& end) const
     {
-        vector v = begin.vectTo(p);
-        for(it = objets.begin(); it != objets.end(); ++it)
+        vector v = begin.vectTo(end);
+        for(std::vector<Solid*>::const_iterator it = objets.begin(); it != objets.end(); ++it)
     	{
     	    if((*it)->intersect(begin, v))
     	    {
@@ -215,7 +215,7 @@ namespace rt
     	}
     }
 
-    color Scene::getIllumination(const Point& p, Solid* o, const vector& v, int nbR, int nbTrans) const
+    color Scene::getIllumination(const Point& p, Solid* o, const vector& vect, int nbR, int nbTrans) const
     {
         vector v = vect;
         vector tem = (-1 * v).unit();
@@ -227,9 +227,9 @@ namespace rt
         for(int k = 0; k < lights.size(); ++k)
         {
             color temp = lights[k]->illuminate(p, o, tem);
-            phong.set_red(std::min(temp.get_red() + phong.get_red(), 255.);
-            phong.set_green(std::min(temp.get_green() + phong.get_green(), 255.);
-            phong.set_blue(std::min(temp.get_blue() + phong.get_blue(), 255.);
+            phong.set_red(std::min(temp.get_red() + phong.get_red(), 255));
+            phong.set_green(std::min(temp.get_green() + phong.get_green(), 255));
+            phong.set_blue(std::min(temp.get_blue() + phong.get_blue(), 255));
         }
 
         vector reflection = (2 * (tem | o->getNormal(p, v)) * o->getNormal(p, v) - tem).unit();
@@ -266,10 +266,10 @@ namespace rt
         {
             if(reflect)
             {
-                color temp = getIlluminationR(brill, e, reflection, nbR - 1, nbTrans);
-                reflechie.set_red(std::min(reflechie.get_red() + temp.get_red(), 255.));
-                reflechie.set_green(std::min(reflechie.get_green() + temp.get_green(), 255.));
-                reflechie.set_blue(std::min(reflechie.get_blue() + temp.get_blue(), 255.));
+                color temp = getIllumination(brill, objets[e], reflection, nbR - 1, nbTrans);
+                reflechie.set_red(std::min(reflechie.get_red() + temp.get_red(), 255));
+                reflechie.set_green(std::min(reflechie.get_green() + temp.get_green(), 255));
+                reflechie.set_blue(std::min(reflechie.get_blue() + temp.get_blue(), 255));
             }
         }
         if(nbTrans > 0)
@@ -287,7 +287,7 @@ namespace rt
                 for(int k = 0; k < lights.size(); ++k)
                 {
                     color temp = lights[k]->illuminate(transp, o, tem);
-                    transparenceLumiere.set_red(std::min(transparenceLumiere.get_red() + temp.get_red(), 255.));
+                    transparenceLumiere.set_red(std::min(transparenceLumiere.get_red() + temp.get_red(), 255));
                 }
 
                 bool brillance = false;
@@ -318,7 +318,7 @@ namespace rt
                 }
                 if(brillance)
                 {
-                    color temp = getIlluminationR(brill, e, tem, nbR, nbTrans - 1);
+                    color temp = getIllumination(brill, objets[e], tem, nbR, nbTrans - 1);
                     transparenceObjet.set_red(std::min(transparenceObjet.get_red()
                                                          + ((double) objets[e]->getTexture().getColorN().get_red() / 255.)
                                                             * temp.get_red()
