@@ -84,7 +84,7 @@ namespace rt
                         }
                         if(inter)
                         {
-                            color temp = getIllumination(p, objets[o], v, 0, 1);
+                            color temp = getIllumination(p, objets[o], v, 5, 5);
                             mL1 += temp.get_red();
                             mL2 += temp.get_green();
                             mL3 += temp.get_blue();
