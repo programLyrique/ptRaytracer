@@ -36,7 +36,7 @@ namespace rt
     class Scene
     {
         private:
-            std::vector<Mesh*> objets;
+            std::vector<Solid*> objets;
             std::vector<Light*> lights;
             Camera* cam;
 
@@ -77,7 +77,7 @@ namespace rt
             /**
             * Add a mesh in the scene.
             */
-            void addMesh(Mesh* mesh);//const ?
+            void addSolid(Solid* solid);//const ?
 
             /**
             * Add a light in the scene.
@@ -112,7 +112,7 @@ namespace rt
             * \return camera
             */
 
-            Camera* getCamera() { return cam; }
+            Camera* getCamera() const { return cam; }
 
             /**
              * Number of objects in the scene

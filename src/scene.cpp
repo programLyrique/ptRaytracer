@@ -320,32 +320,33 @@ namespace rt
                 {
                     color temp = getIlluminationR(brill, e, tem, nbR, nbTrans - 1);
                     transparenceObjet.set_red(std::min(transparenceObjet.get_red()
-                                                         + ((double) objets[e]->getTexture().getColorN().get_red() / ((double) 255))
+                                                         + ((double) objets[e]->getTexture().getColorN().get_red() / 255.)
                                                             * temp.get_red()
                                                        , 255.));
                     transparenceObjet.set_green(std::min(transparenceObjet.get_green()
-                                                         + ((double) objets[e]->getTexture().getColorN().get_green() / ((double) 255))
+                                                         + ((double) objets[e]->getTexture().getColorN().get_green() / 255.)
                                                             * temp.get_green()
                                                        , 255.));
                     transparenceObjet.set_blue(std::min(transparenceObjet.get_blue()
-                                                         + ((double) objets[e]->getTexture().getColorN().get_blue() / ((double) 255))
+                                                         + ((double) objets[e]->getTexture().getColorN().get_blue() / 255.)
                                                             * temp.get_blue()
                                                        , 255.));
                 }
             }
         }
-        return color(std::min(((1 - o->getTexture().getTransparence()) * phong.get_red()
-                               + (1 - o->getTexture().getTransparence()) * reflechie.get_red()
-                               + o->getTexture().getTransparence() * transparenceLumiere.get_red()
-                               + o->getTexture().getTransparence() * transparenceObjet.get_red()), 255.),
-                     std::min(((1 - o->getTexture().getTransparence()) * phong.get_green()
-                               + (1 - o->getTexture().getTransparence()) * reflechie.get_green()
-                               + o->getTexture().getTransparence() * transparenceLumiere.get_green()
-                               + o->getTexture().getTransparence() * transparenceObjet.get_green()), 255.),
-                     std::min(((1 - o->getTexture().getTransparence()) * phong.get_blue()
-                               + (1 - o->getTexture().getTransparence()) * reflechie.get_blue()
-                               + o->getTexture().getTransparence() * transparenceLumiere.get_blue()
-                               + o->getTexture().getTransparence() * transparenceObjet.get_blue()), 255.));
+        double t = o->getTexture().getTransparence();
+        return color(std::min(((1 - t) * phong.get_red()
+                               + (1 - t) * reflechie.get_red()
+                               + t * transparenceLumiere.get_red()
+                               + t * transparenceObjet.get_red()), 255.),
+                     std::min(((1 - t) * phong.get_green()
+                               + (1 - t) * reflechie.get_green()
+                               + t * transparenceLumiere.get_green()
+                               + t * transparenceObjet.get_green()), 255.),
+                     std::min(((1 - t) * phong.get_blue()
+                               + (1 - t) * reflechie.get_blue()
+                               + t * transparenceLumiere.get_blue()
+                               + t * transparenceObjet.get_blue()), 255.));
     }
 
 }

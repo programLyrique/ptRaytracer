@@ -15,7 +15,7 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-#include "position.h"
+#include "point.h"
 #include "vector.hpp"
 #include "scene.h"
 
@@ -31,29 +31,29 @@ namespace rt
     class Camera
     {
 		public:
-		    Camera(){};///A default constructor @todo To remove it !
+		    Camera(){}///A default constructor @todo To remove it !
 		    /**  Set up the camera
 		     * @param eye the position of the camera
 		     * @param centre the point it looks to
 		     * @param up a vector directing the vertical direction
 		     */
-		    Camera(Position eye, Position centre, vector _up/*, Scene* par*/);
+		    Camera(Point eye, Point centre, vector _up);
 		    /** Access eye
 		     * \return The current value of eye
 		     */
-		    Position getEye() { return eye; };
+		    Point getEye() { return eye; };
 		    /** set eye
 		     * \param val New value to set
 		     */
-		    void setEye(Position val) { eye = val; };
+		    void setEye(Point val) { eye = val; };
 		    /** Access center
 		     * \return The current value of center
 		     */
-		    Position getCentre() { return centre; };
+		    Point getCentre() { return centre; };
 		    /** set center
 		     * \param val New value to set
 		     */
-		    void setCenter(Position val) { centre = val; };
+		    void setCenter(Point val) { centre = val; };
 		    /** Access up
 		     * \return The current value of up
 		     */
@@ -65,8 +65,8 @@ namespace rt
 
 		protected:
 		private:
-		    Position eye; //!< Member variable "eye"
-		    Position centre; //!< Member variable "centre"
+		    Point eye; //!< Member variable "eye"
+		    Point centre; //!< Member variable "centre"
 		    vector up; //!< Member variable "up"
 		};
 

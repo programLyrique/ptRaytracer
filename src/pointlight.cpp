@@ -7,39 +7,40 @@ namespace rt
 
     }
 
-    double PointLight::illuminate(const Point& p, const Solid* m, const vector vision)
+    color PointLight::illuminate(const Point& p, const Solid* m, const vector vision) const
     {
-        /** need to create a function intersect in scene so just do scene->existInter() */
-
-        if(scene->existInterBetween(*this, p))
+        if(scene->existInterBetween((Point) (*this), p))
             return 0;
-
+        
+        color cN = m->getTexture().getColorN();
+        color cB = m->getTexture().getColorB();
+        
     	double reda = std::max(0.,
-                        ((double) m->getTexture().getColorN().get_red() / ((double) 255))
+                        ((double) cN.get_red() / 255.)
                         * (m->getNormal(p, vision.unit()).unit() | p.vectTo(*this).unit()));
     	double redb = std::max(0.,
-                        ((double) m->getTexture().getColorB().get_red() / ((double) 255))
+                        ((double) cB.get_red() / 255.)
                         * std::pow(vision.unit()
                                   | (2 * (m->getNormal(p, vision.unit()).unit()
-                                         | p.vectTo(*this).unit()) * m->getNormal(p, vision.unit()).unit() - p.vectTo(*this).unit()).unit()
+                                         | p.vectTo(*this).unit()) * m->getNormal(p, vision.unit()) - p.vectTo(*this).unit()).unit()
                             , m->getTexture().getBrillance()));
         double greena = std::max(0.,
-                        ((double) m->getTexture().getColorN().get_green() / ((double) 255))
+                        ((double) cN.get_green() / 255.)
                         * (m->getNormal(p, vision.unit()).unit() | p.vectTo(*this).unit()));
-    	double greenbb = std::max(0.,
-                        ((double) m->getTexture().getColorB().get_green() / ((double) 255))
+    	double greenb = std::max(0.,
+                        ((double) cB.get_green() / 255.)
                         * std::pow(vision.unit()
                                   | (2 * (m->getNormal(p, vision.unit()).unit()
-                                         | p.vectTo(*this).unit()) * m->getNormal(p, vision.unit()).unit() - p.vectTo(*this).unit()).unit()
+                                         | p.vectTo(*this).unit()) * m->getNormal(p, vision.unit()) - p.vectTo(*this).unit()).unit()
                             , m->getTexture().getBrillance()));
-        double greena = std::max(0.,
-                        ((double) m->getTexture().getColorN().get_blue() / ((double) 255))
+        double bluea = std::max(0.,
+                        ((double) cN.get_blue() / 255.)
                         * (m->getNormal(p, vision.unit()).unit() | p.vectTo(*this).unit()));
-    	double greenbb = std::max(0.,
-                        ((double) m->getTexture().getColorB().get_blue() / ((double) 255))
+    	double blueb = std::max(0.,
+                        ((double) cB.get_blue() / 255.)
                         * std::pow(vision.unit()
                                   | (2 * (m->getNormal(p, vision.unit()).unit()
-                                         | p.vectTo(*this).unit()) * m->getNormal(p, vision.unit()).unit() - p.vectTo(*this).unit()).unit()
+                                         | p.vectTo(*this).unit()) * m->getNormal(p, vision.unit()) - p.vectTo(*this).unit()).unit()
                             , m->getTexture().getBrillance()));
         return color(std::min(couleur.get_red() * (reda + redb), 255.),
                      std::min(couleur.get_green() * (greena + greenb), 255.),
