@@ -83,6 +83,9 @@ namespace rt
             	printf("%f %f %f\n", x, y, z);
             }
 
+            /**
+             * Is not equal to another point, with a precision of epsilon = 0.0001
+             */
     		virtual bool operator!=(const Point& p) const;
     };
 

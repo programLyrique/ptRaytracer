@@ -37,7 +37,7 @@ namespace rt
             PointLight() {}
 
             /** default destructor */
-            ~PointLight() {}
+            virtual ~PointLight() {}
 
             /**
             * Constructor from a point
@@ -49,6 +49,9 @@ namespace rt
             */
             PointLight(double x, double y, double z, color c, Scene* parent);
 
+            /**
+             * Redefinition of illuminate for a pointlight.
+             */
             color illuminate(const Point& p, const Solid* m, const vector vision) const;
 
 

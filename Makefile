@@ -6,7 +6,6 @@ export MAKE = make
 export MRPROPER = make mrproper
 export MASTER=..#Le chemin du Makefile par rapport au makefile appelé
 
-#Il faudra modifier le Makefile dans source pour qu'il mette les binaires dans BIN
 all:
 	cd $(SRC); $(MAKE); mv main $(MASTER)/$(BIN)/;
 

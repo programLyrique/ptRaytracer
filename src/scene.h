@@ -135,7 +135,7 @@ namespace rt
             * @param p the point
             * @param o the solid
             * @param v the vision direction
-            * @param nbR the number of reflection
+            * @param nbR the number of reflections
             * @param nbTrans the number of transmissions
             */
             color getIllumination(const Point& p, Solid* o, const vector& v, int nbR, int nbTrans) const;
