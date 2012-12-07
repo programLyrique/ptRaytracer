@@ -222,7 +222,6 @@ namespace rt
         vector tem = (-1 * v).unit();
         color phong;
         color reflechie;
-        color transparenceLumiere;
         color transparenceObjet;
 
         for(unsigned k = 0; k < lights.size(); ++k)
@@ -285,12 +284,6 @@ namespace rt
 
             if(o->getTexture().getTransparence() != 0)
             {
-                for(unsigned k = 0; k < lights.size(); ++k)
-                {
-                    color temp = lights[k]->illuminate(transp, o, tem);
-                    transparenceLumiere.set_red(std::min(transparenceLumiere.get_red() + temp.get_red(), 255));
-                }
-
                 bool brillance = false;
                 for(unsigned k = 0; k < objets.size(); k++)
                 {
@@ -338,15 +331,12 @@ namespace rt
         double t = o->getTexture().getTransparence();
         return color(std::min(((1 - t) * phong.get_red()
                                + (1 - t) * reflechie.get_red()
-                               + t * transparenceLumiere.get_red()
                                + t * transparenceObjet.get_red()), 255.),
                      std::min(((1 - t) * phong.get_green()
                                + (1 - t) * reflechie.get_green()
-                               + t * transparenceLumiere.get_green()
                                + t * transparenceObjet.get_green()), 255.),
                      std::min(((1 - t) * phong.get_blue()
                                + (1 - t) * reflechie.get_blue()
-                               + t * transparenceLumiere.get_blue()
                                + t * transparenceObjet.get_blue()), 255.));
     }
 
