@@ -1,0 +1,7 @@
+\subsection{La réflection}
+Nous avons implémenté la réflection de la lumière sur de multiples sphères avant d'accéder à la source de lumière pour pouvoir ajouter un effet miroir aux sphères. Pour cela, nous avons considéré que le rayon se réfléchissait parfaitement sur la sphère avant de continuer, cela permettait de calculer l'éclairement par récurrence, la lumière arrivant en ce point étant celle que l'on recevrait avec une caméra placée en ce point et avec une direction celle du vecteur refléchi \ref{reflection}.
+L'implémentation a donné des résultats comme celui-ci \ref{ereflection}.
+
+\subsection{La transparence}
+De même que pour la réflections, nous avons implémenté la transparence des objets, c'est-à-dire la possibilité de voir un objet à travers un autre. Pour cela, nous avons ajouté la possibilité à un rayon de traverser un objet en échange d'une diminution d'intensité. Nous avons ensuite implémenté les lois de Snell-Descartes, pour avoir de la réfraction dans les sphères et gérer des effets comme celui de la lumière qui traverse une boule en verre \ref{refraction}.
+L'implémentation a donné des résultats comme celui-ci \ref{erefraction}.
