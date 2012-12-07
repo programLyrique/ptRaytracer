@@ -27,9 +27,15 @@ private:
 class Four_Spheres_Reflexions : public rt::Scene
 {
 public:
-    Four_Spheres_Reflexions(){};
+    Four_Spheres_Reflexions();
     virtual ~Four_Spheres_Reflexions(){};
 private:
+    rt::Camera camera;
+    rt::PointLight light;
+    rt::Sphere s1;
+    rt::Sphere s2;
+    rt::Sphere s3;
+    rt::Sphere s4;
 };
 
 /**
