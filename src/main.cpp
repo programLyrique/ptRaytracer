@@ -13,7 +13,11 @@
 #include "ptScenes.h"
 
 
-#define NB_SPHERES 20
+
+// You can put 1000 here, but more is expected to be very long.
+#define NB_SPHERES 100
+
+
 
 int main(int argc, char** argv)
 {

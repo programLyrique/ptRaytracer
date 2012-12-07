@@ -1,12 +1,28 @@
+/**
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 #ifndef SCENES_H
 #define SCENES_H
+
+#include <vector>
 
 #include "scene.h"
 #include "sphere.h"
 #include "pointlight.h"
 #include "camera.h"
 #include "point.h"
-
+#include "plan.h"
 
 /**
  * A scene to benchmark the ray tracer with lots of solids in the scene.
@@ -14,10 +30,20 @@
 class Many_Spheres : public rt::Scene
 {
 public:
-    Many_Spheres();
-    virtual ~Many_Spheres(){};
+    /**   Creates a scene with a huge pile of spheres
+     * @param nbSpheres number of spheres. Not more 1000 if you want a render time of less than 15 minutes.
+     */
+    Many_Spheres(int nbSpheres);
+    virtual ~Many_Spheres();
+    /** A copy constructor.
+     * But you really don't need to coyp that class !
+     */
+    Many_Spheres(const Many_Spheres& mS);
 private:
-
+    rt::Camera camera;
+    rt::PointLight light;
+    std::vector<rt::Solid* > solids;
+    rt::Plan plan;
 };
 
 

@@ -38,7 +38,7 @@ namespace rt
             /**
              * Builds a sphere of center (0,0,0) and radius 10.
              */
-            Sphere() {};
+            Sphere();
 
             /// default destructor
             ~Sphere() {};

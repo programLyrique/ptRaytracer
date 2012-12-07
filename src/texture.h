@@ -45,7 +45,7 @@ namespace rt
 
 		public:
 			/** default constructor */
-			Texture() {};
+			Texture() : brillance(0), transparence(0), indice(0) {};
 			/** default destructor */
 			~Texture() {};
 
