@@ -18,3 +18,5 @@ doc:
 
 mrproper:
 	cd $(SRC); $(MRPROPER)
+
+.PHONY: run doc mrproper
