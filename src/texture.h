@@ -38,11 +38,6 @@ namespace rt
 			/** Parameter for the Phong reflection */
 			int brillance;
 
-			/** transparency of the object */
-			double transparence;
-			/** refraction parameter*/
-			double indice;
-
 		public:
 			/** default constructor */
 			Texture() {};
@@ -56,7 +51,7 @@ namespace rt
 			* @param t transparency between 0 and 1 (0 not transparent at all, 1 perfectly transparent)
 			* @param n refraction parameter
 			*/
-			Texture(color colB, color colN, int b, double t, double n) : cB(colB), cN(colN), brillance(b), transparence(t), indice(n) {};
+			Texture(color colB, color colN, int b) : cB(colB), cN(colN), brillance(b) {};
 
 			/** \return brillance color */
 			color getColorB() const { return cB; }
@@ -64,10 +59,6 @@ namespace rt
 			color getColorN() const { return cN; }
 			/** \return brillance */
 			int getBrillance() { return brillance; }
-			/** \return transparency */
-			double getTransparence() { return transparence; }
-			/** \return refraction parameter */
-			double getIndice() { return indice; }
 
 
 	};

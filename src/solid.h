@@ -61,12 +61,6 @@ class Solid
         */
         virtual Point getIntersection(const Point& point, const vector& vect) = 0;
 
-        /** Return the point on the other side of the solid
-        * \return point
-     	*/
-        virtual Point autreCote(const Point& point, const vector& vect, const Point& act) const = 0;
-
-
         /** Retourne un vecteur normal a la surface
         * @param point of the object
         * \return vector

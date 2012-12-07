@@ -97,22 +97,11 @@ namespace rt
              */
             void render(screen& s);
 
-            /*
-            std::vector<Mesh*>::const_iterator getDebObjets() const { return objets.begin(); }
-            std::vector<Mesh*>::const_iterator getFinObjets() const { return objets.end(); }
-            */
-
             /** Wether an solid exist between them
             * @param deb the first point
             * @param end the second point
             */
-            //bool existInterBetween(const Point& begin, const Point& end) const;
-            
-            /** The transparency coefficient after going throught the element between the 2 points
-            * @param deb the first point
-            * @param fin the second point
-            */
-            double existInterBetween(const Point& begin, const Point& end) const;
+            bool existInterBetween(const Point& begin, const Point& end) const;
 
             /** Accessor
             * \return camera
@@ -141,10 +130,8 @@ namespace rt
             * @param p the point
             * @param o the solid
             * @param v the vision direction
-            * @param nbR the number of reflection
-            * @param nbTrans the number of transmissions
             */
-            color getIllumination(const Point& p, Solid* o, const vector& v, int nbR, int nbTrans) const;
+            color getIllumination(const Point& p, Solid* o, const vector& v) const;
     };
 }
 

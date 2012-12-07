@@ -6,7 +6,6 @@
 #include "color.hpp"
 #include "texture.h"
 #include "pointlight.h"
-#include "plan.h"
 
 #include <cmath>
 #include <sstream>
@@ -27,11 +26,11 @@ int main(int argc, char** argv)
         scene.addSolid(new rt::Sphere(rt::Point(0 * cos(k), 20 + 35* cos(k), 25 * cos(k) ), 3, rt::Texture(rt::color::RED, rt::color::BLUE, 1, 0, 1)));
     }
     scene.addSolid(new rt::Plan(rt::Texture(rt::color::WHITE, rt::color::WHITE, 1, 0, 1), rt::Point(0, 0, 10), rt::vector(0, 0, -1)));*/
-	scene.addSolid(new rt::Sphere(rt::Point(3, 20, 0), 3, rt::Texture(rt::color::WHITE, rt::color(255, 255, 0), 100, 0, 1)));
-	scene.addSolid(new rt::Sphere(rt::Point(-3, 20, 3), 3, rt::Texture(rt::color::WHITE, rt::color(255, 0, 255), 100, 0, 1)));
-	scene.addSolid(new rt::Sphere(rt::Point(-3, 20, -3), 3, rt::Texture(rt::color::WHITE, rt::color(0, 255, 255), 100, 0, 1)));
-	scene.addSolid(new rt::Sphere(rt::Point(0, 15, 0), 3, rt::Texture(rt::color::WHITE, rt::color::WHITE, 1, 0.9, 1.4)));
-	scene.addSolid(new rt::Sphere(rt::Point(3, 20, 6), 3, rt::Texture(rt::color::WHITE, rt::color::RED, 100, 0, 1)));
+	scene.addSolid(new rt::Sphere(rt::Point(3, 20, 0), 3, rt::Texture(rt::color::WHITE, rt::color(255, 255, 0), 100)));
+	scene.addSolid(new rt::Sphere(rt::Point(-3, 20, 3), 3, rt::Texture(rt::color::WHITE, rt::color(255, 0, 255), 100)));
+	scene.addSolid(new rt::Sphere(rt::Point(-3, 20, -3), 3, rt::Texture(rt::color::WHITE, rt::color(0, 255, 255), 100)));
+	scene.addSolid(new rt::Sphere(rt::Point(0, 15, 0), 3, rt::Texture(rt::color::WHITE, rt::color::WHITE, 1)));
+	scene.addSolid(new rt::Sphere(rt::Point(3, 20, 6), 3, rt::Texture(rt::color::WHITE, rt::color::RED, 100)));
 
 
 
@@ -48,7 +47,7 @@ int main(int argc, char** argv)
         std::istringstream iss(argv[1]);
         int nbThreads;
         iss >> nbThreads;
-        scene.render(s, nbThreads);
+        scene.render(s);
     }
 
     while(s.update()) {

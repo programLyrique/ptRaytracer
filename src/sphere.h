@@ -64,11 +64,6 @@ namespace rt
             */
             Point getIntersection(const Point& point, const vector& vect);
 
-            /**	get the point on the other side of the object
-            *	\return the point
-            */
-            Point autreCote(const Point& point, const vector& vect, const Point& act) const;
-
             /** Return the normal at p at the sphere
             * \return vector
             */
