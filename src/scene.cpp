@@ -19,12 +19,12 @@ namespace rt
         {
             delete (*it);
         }
-        objets.~vector();
+        
         for(std::vector<Light*>::iterator it = lights.begin(); it != lights.end(); ++it)
         {
             delete (*it);
         }
-        lights.~vector();
+        
     }
 
     void Scene::renderArea(int x, int y, int width, int height, screen& s, bool oversampling = true)
@@ -84,7 +84,7 @@ namespace rt
                         }
                         if(inter)
                         {
-                            color temp = getIllumination(p, objets[o], v, 1, 3);
+                            color temp = getIllumination(p, objets[o], v, 2, 0);
                             mL1 += temp.get_red();
                             mL2 += temp.get_green();
                             mL3 += temp.get_blue();
@@ -209,10 +209,11 @@ namespace rt
     	    	Point q = (*it)->getIntersection(begin, v);
     	    	if((q.distance(begin) < end.distance(begin)) && (end != q))
     	    	{
-    	        	return false;
+    	        	return true;
     	        }
     	    }
     	}
+    	return false;
     }
 
     color Scene::getIllumination(const Point& p, Solid* o, const vector& vect, int nbR, int nbTrans) const
@@ -231,13 +232,12 @@ namespace rt
             phong.set_green(std::min(temp.get_green() + phong.get_green(), 255));
             phong.set_blue(std::min(temp.get_blue() + phong.get_blue(), 255));
         }
-
         vector reflection = (2 * (tem | o->getNormal(p, v)) * o->getNormal(p, v) - tem).unit();
         bool reflect = false;
         Point brill;
         int e = 0;
 
-        for(unsigned k = 0; k < objets.size(); k++)
+        for(int k = 0; k < objets.size(); k++)
         {
             if(objets[k]->intersect(p, reflection))
             {
@@ -291,7 +291,7 @@ namespace rt
                 }
 
                 bool brillance = false;
-                for(unsigned k = 0; k < objets.size(); k++)
+                for(int k = 0; k < objets.size(); k++)
                 {
                     if(objets[k]->intersect(transp, tem))
                     {
