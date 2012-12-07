@@ -106,7 +106,13 @@ namespace rt
             * @param deb the first point
             * @param end the second point
             */
-            bool existInterBetween(const Point& begin, const Point& end) const;
+            //bool existInterBetween(const Point& begin, const Point& end) const;
+            
+            /** The transparency coefficient after going throught the element between the 2 points
+            * @param deb the first point
+            * @param fin the second point
+            */
+            double existInterBetween(const Point& begin, const Point& end) const;
 
             /** Accessor
             * \return camera

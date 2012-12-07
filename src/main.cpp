@@ -1,5 +1,7 @@
 #include <iostream>
 #include <unistd.h>
+#include <cmath>
+#include <sstream>
 
 #include "screen.hpp"
 #include "scene.h"
@@ -8,8 +10,8 @@
 #include "pointlight.h"
 #include "plan.h"
 
-#include <cmath>
-#include <sstream>
+#include "ptScenes.h"
+
 
 #define NB_SPHERES 20
 
@@ -17,17 +19,7 @@ int main(int argc, char** argv)
 {
     rt::screen s(640,480);
 
-	// here the code to draw the pixels...
-    rt::Scene scene;
-    scene.setCamera(new rt::Camera(rt::Point(0, 0, 0), rt::Point(0, 500, 0), rt::vector(0, 0, 1)));
-    scene.addLight(new rt::PointLight(0., 0., 0., rt::color::WHITE, &scene));
-    //scene.addLight(new rt::PointLight(-20, -25, 0, rt::color::WHITE, &scene));
-
-	scene.addSolid(new rt::Sphere(rt::Point(3, 20, 6), 3, rt::Texture(rt::color::WHITE, rt::color(0, 255, 255), 2, 0, 1)));
-
-
-
-
+    Real_Transparence scene;
 
 
     std::cout << "Nombre de param : " << argc << std::endl;
@@ -39,7 +31,7 @@ int main(int argc, char** argv)
     {
         std::istringstream iss(argv[1]);
         // To prevent from format errors.
-        iss.exceptions(ifstream::failbit | ifstream::badbit );
+        iss.exceptions(std::istringstream::failbit | std::istringstream::badbit );
         int nbThreads;
         iss >> nbThreads;
         scene.render(s, nbThreads);
