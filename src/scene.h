@@ -25,6 +25,8 @@ class Light;
 #include "sphere.h"
 #include "thread.h"
 #include <vector>
+#include <iostream>
+#include <ctime>
 
 
 namespace rt
