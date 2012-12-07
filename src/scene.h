@@ -79,7 +79,7 @@ namespace rt
             /**
             * Add a mesh in the scene.
             */
-            void addSolid(Solid* solid);//const ?
+            void addSolid(Solid* solid);
 
             /**
             * Add a light in the scene.
@@ -109,7 +109,7 @@ namespace rt
             * @param end the second point
             */
             //bool existInterBetween(const Point& begin, const Point& end) const;
-            
+
             /** The transparency coefficient after going throught the element between the 2 points
             * @param deb the first point
             * @param fin the second point

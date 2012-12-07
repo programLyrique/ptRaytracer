@@ -22,7 +22,7 @@
 
 namespace rt
 {
-	class Plan :	public Solid {
+	class Plan : public Solid {
 
 		protected:
 
