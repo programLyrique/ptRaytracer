@@ -24,7 +24,6 @@ namespace rt
         {
             delete (*it);
         }
-        
     }
 
     void Scene::render(screen& s)

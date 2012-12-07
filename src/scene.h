@@ -23,7 +23,6 @@ class Light;
 #include "camera.h"
 #include "screen.hpp"
 #include "sphere.h"
-#include "thread.h"
 #include <vector>
 
 
@@ -39,23 +38,6 @@ namespace rt
             std::vector<Solid*> objets;
             std::vector<Light*> lights;
             Camera* cam;
-
-        /**
-         * Internal class to implement a rendering thread.
-         */
-        class ThreadRender : public Thread
-        {
-            public:
-                ThreadRender(Scene& _sc,int _x, int _y, int _w, int _h, screen& _s);
-                void run();
-            private:
-                Scene& sc;
-                int x;
-                int y;
-                int w;
-                int h;
-                screen& s;
-        };
 
 	protected:
             /**
