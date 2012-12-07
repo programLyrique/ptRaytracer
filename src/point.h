@@ -82,8 +82,10 @@ namespace rt
             void print() const {
             	printf("%f %f %f\n", x, y, z);
             }
-			
-			/** Overide != operator, true si the point is close enough*/
+
+            /**
+             * Is not equal to another point, with a precision of epsilon = 0.0001
+             */
     		virtual bool operator!=(const Point& p) const;
     };
 

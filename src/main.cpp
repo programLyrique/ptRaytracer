@@ -1,5 +1,7 @@
 #include <iostream>
 #include <unistd.h>
+#include <cmath>
+#include <sstream>
 
 #include "screen.hpp"
 #include "scene.h"
@@ -8,8 +10,8 @@
 #include "pointlight.h"
 #include "plan.h"
 
-#include <cmath>
-#include <sstream>
+#include "ptScenes.h"
+
 
 #define NB_SPHERES 20
 
@@ -17,19 +19,7 @@ int main(int argc, char** argv)
 {
     rt::screen s(640,480);
 
-	// here the code to draw the pixels...
-    rt::Scene scene;
-    scene.setCamera(new rt::Camera(rt::Point(0, 0, 0), rt::Point(0, 500, 0), rt::vector(0, 0, 1)));
-    scene.addLight(new rt::PointLight(0., 0., 0., rt::color::WHITE, &scene));
-	scene.addSolid(new rt::Sphere(rt::Point(3, 20, 0), 3, rt::Texture(rt::color::WHITE, rt::color(255, 255, 0), 100, 0, 1)));
-	scene.addSolid(new rt::Sphere(rt::Point(-3, 20, 3), 3, rt::Texture(rt::color::WHITE, rt::color(255, 0, 255), 100, 0, 1)));
-	scene.addSolid(new rt::Sphere(rt::Point(-3, 20, -3), 3, rt::Texture(rt::color::WHITE, rt::color(0, 255, 255), 100, 0, 1)));
-	scene.addSolid(new rt::Sphere(rt::Point(0, 15, 0), 3, rt::Texture(rt::color::WHITE, rt::color::WHITE, 1, 0.9, 1.4)));
-	scene.addSolid(new rt::Sphere(rt::Point(3, 20, 6), 3, rt::Texture(rt::color::WHITE, rt::color::RED, 100, 0, 1)));
-
-
-
-
+    Real_Transparence scene;
 
 
     std::cout << "Nombre de param : " << argc << std::endl;
@@ -40,6 +30,8 @@ int main(int argc, char** argv)
     else
     {
         std::istringstream iss(argv[1]);
+        // To prevent from format errors.
+        iss.exceptions(std::istringstream::failbit | std::istringstream::badbit );
         int nbThreads;
         iss >> nbThreads;
         scene.render(s, nbThreads);

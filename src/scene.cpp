@@ -9,17 +9,7 @@ namespace rt
 
     Scene::~Scene()
     {
-        delete cam;
-        for(std::vector<Solid*>::iterator it = objets.begin(); it != objets.end(); ++it)
-        {
-            delete (*it);
-        }
-        
-        for(std::vector<Light*>::iterator it = lights.begin(); it != lights.end(); ++it)
-        {
-            delete (*it);
-        }
-        
+
     }
 
     void Scene::renderArea(int x, int y, int width, int height, screen& s, bool oversampling = true)
@@ -334,7 +324,7 @@ namespace rt
                                + (1 - t) * reflechie.get_blue()
                                + t * transparenceObjet.get_blue()), 255.));
     }
-    
+
     double Scene::existInterBetween(const Point& begin, const Point& end) const
     {
     	double t = 1;
