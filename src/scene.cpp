@@ -1,9 +1,4 @@
 #include "scene.h"
-#include "thread.h"
-#include <cmath>
-#include <ctime>
-#include <iostream>
-#include "screen.hpp"
 
 namespace rt
 {
