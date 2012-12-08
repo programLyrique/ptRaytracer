@@ -43,11 +43,11 @@ namespace rt
 
 			vector getNormal(const Point& p, const vector& vect) const;
 
-			bool intersect(const Point& pos, const vector& vect);
+			bool intersect(const Point& pos, const vector& vect) const;
 
 			Point autreCote(const Point& point, const vector& vect, const Point& act) const;
 
-			Point getIntersection(const Point& pos, const vector& vect);
+			Point getIntersection(const Point& pos, const vector& vect) const;
 
 	};
 }
