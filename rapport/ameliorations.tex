@@ -27,3 +27,21 @@ Cette méthode demande beaucoup de calculs par rapport à d'autres méthodes, ma
   \begin{lstlisting}
   virtual void run() = 0;
   \end{lstlisting}
+  
+  Une fonction détecte le nombre de coeurs disponibles, qui est supposé être une puissance de deux.
+  
+  Le découpage de l'image s'effectue alors en prenant, avec $ n = \log_2(nbThreads) $ et $ m = nbThreads / n$, en une grille de $n \times m$ rectangles.
+  
+ Une augmentation de la vitesse de rendu est finalement bien obtenue (voir table \ref{tempsRendu}).
+  
+ \begin{table}
+   \begin{tabular}{|c|c|c|c|c|}
+  \hline 
+  Nombre de threads & 1 & 2 & 4 & 8 \\ 
+  \hline 
+  Temps (s) & 91 & 47 & 35 & 23 \\ 
+  \hline 
+  \end{tabular}
+  \caption{Évolution du temps de rendu en fonction du nombre de threads.} \label{tempsRendu}
+\end{table}  
+ 
