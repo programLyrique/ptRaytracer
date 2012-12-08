@@ -16,7 +16,7 @@
 #define POSITION_H
 
 #include "vector.hpp"
-#include <cstdio>
+#include <iostream>
 #include <algorithm>
 #include <cmath>
 
@@ -37,11 +37,11 @@ namespace rt
             double z;
         public:
 
-            /** default constructor */
-            Point(){};
+            /** default constructor : builds a point of coordinates (0,0,0) */
+            Point() : x(0), y(0), z(0) {};
 
             /** default destructor */
-            ~Point(){};
+            virtual ~Point(){};
 
             /**
             * Constructor
@@ -80,9 +80,9 @@ namespace rt
             * Print the coordinates of the point
             */
             void print() const {
-            	printf("%f %f %f\n", x, y, z);
+                std::cout << x << " " << y << " " << z << std::endl;
             }
-
+            /** Difference with a precision of 0.0001. */
     		virtual bool operator!=(const Point& p) const;
     };
 

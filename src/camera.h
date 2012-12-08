@@ -39,27 +39,27 @@ namespace rt
 		     */
 		    Camera(Point eye, Point centre, vector _up);
 		    /** Access eye
-		     * \return The current value of eye
+		     * @return The current value of eye
 		     */
 		    Point getEye() { return eye; };
 		    /** set eye
-		     * \param val New value to set
+		     * @param val New value to set
 		     */
 		    void setEye(Point val) { eye = val; };
 		    /** Access center
-		     * \return The current value of center
+		     * @return The current value of center
 		     */
 		    Point getCentre() { return centre; };
 		    /** set center
-		     * \param val New value to set
+		     * @param val New value to set
 		     */
 		    void setCenter(Point val) { centre = val; };
 		    /** Access up
-		     * \return The current value of up
+		     * @return The current value of up
 		     */
 		    vector getUp() { return up; };
 		    /** set up
-		     * \param val New value to set
+		     * @param val New value to set
 		     */
 		    void setUp(vector val) { up = val; };
 

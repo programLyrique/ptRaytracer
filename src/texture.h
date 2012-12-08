@@ -53,11 +53,17 @@ namespace rt
 			*/
 			Texture(color colB, color colN, int b) : cB(colB), cN(colN), brillance(b) {};
 
-			/** \return brillance color */
+			/** Accessor
+             * @return brillance color
+             */
 			color getColorB() const { return cB; }
-			/** \return inner color */
+			/** Accessor
+			 * @return inner color
+			  */
 			color getColorN() const { return cN; }
-			/** \return brillance */
+			/** Accessor
+			 * @return brillance
+			 */
 			int getBrillance() { return brillance; }
 
 

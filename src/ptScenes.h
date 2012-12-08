@@ -22,7 +22,7 @@
 #include "point.h"
 
 /**
- * A basic scene with 4 sphere to show the Phong reflection model
+ * A basic scene with 4 sphere to show the Phong reflection model.
  */
 class Four_Spheres : public rt::Scene
 {

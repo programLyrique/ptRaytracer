@@ -39,12 +39,12 @@ class Solid
         Texture t;
     private:
     public:
-        /** Default constructor : puts uniform balck as a texture. */
+        /** Default constructor : puts uniform black as a texture. */
         Solid();
 
         /** @param texture the texture for the solid*/
         Solid(Texture texture);
-        
+
         virtual ~Solid() {}
 
         /** Wether the line defined by a vector and a point intersects the solid.

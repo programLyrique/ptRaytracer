@@ -15,6 +15,15 @@
 #ifndef SCENE_H
 #define SCENE_H
 
+/** @mainpage
+ * The ptRaytracer aims at enhancing your visual experience. It uses ray tracing technics to
+ * show realistic images.
+ *
+ * That version is a basic one, which only supports the Phong illumination model.
+ *
+ * Use version 0.5 to have better renderings, with reflexion, transparence, multithreading, and anti-aliasing.
+ */
+
 class Camera;
 class Light;
 
@@ -50,7 +59,7 @@ namespace rt
              */
             void renderArea(int x, int y, int width, int height, screen& s, bool oversampling);
         public:
-            /** default constructor */
+            /** default constructor, which does nothing. */
             Scene();
 
             /** default destructor */
@@ -86,18 +95,18 @@ namespace rt
             bool existInterBetween(const Point& begin, const Point& end) const;
 
             /** Accessor
-            * \return camera
-            */
+             * @return camera
+             */
 
             Camera* getCamera() const { return cam; }
 
-            /**
-             * Number of objects in the scene
+            /** Accessor
+             *  @return Number of objects in the scene
              */
             int getNbObjects() const { return objets.size();}
 
-            /**
-             * Number of lights in the scene.
+            /** Accessor
+             * @return Number of lights in the scene.
              */
             int getNbLights() const { return lights.size(); }
 

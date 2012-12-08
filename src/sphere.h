@@ -60,17 +60,17 @@ namespace rt
             /** get intersection between the sphere and a line if it exists
             * @param point the beginning of the ray
             * @param vect a directing vector of the ray
-            * \return the intersection if it exists
+            * @return the intersection if it exists
             */
             Point getIntersection(const Point& point, const vector& vect);
 
             /** Return the normal at p at the sphere
-            * \return vector
+            * @return vector
             */
             vector getNormal(const Point& p, const vector& vect) const;
 
             /** Accessor
-            * \return centre
+            * @return centre
             */
             Point getCentre() const { return centre; }
 
