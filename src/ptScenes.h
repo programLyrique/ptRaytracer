@@ -22,7 +22,7 @@
 #include "point.h"
 
 /**
- * A basic scene with 4 sphere to show the Phong relfection model
+ * A basic scene with 4 sphere to show the Phong reflection model
  */
 class Four_Spheres : public rt::Scene
 {
@@ -31,7 +31,8 @@ public:
     virtual ~Four_Spheres(){};
 private:
     rt::Camera camera;
-    rt::PointLight light;
+    rt::PointLight light1;
+    rt::PointLight light2;
     rt::Sphere s1;
     rt::Sphere s2;
     rt::Sphere s3;

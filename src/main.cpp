@@ -10,7 +10,6 @@
 #include <cmath>
 #include <sstream>
 
-#define NB_SPHERES 20
 
 int main(int argc, char** argv)
 {
