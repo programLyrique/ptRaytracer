@@ -26,7 +26,7 @@
 \maketitle
 
 \section*{Introduction} %Situer le problème du lancer de rayon
-Le lancer de rayon est une méthode de rendu d'images en trois dimensions.
+Le lancer de rayon est 
 \section{Organisation du projet} % Parler ici de la hiérarchie de classes et des structures de données, de git, de github, et de Doxygen
 
 \input{orgProjet.tex}
@@ -136,5 +136,80 @@ Le lancer de rayon est une méthode de rendu d'images en trois dimensions.
 \includegraphics[scale=0.6]{phong3.png}
 \caption{Exemple d'illumination de phong sur une sphère rouge avec une lampe unique}
 \end{figure}
+
+\begin{figure}
+\label{reflection}
+\begin{tikzpicture}
+	\coordinate (v1) at (-2, 5);
+	\coordinate (v2) at (-2, 4);
+	\coordinate (l) at (2,3);
+	\coordinate (f) at (-2,3);
+	\coordinate (r1) at (2,1);
+	\coordinate (r2) at (-2,1);
+	\draw[ultra thick, yellow]
+		(r1) -- node
+		{} (r2);
+	\draw[ultra thick, yellow]
+		(l) -- node
+		{} (r1);
+	\draw[ultra thick,-latex, yellow]
+		(r2) -- node[left = 4pt]
+		{$\bold{L}$} (f);
+		
+	\draw[ultra thick,-latex, red]
+		(v1) -- node[left = 4pt]
+		{$\bold{V}$} (v2);
+	\draw (-3,0) circle (1.4);
+	\draw (3,0) circle (1.4);
+\end{tikzpicture}
+\caption{Principe de la réflection}
+\end{figure}
+
+\begin{figure}
+\label{refraction}
+\begin{tikzpicture}
+	\coordinate (l) at (1, 4);
+	\coordinate (r1) at (1, 2.8);
+	\coordinate (r2) at (2.4, -1.7);
+	\coordinate (f) at (3.3, -3);
+	\coordinate (v2) at (4, -4);
+	\coordinate (v1) at (5, -5);
+	\coordinate (n) at (1.4,4.2);
+	\draw[ultra thick, yellow]
+		(r1) -- node
+		{} (r2);
+	\draw[ultra thick, yellow]
+		(l) -- node
+		{} (r1);
+	\draw[ultra thick,-latex, yellow]
+		(r2) -- node[left = 4pt]
+		{$\bold{L}$} (f);
+	\draw[ultra thick,-latex, red]
+		(v1) -- node[left = 4pt]
+		{$\bold{V}$} (v2);
+	\draw[ultra thick,-latex, black]
+		(r1) -- node[left = 4pt]
+		{$\bold{N}$} (n);
+	
+	\draw (0,0) circle (3);
+\end{tikzpicture}
+\caption{Principe de la réfraction}
+\end{figure}
+
+
+\begin{figure}[hbtp]
+\label{ereflection}
+\centering
+\includegraphics[scale=0.6]{ereflection.png}
+\caption{Exemple de reflection (5 réflections par sphères)}
+\end{figure}
+
+\begin{figure}[hbtp]
+\label{erefraction}
+\centering
+\includegraphics[scale=0.6]{erefraction.png}
+\caption{Exemple de refraction, même configuration que le cas précédent mais avec une sphère transparente d'indice 1.4 devant (du verre par exemple)}
+\end{figure}
+
 
 \end{document}
