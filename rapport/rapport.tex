@@ -46,11 +46,95 @@ Le lancer de rayon est
 
 \appendix % Mettre ici toutes les images (et y faire réfèrence via \label{truc}, puis \ref{truc}
 
+\begin{figure}
 \label{speculaire}
 \begin{tikzpicture}
-\draw (0,0) circle (3);
-\title{Schéma représentant l'illumination spéculaire}
+	\coordinate (reflection) at (0,2);
+	\coordinate (n) at (0,4);
+	\coordinate (light) at (-5, 3);
+	\coordinate (r1) at (5, 3);
+	\coordinate (r2) at (3.5, 3.5);
+	\coordinate (r3) at (4, 2.5);
+	\coordinate (v1) at (6,3);
+	\coordinate (v2) at (11,4);
+	\draw[ultra thick, -latex, black]
+		(reflection) -- node[left=4pt,fill=white]
+		{$N$} (n);
+	\draw[ultra thick, -latex, yellow]
+		(light) -- node[below=4pt,fill=white]
+		{$\bold{L}$} (reflection);
+	\draw[ultra thick, -latex, yellow]
+		(reflection) -- node[above=2pt,fill=white]
+		{$\bold{R}$} (r1);
+	\draw[ultra thick, -latex, yellow]
+		(reflection) -- node[above=3pt,fill=white]
+		{} (r2);
+	\draw[ultra thick, -latex, yellow]
+		(reflection) -- node[below=2pt,fill=white]
+		{} (r3);
+	\draw[ultra thick, -latex, red]
+		(v2) -- node[below=2pt,fill=white]
+		{$\bold{V}$} (v1);
+	\draw (0,0) circle (2);
 \end{tikzpicture}
+\caption{Illumination spéculaire}
+\end{figure}
 
+\begin{figure}
+\label{diffuse}
+\begin{tikzpicture}
+	\coordinate (reflection) at (0,2);
+	\coordinate (n) at (0,5);
+	\coordinate (light) at (-5, 3);
+	\coordinate (r1) at (3, 3);
+	\coordinate (r2) at (2.5, 4);
+	\coordinate (r3) at (0, 4);
+	\coordinate (r4) at (-2.5, 4);
+	\coordinate (r5) at (-3, 3);
+	\coordinate (r6) at (-1, 4.5);
+	\coordinate (r7) at (1, 4.5);
+	\coordinate (v1) at (6,3);
+	\coordinate (v2) at (11,4);
+	\draw[ultra thick, -latex, black]
+		(reflection) -- node[left=4pt,fill=white]
+		{$N$} (n);
+	\draw[ultra thick, -latex, yellow]
+		(light) -- node[below=4pt,fill=white]
+		{$\bold{L}$} (reflection);
+	\draw[ultra thick, -latex, yellow]
+		(reflection) -- node
+		{} (r1);
+	\draw[ultra thick, -latex, yellow]
+		(reflection) -- node
+		{} (r2);
+	\draw[ultra thick, -latex, yellow]
+		(reflection) -- node
+		{} (r3);
+	\draw[ultra thick, -latex, yellow]
+		(reflection) -- node
+		{} (r4);
+	\draw[ultra thick, -latex, yellow]
+		(reflection) -- node
+		{} (r5);
+	\draw[ultra thick, -latex, yellow]
+		(reflection) -- node
+		{} (r6);
+	\draw[ultra thick, -latex, yellow]
+		(reflection) -- node
+		{} (r7);
+	\draw[ultra thick, -latex, red]
+		(v2) -- node[below=2pt,fill=white]
+		{$\bold{V}$} (v1);
+	\draw (0,0) circle (2);
+\end{tikzpicture}
+\caption{Illumination diffuse}
+\end{figure}
+
+\begin{figure}[hbtp]
+\centering
+\label{phong}
+\includegraphics[scale=0.6]{phong3.png}
+\caption{Exemple d'illumination de phong sur une sphère rouge avec une lampe unique}
+\end{figure}
 
 \end{document}
