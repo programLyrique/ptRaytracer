@@ -20,8 +20,8 @@
 
 #ifdef MANY_SPHERES
 // You can put 1000 here, but more is expected to be very long.
-// 373 s on a core i7, 2,6 GHz, 8 cores.
-#define NB_SPHERES 1000
+// For 1000, 373 s on a core i7, 2,6 GHz, 8 cores.
+#define NB_SPHERES 100
 #endif
 
 
