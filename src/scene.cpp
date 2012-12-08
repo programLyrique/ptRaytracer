@@ -101,28 +101,14 @@ namespace rt
         std::cout << "Rendering with " << nbThreads <<  " threads." << std::endl;
 
         std::cout << getNbObjects() << " objects. " << getNbLights() << " lights." << std::endl;
-        // Most of the times, the number of procs is a power of 2.
-        // Anyway, it's rarely a prime number (except 2...).
-        int p2 = std::log(nbThreads) / std::log(2);//More efficient to detect the most significant bit
-        int nb_w = 0; // Nombre de divisions de la largeur
-        int nb_h = 0; // Nombre de morceaux en hauteur
-        std::vector<ThreadRender*> threads(nbThreads);//A "pool" of threads
-        //What is the longest side ?
-        if(s.height() > s.width())
-        {
-            nb_w = std::pow(2, p2 / 2);
-            nb_h = nbThreads / nb_w ;
-        }
-        else
-        {
-            nb_h = std::pow(2, p2 / 2);
-            nb_w = nbThreads / nb_h ;
-        }
 
-        int w = s.width() / nb_w;
-        int h = s.height() / nb_h;
-        std::cout << "Parts are " << w << " x " << h << std::endl;
-        std::cout << "There are " << nb_w << " parts in width and " << nb_h << " in height." << std::endl;
+        std::vector<ThreadRender*> threads(nbThreads);//A "pool" of threads
+
+
+
+        int w = 32;
+        int h = 32;
+        std::cout << "Parts are 32 x 2 pixels" << std::end;
 
         time_t beginning = std::time(NULL);
 
@@ -132,7 +118,7 @@ namespace rt
         for(int i = 0 ; i <  s.width(); i += w)
             for(int j = 0; j < s.height(); j += h)
             {
-                std::cout << "Rendering of " << i << "," << j << " - " << w << "," << h << std::endl;
+                //std::cout << "Rendering of " << i << "," << j << " - " << w << "," << h << std::endl;
                 threads[k] = new ThreadRender(*this,i,j,w,h,s);
                 k++;
             }
@@ -318,6 +304,40 @@ namespace rt
     	    }
     	}
     	return t;
+    }
+
+    RenderQueue::RenderQueue(int width, int height, int tile=32) :
+        nbW(width / tile), nbH(height / tile),
+        reminderW( width % tile), reminderH(height % tile),
+        tileLenght(tile), w(0), h(0)
+    {
+
+    }
+
+    // Attention aux indices : devraient partir de 0.
+    rectangle RenderQueue::nextTile()() const
+    {
+        rectangle p = {w,h, tileLenght, tileLenght};
+        if(w < nbW)
+        {
+            w++;
+        }
+        else if (reminderW > 0) // w = nbW
+        {
+            p.sX = reminderW;
+            w = 0;
+        }
+        else // reminderW = 0 and w = nbW
+        {
+            p.x = 0;
+            w = (nbW > 1);
+
+        }
+        if(h < nbH)
+        {
+            h++;
+        }
+        else if(reminderH > )
     }
 
 }
