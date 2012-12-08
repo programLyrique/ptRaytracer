@@ -67,8 +67,6 @@ Il faut alors déterminer l'intersection du rayon avec les objets visibles dans 
 L'objectif était d'écrire un programme de lancer de rayons basique, qui puisse afficher des sphères, les colorer de façon réaliste, avec plusieurs lampes.
 Nous verrons quelques améliorations qui peuvent être apportées pour améliorer la qualité du rendu, et le temps de rendu.
 
-\tableofcontents
-
 \section{Organisation du projet} % Parler ici de la hiérarchie de classes et des structures de données, de git, de github, et de Doxygen
 
 \input{orgProjet.tex}
@@ -82,12 +80,18 @@ Nous verrons quelques améliorations qui peuvent être apportées pour améliore
 \input{ameliorations.tex}
 
 \section*{Conclusion}
+  Le lanceur de rayons créé, avec les améliorations, permet d'obtenir des rendus très esthétiques, en un temps relativement court 
+  grâce au \emph{multithreading}. Il lui manque cependant, pour être facilement utilisable, un langage de description de scènes, ce qui permettrait
+  de se contenter de modifier un fichier pour avoir une nouvelle scène, et pas d'avoir à recompiler le programme.
+    L'illumination est pour l'instant une illumination locale. Pour avoir des rendus plus physiquement réalistes, des méthodes d'illumination globale
+  sont plus adaptées, comme le \emph{photon mapping}, qui envoie des photons depuis les sources de lumière en pré-traitement ou le \emph{Metropolis path tracing}.
 
 
+\tableofcontents
 
 \appendix % Mettre ici toutes les images (et y faire réfèrence via \label{truc}, puis \ref{truc}
 
-\begin{figure}
+\begin{figure}[b]
 \begin{tikzpicture}
 	\coordinate (reflection) at (0,2);
 	\coordinate (n) at (0,4);
@@ -120,7 +124,7 @@ Nous verrons quelques améliorations qui peuvent être apportées pour améliore
 \caption{Illumination spéculaire} \label{speculaire}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[b]
 \begin{tikzpicture}
 	\coordinate (reflection) at (0,2);
 	\coordinate (n) at (0,5);
