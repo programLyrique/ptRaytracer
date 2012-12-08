@@ -9,7 +9,7 @@ EXEC=main
 SRC= $(wildcard *.cpp)
 OBJ= $(SRC:.cpp=.o)	
 
-all: $(EXEC)
+all: clean $(EXEC)
 
 main: $(OBJ)
 	$(CC) -o $@ $^ $(LDFLAGS) $(LIBS)
