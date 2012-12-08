@@ -41,7 +41,6 @@ namespace rt
                             ho++;//eviter une boucle infinie
                             ve++;
                         }
-                        //  std::cout  << ho << " et " << ve << std::endl;
                         bool inter = false;
                         Point p;
                         int o = 0;
@@ -127,16 +126,14 @@ namespace rt
 
         time_t beginning = std::time(NULL);
 
-        //int limit_w = w * (nb_w - 1); // useful when there are parts left by the divisions above.
-        //int limit_h = h * (nb_h - 1 );
+
         int k = 0;
-        //std::cout << "Number of simple parts : limit_w = " << limit_w << " and limit_h = " << limit_h << std::endl;
+
         for(int i = 0 ; i <  s.width(); i += w)
             for(int j = 0; j < s.height(); j += h)
             {
                 std::cout << "Rendering of " << i << "," << j << " - " << w << "," << h << std::endl;
                 threads[k] = new ThreadRender(*this,i,j,w,h,s);
-                //renderArea(i,j,w ,h,s);
                 k++;
             }
         for(k=0; k < nbThreads ; k++)
@@ -148,17 +145,11 @@ namespace rt
         for(k=0; k < nbThreads; k++)
         {
             threads[k]->join();
-            s.update();//Probably useless
+            s.update();
         }
 
         for(k=0; k < nbThreads; k++)
             delete threads[k];
-        //Render the last parts (w,h + reminder of the devision)
-        /*std::cout << "Rendering last parts" << std::endl;
-        for(unsigned i = 0; i < limit_w ; i += w)
-            renderArea(i, limit_h, w, s.height() - h, s);
-        for(unsigned j=0; j < limit_h; j += h)
-            renderArea(limit_w, j, s.width() - h, h, s);*/
 
         time_t end = std::time(NULL);
         std::cout << "End of rendering. Took " << end - beginning << " seconds." << std::endl;
@@ -183,24 +174,7 @@ namespace rt
     {
         cam = camera;
     }
-	/*
-    bool Scene::existInterBetween(const Point& begin, const Point& end) const
-    {
-        vector v = begin.vectTo(end);
-        for(std::vector<Solid*>::const_iterator it = objets.begin(); it != objets.end(); ++it)
-    	{
-    	    if((*it)->intersect(begin, v))
-    	    {
-    	    	Point q = (*it)->getIntersection(begin, v);
-    	    	if((q.distance(begin) < end.distance(begin)) && (end != q))
-    	    	{
-    	        	return true;
-    	        }
-    	    }
-    	}
-    	return false;
-    }
-	*/
+
     color Scene::getIllumination(const Point& p, Solid* o, const vector& vect, int nbR, int nbTrans) const
     {
         vector v = vect;

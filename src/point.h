@@ -16,7 +16,7 @@
 #define POSITION_H
 
 #include "vector.hpp"
-#include <cstdio>
+#include <iostream>
 #include <algorithm>
 #include <cmath>
 
@@ -37,7 +37,7 @@ namespace rt
             double z;
         public:
 
-            /** default constructor */
+            /** default constructor  : point of coordinate (0,0,0) */
             Point() : x(0), y(0), z(0) {};
 
             /** default destructor */
@@ -52,35 +52,35 @@ namespace rt
             Point(double _x, double _y, double _z);
 
             /** Accessors
-            * \return x
-            */
+             * @return x
+             */
             double getX() const;
             /** Accessors
-            * \return y
-            */
+             * @return y
+             */
             double getY() const;
             /** Accessors
-            * \return z
-            */
+             * @return z
+             */
             double getZ() const;
 
             /** distances between 2 points
-            * @arg p other point
-            */
+             * @param p other point
+             */
             double distance(const Point& p) const;
 
 
             /** Create a vector for current point to given point
-            * @param p point
-            * \return vector
-            */
+             * @param p point
+             * @return vector
+             */
             vector vectTo(const Point& p) const;
 
             /**
-            * Print the coordinates of the point
-            */
+             * Print the coordinates of the point
+             */
             void print() const {
-            	printf("%f %f %f\n", x, y, z);
+            	std::cout << x << " " << y << " " << z << std::endl;
             }
 
             /**

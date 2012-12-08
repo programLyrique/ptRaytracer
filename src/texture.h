@@ -33,7 +33,6 @@ namespace rt
 		    * cN: inner color
 		    */
 			color cB;
-			/**/
 			color cN;
 			/** Parameter for the Phong reflection */
 			int brillance;
@@ -47,7 +46,7 @@ namespace rt
 			/** default constructor */
 			Texture() : brillance(0), transparence(0), indice(0) {};
 			/** default destructor */
-			~Texture() {};
+			virtual ~Texture() {};
 
 			/** Constructor
 			* @param cB color when illuminated
@@ -58,15 +57,15 @@ namespace rt
 			*/
 			Texture(color colB, color colN, int b, double t, double n) : cB(colB), cN(colN), brillance(b), transparence(t), indice(n) {};
 
-			/** \return brillance color */
+			/** @return brillance color */
 			color getColorB() const { return cB; }
-			/** \return inner color */
+			/** @return inner color */
 			color getColorN() const { return cN; }
-			/** \return brillance */
+			/** @return brillance */
 			int getBrillance() { return brillance; }
-			/** \return transparency */
+			/** @return transparency */
 			double getTransparence() { return transparence; }
-			/** \return refraction parameter */
+			/** @return refraction parameter */
 			double getIndice() { return indice; }
 
 

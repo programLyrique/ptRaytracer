@@ -14,7 +14,7 @@ namespace rt
 {
 
 
-Thread::Thread()
+Thread::Thread() : thread(0)
 {
 
 }
@@ -31,7 +31,7 @@ bool Thread::exec()
 
 bool Thread::join()
 {
-    if(thread != 0) // Le thread existe.
+    if(thread != 0) // Le thread existe, car on espère que 0 n'est pas une valeur valide d'identifiant de thread
         return pthread_join(thread, NULL) == 0;
     else
         return false;

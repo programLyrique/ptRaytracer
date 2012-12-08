@@ -31,7 +31,7 @@ namespace rt
 			Point point;
 			vector normal;
 		public:
-
+            /** A default plan. */
 			Plan() {}
 			virtual ~Plan() {}
 			/** Constructor

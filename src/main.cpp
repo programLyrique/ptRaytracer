@@ -12,8 +12,15 @@
 
 #include "ptScenes.h"
 
+
+/*
+ * Pass -DNOM_SCENE to build the scene you want.
+ * It can be necessary to do a make mrproper before.
+ */
+
 #ifdef MANY_SPHERES
 // You can put 1000 here, but more is expected to be very long.
+// For 1000, 373 s on a core i7, 2,6 GHz, 8 cores.
 #define NB_SPHERES 100
 #endif
 
@@ -30,7 +37,7 @@ int main(int argc, char** argv)
 #endif
 
 
-    std::cout << "Nombre de param : " << argc << std::endl;
+    std::cout << "Number of param : " << argc << std::endl;
 
     //On peut passer le nombre de coeurs voulus en paramètre
     if(argc <= 1)

@@ -38,42 +38,42 @@ class Solid
 
         /** @param texture the texture for the solid*/
         Solid(Texture texture);
-        
+
         virtual ~Solid() {}
 
         /** Wether the line defined by a vector and a point intersects the solid.
-        *    @param pos the point
-        *    @param vect the vector
-        */
+         *    @param pos the point
+         *    @param vect the vector
+         */
         virtual bool intersect(const Point& pos, const vector& vect) const = 0;
 
 
-        /** get intersection between the object and a line if it exists
-        * @param point the beginning of the ray
-        * @param vect a directing vector of the ray
-        * \return the intersection if it exists
-        */
+        /** Get intersection between the object and a line if it exists
+         * @param point the beginning of the ray
+         * @param vect a directing vector of the ray
+         * @return the intersection if it exists
+         */
         virtual Point getIntersection(const Point& point, const vector& vect) const = 0;
 
-        /** Return the point on the other side of the solid according to a line
-     	* @param p point of the line
-     	* @param v the vector
-     	* @param act the current point
-        * \return point
-     	*/
+        /** Returns the point on the other side of the solid according to a line
+     	 * @param p point of the line
+     	 * @param v the vector
+     	 * @param act the current point
+         * @return point
+     	 */
         virtual Point autreCote(const Point& point, const vector& vect, const Point& act) const = 0;
 
 
-        /** Retourne un vecteur normal a la surface
-        * @param p point of the object
-        * @param v the vision vector
-        * \return vector
-        */
+        /** Returns a vector which is normal to the surface.
+         * @param p point of the object
+         * @param v the vision vector
+         * @return vector
+         */
         virtual vector getNormal(const Point& p, const vector& v) const = 0;
 
         /** Accessor
-        * \return texture of the solid
-        */
+         * @return texture of the solid
+         */
         Texture getTexture() const { return t; } ;
 
 

@@ -32,6 +32,7 @@ class Many_Spheres : public rt::Scene
 public:
     /**   Creates a scene with a huge pile of spheres
      * @param nbSpheres number of spheres. Not more 1000 if you want a render time of less than 15 minutes.
+     * 100 takes 39 s to render on an octocore (core i7, 2,6 GHz).
      */
     Many_Spheres(int nbSpheres);
     virtual ~Many_Spheres();
@@ -39,6 +40,12 @@ public:
      * But you really don't need to coyp that class !
      */
     Many_Spheres(const Many_Spheres& mS);
+
+    /**
+     * Overloading =
+     * But you really don't need to use = with that class !
+     */
+    Many_Spheres& operator = (const Many_Spheres& mS);
 private:
     rt::Camera camera;
     rt::PointLight light;

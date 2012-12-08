@@ -10,9 +10,6 @@ SRC= $(wildcard *.cpp)
 OBJ= $(SRC:.cpp=.o)
 PROG_NAME=main
 
-
-all: $(EXEC)
-
 4sphere: CFLAGS+=-DFOUR_SPHERES_REFLEXIONS
 4sphere: clean $(EXEC)
 
