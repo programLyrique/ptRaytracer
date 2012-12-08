@@ -78,3 +78,23 @@ Many_Spheres::Many_Spheres(const Many_Spheres& mS)
 
     }
 }
+
+
+ Many_Spheres& Many_Spheres::operator = (const Many_Spheres& mS)
+ {
+    if(this != &mS)
+    {
+        camera = mS.camera;
+        plan = mS.plan;
+        spheres.resize(mS.spheres.size());
+        for(int k = 0; k < static_cast<int>(spheres.size()) ; k ++)
+        {
+            rt::Sphere* sphere = new rt::Sphere;
+            *sphere = rt::Sphere(*(mS.spheres[k]));
+            spheres[k] = sphere;
+
+        }
+    }
+    return *this;
+ }
+

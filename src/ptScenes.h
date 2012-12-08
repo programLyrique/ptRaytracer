@@ -40,6 +40,12 @@ public:
      * But you really don't need to coyp that class !
      */
     Many_Spheres(const Many_Spheres& mS);
+
+    /**
+     * Overloading =
+     * But you really don't need to use = with that class !
+     */
+    Many_Spheres& operator = (const Many_Spheres& mS);
 private:
     rt::Camera camera;
     rt::PointLight light;
