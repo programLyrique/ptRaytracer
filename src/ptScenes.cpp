@@ -47,11 +47,12 @@ Many_Spheres::Many_Spheres(int nbSpheres) :
     spheres(nbSpheres),
     plan(rt::Texture(rt::color::WHITE, rt::color::WHITE, 1, 0, 1), rt::Point(0, 0, 10), rt::vector(0, 0, -1))
 {
+	setCamera(&camera);
     addLight(&light);
     for(int k = 0 ; k < nbSpheres ; k++)
     {
         rt::Sphere* sphere = new rt::Sphere(rt::Point(0 * cos(k), 20 + 35* cos(k), 25 * cos(k) ),
-                                          3, rt::Texture(rt::color::RED, rt::color::BLUE, 1, 0, 1));
+                                          3, rt::Texture(rt::color::BLUE, rt::color::RED, 1, 0, 1));
         spheres[k] = sphere;
         addSolid(sphere);
     }
