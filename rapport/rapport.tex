@@ -12,6 +12,35 @@
 \usepackage{multicol}
 \usepackage{tikz}
 
+\usepackage{color}
+
+%\usepackage{fullpage}
+
+\usepackage{listings}
+
+\lstset{
+language=C++,
+basicstyle=\footnotesize,
+keywordstyle=\bfseries\ttfamily\color[rgb]{0,0,1},
+identifierstyle=\ttfamily,
+commentstyle=\color[rgb]{0.133,0.545,0.133},
+stringstyle=\ttfamily\color[rgb]{0.627,0.126,0.941},
+showstringspaces=false,
+morecomment=[l][\color{magenta}]{\#},
+%basicstyle=\small,
+numberstyle=\footnotesize,
+numbers=left,
+stepnumber=1,
+numbersep=10pt,
+tabsize=2,
+breaklines=true,
+prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+breakatwhitespace=false,
+aboveskip={1.5\baselineskip},
+columns=fixed,
+extendedchars=true,
+}
+
 \author{Pierre \bsc{Donat-Bouillud} Thibaud \bsc{Ehret}}
 \title{Lancer de rayons}
 
@@ -27,7 +56,20 @@
 
 \section*{Introduction} %Situer le problème du lancer de rayon
 Le lancer de rayon est une méthode de synthèse d'images en trois dimensions, qui repose sur le principe, en optique géométrique, du retour 
-inverse de la lumière.
+inverse de la lumière : un rayon de lumière est lancé, depuis la caméra, vers tous les pixels de l'écran. Il faut alors déterminer l'intersection
+du rayon avec les objets visibles dans la scène, puis après réflexion, ou passage à travers des objets transparents, renvoyer le rayon jusqu'à ce
+qu'il touche une source de lumière.
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale=0.5]{../presentation/raytracing.png}
+\end{center}
+\caption{Principe du lancer de rayons.}
+\end{figure}
+L'objectif était d'écrire un programme de lancer de rayons basique, qui puisse afficher des sphères, les colorer de façon réaliste, avec plusieurs lampes.
+Nous verrons quelques améliorations qui peuvent être apportées pour améliorer la qualité du rendu, et le temps de rendu.
+
+\tableofcontents
+
 \section{Organisation du projet} % Parler ici de la hiérarchie de classes et des structures de données, de git, de github, et de Doxygen
 
 \input{orgProjet.tex}
@@ -43,12 +85,10 @@ inverse de la lumière.
 \section*{Conclusion}
 
 
-\tableofcontents
 
 \appendix % Mettre ici toutes les images (et y faire réfèrence via \label{truc}, puis \ref{truc}
 
 \begin{figure}
-\label{speculaire}
 \begin{tikzpicture}
 	\coordinate (reflection) at (0,2);
 	\coordinate (n) at (0,4);
@@ -78,11 +118,10 @@ inverse de la lumière.
 		{$\bold{V}$} (v1);
 	\draw (0,0) circle (2);
 \end{tikzpicture}
-\caption{Illumination spéculaire}
+\caption{Illumination spéculaire} \label{speculaire}
 \end{figure}
 
 \begin{figure}
-\label{diffuse}
 \begin{tikzpicture}
 	\coordinate (reflection) at (0,2);
 	\coordinate (n) at (0,5);
@@ -128,18 +167,16 @@ inverse de la lumière.
 		{$\bold{V}$} (v1);
 	\draw (0,0) circle (2);
 \end{tikzpicture}
-\caption{Illumination diffuse}
+\caption{Illumination diffuse} \label{diffuse}
 \end{figure}
 
 \begin{figure}[hbtp]
 \centering
-\label{phong}
 \includegraphics[scale=0.6]{phong3.png}
-\caption{Exemple d'illumination de phong sur une sphère rouge avec une lampe unique}
+\caption{Exemple d'illumination de phong sur une sphère rouge avec une lampe unique} \label{phong}
 \end{figure}
 
 \begin{figure}
-\label{reflection}
 \begin{tikzpicture}
 	\coordinate (v1) at (-2, 5);
 	\coordinate (v2) at (-2, 4);
@@ -163,11 +200,10 @@ inverse de la lumière.
 	\draw (-3,0) circle (1.4);
 	\draw (3,0) circle (1.4);
 \end{tikzpicture}
-\caption{Principe de la réflection}
+\caption{Principe de la réflection} \label{reflection}
 \end{figure}
 
 \begin{figure}
-\label{refraction}
 \begin{tikzpicture}
 	\coordinate (l) at (1, 4);
 	\coordinate (r1) at (1, 2.8);
@@ -194,22 +230,21 @@ inverse de la lumière.
 	
 	\draw (0,0) circle (3);
 \end{tikzpicture}
-\caption{Principe de la réfraction}
+\caption{Principe de la réfraction} \label{refraction}
 \end{figure}
 
 
 \begin{figure}[hbtp]
-\label{ereflection}
+
 \centering
 \includegraphics[scale=0.6]{ereflection.png}
-\caption{Exemple de reflection (5 réflections par sphères)}
+\caption{Exemple de reflection (5 réflections par sphères)} \label{ereflection}
 \end{figure}
 
 \begin{figure}[hbtp]
-\label{erefraction}
 \centering
 \includegraphics[scale=0.6]{erefraction.png}
-\caption{Exemple de refraction, même configuration que le cas précédent mais avec une sphère transparente d'indice 1.4 devant (du verre par exemple)}
+\caption{Exemple de refraction, même configuration que le cas précédent mais avec une sphère transparente d'indice 1.4 devant (du verre par exemple)} \label{erefraction}
 \end{figure}
 
 
