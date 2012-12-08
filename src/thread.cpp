@@ -69,5 +69,19 @@ unsigned int Thread::nbCores()
 #endif
 }
 
+bool Mutex::lock()
+{
+    return pthread_mutex_lock(&mutex) == 0;
+}
+
+bool Mutex::unlock()
+{
+    return pthread_mutex_unlock(&mutex) == 0;
+}
+
+Mutex::~Mutex()
+{
+    pthread_mutex_destroy(&mutex);
+}
 
 }

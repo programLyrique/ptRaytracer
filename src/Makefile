@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-W -Wall -ansi -pedantic -O3 
+CFLAGS=-W -Wall -ansi -pedantic -pthread #-O3
 LDFLAGS=
 
 INCLUDE=-I. -I/usr/include -I/usr/include/SDL -I./include

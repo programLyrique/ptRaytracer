@@ -27,48 +27,74 @@ namespace rt
  */
 class Thread
 {
-    public:
-        /** Default constructor */
-        Thread();
-        /** Default destructor */
-        virtual ~Thread();
+public:
+    /** Default constructor */
+    Thread();
+    /** Default destructor */
+    virtual ~Thread();
 
-        /**
-         * To use pthread functions that are not implemented in the class Thread.
-         * @return a handle to the thread
-         */
-        pthread_t getHandle() const { return thread; }
+    /**
+     * To use pthread functions that are not implemented in the class Thread.
+     * @return a handle to the thread
+     */
+    pthread_t getHandle() const
+    {
+        return thread;
+    }
 
-        /**
-         * Launches the thread.
-         * @return false if the thread failed to execute, true otherwise.
-         */
-        bool exec();
+    /**
+     * Launches the thread.
+     * @return false if the thread failed to execute, true otherwise.
+     */
+    bool exec();
 
-        /** To wait for the thread to finish
-         * @return false if it's not possible to wait for the end of the thread
-         */
-        bool join();
+    /** To wait for the thread to finish
+     * @return false if it's not possible to wait for the end of the thread
+     */
+    bool join();
 
-        /** Return the number of core available in the system
-         * Works on Linux. Should work on Mac OS, and Windows. Maybe *BDS.
-         */
-        static unsigned int nbCores();
-    protected:
-        /**
-         * Run will be executed by the thread.
-         * Implement here what you want you thread to do.
-         */
-        virtual void run() = 0;
-    private:
-        pthread_t thread;
-        /**
-         * To wrap run() so that run() can be launched with pthread_create.
-         * Has to be static because non static member functions have a hidden parameter which
-         * points to the object.
-         * @param a pointer to the current object !
-         */
-        static void * startRoutine(void * obj);
+    /** Return the number of core available in the system
+     * Works on Linux. Should work on Mac OS, and Windows. Maybe *BDS.
+     */
+    static unsigned int nbCores();
+protected:
+    /**
+     * Run will be executed by the thread.
+     * Implement here what you want you thread to do.
+     */
+    virtual void run() = 0;
+private:
+    pthread_t thread;
+    /**
+     * To wrap run() so that run() can be launched with pthread_create.
+     * Has to be static because non static member functions have a hidden parameter which
+     * points to the object.
+     * @param a pointer to the current object !
+     */
+    static void * startRoutine(void * obj);
+};
+
+class Mutex
+{
+private :
+    pthread_mutex_t mutex;
+public:
+    Mutex() { pthread_mutex_init(&mutex, NULL);}
+
+    /**
+     * Destuctor. Unlock the mutex if locked.
+     */
+     virtual ~Mutex();
+    /** To lock a mutex :
+     * @return true success
+     * @return false impossible to lock
+     */
+    bool lock();
+    /** To unlock a mutex
+     * @return true success
+     * @return false failure
+     */
+     bool unlock();
 };
 
 }
