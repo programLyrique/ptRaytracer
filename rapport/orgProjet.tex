@@ -6,7 +6,7 @@
   de fusion de branches soient extrêmement rapides.
   Le dépôt étant public, il a fallu mettre une licence adaptée : la licence \emph{GPL}.
   
-  Le code est commentée avec des commentaires \emph{Doxygen}, ce qui permet de générer automatiquement une documentation au format html.
+  Le code est commenté avec des commentaires \emph{Doxygen}, ce qui permet de générer automatiquement une documentation au format html.
   
 \subsection{Organisation du projet}
 
@@ -48,7 +48,7 @@ Les structures de données utilisées pour conserver les objets dans une scène 
 std::vector<Solid*> objets;
 std::vector<Light*> lights;
 \end{lstlisting}
-Les \emph{vector}\footnote{sic} ont l'inconvénient d'occasionner un temps de recherche linéaire (voir table \ref{tempsSphères}) de l'intersection entre les objets dans la scène et un rayon lancé. 
+Les \verb|vector|\footnote{sic} ont l'inconvénient d'occasionner un temps de recherche linéaire (voir table \ref{tempsSphères}) de l'intersection entre les objets dans la scène et un rayon lancé. 
 Des structures de données plus efficaces mais plus complexes, \emph{octree} et \emph{voxels}, existent.
 
 \begin{table}

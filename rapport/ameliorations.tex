@@ -1,25 +1,25 @@
 \subsection{La réflection}
-Nous avons implémenté la réflection de la lumière sur de multiples sphères avant d'accéder à la source de lumière pour pouvoir ajouter un effet miroir aux sphères. Pour cela, nous avons considéré que le rayon se réfléchissait parfaitement sur la sphère avant de continuer. Cela permet de calculer l'éclairement par récurrence : la lumière arrivant en un point est celle que l'on recevrait avec une caméra placée en ce point et avec une direction celle du vecteur réfléchi \ref{reflection}.
+Nous avons implémenté la réflection de la lumière sur de multiples sphères avant d'accéder à la source de lumière pour pouvoir ajouter un effet miroir aux sphères. Pour cela, nous avons considéré que le rayon se réfléchissait parfaitement sur la sphère avant de continuer. Cela permet de calculer l'éclairement par récurrence : la lumière arrivant en un point est celle que l'on recevrait avec une caméra placée en ce point et avec une direction celle du vecteur réfléchi (voir figure \ref{reflection}).
 
-L'implémentation a donné des résultats comme celui-ci \ref{ereflection}.
+L'implémentation a donné des résultats comme celui-ci : figure \ref{ereflection}.
 
 \subsection{La transparence}
-  La transparence des objets a été aussi implémentée : la possibilité de voir un objet à travers un autre. Pour cela, un rayon peut traverser un objet, ce qui entraîne une diminution d'intensité. Les lois de Snell-Descartes ont ensuite été ajoutées, pour avoir la réfraction dans les sphères et gérer des effets comme celui de la lumière qui traverse une boule en verre \ref{refraction}.
-Les résultats sont assez réalistes :  \ref{erefraction}.
+  La transparence des objets a été aussi implémentée : la possibilité de voir un objet à travers un autre. Pour cela, un rayon peut traverser un objet, ce qui entraîne une diminution d'intensité. Les lois de Snell-Descartes ont ensuite été ajoutées, pour avoir la réfraction dans les sphères et gérer des effets comme celui de la lumière qui traverse une boule en verre (c.f. figure \ref{refraction}).
+Les résultats sont assez réalistes :  figure \ref{erefraction}.
 
 \subsection{Anti-crénelage}
   Les images rendues par le lanceur de rayons présentent le long de leurs contours des bords crénelés.
-Il est possible de réduire ce crénelage disgracieux en utilisant le suréchantillonage, en l'occurence, $\times 8$ : on calcule en plus 
- du pixel considéré huit autres pixels, répartis équitablement autour de ce pixel, et puis on effectue la moyenne des couleurs.
-Cette méthode demande beaucoup de calculs par rapport à d'autres méthodes, mais est très simple à mettre en place.
-  Les résultats son convaincants : voir la figure \ref{crenelage}.
+Il est possible de réduire ce crénelage disgracieux en utilisant le suréchantillonage, en l'occurrence, $\times 8$ : en plus 
+ du pixel considéré sont calculés huit autres pixels, répartis équitablement autour de ce pixel, et puis la moyenne des couleurs est attribuée au pixel central.
+Cette méthode demande beaucoup de calculs, mais est très simple à mettre en place.
+  Les résultats sont convaincants : voir la figure \ref{crenelage}.
  
 \subsection{Multithreading}
-  Les temps de rendus devenant prohibitifs, il a paru intéressant d'utiliser à leur plein potentiel les machines multicoeurs, et multiprocesseurs.
+  Les temps de rendus devenant prohibitifs, il a paru intéressant d'utiliser à leur plein potentiel les machines multicœurs, et multiprocesseurs.
   Le lancer de rayon est d'ailleurs extrêmement facilement parallélisable : chaque calcul de la couleur d'un pixel est indépendant de celui des 
   autres.
   
-  Notre rendu multithreadé utilise une bibliothèque C, \emph{pthread} \footnote{Posix Threads}, qu'il a fallu, pour que le code soit plus idiomatique de C++, 
+  Notre rendu multithreadé utilise une bibliothèque C, \emph{pthread} \footnote{Posix Threads}, qu'il a fallu, pour que le code soit plus idiomatique en C++, 
   encapsuler dans une classe : \emph{Thread}. Pour utiliser la fonction \verb|pthread_create| qui prend en argument un pointeur de fonction, passer une méthode de classe
   n'était pas possible, car celles-ci prennent en argument un pointeur caché vers l'objet dont elles sont méthodes. Il a donc fallu créer une méthode statique privée.
   
@@ -28,7 +28,7 @@ Cette méthode demande beaucoup de calculs par rapport à d'autres méthodes, ma
   virtual void run() = 0;
   \end{lstlisting}
   
-  Une fonction détecte le nombre de coeurs disponibles, qui est supposé être une puissance de deux.
+  Une fonction détecte le nombre de cœurs disponibles, qui est supposé être une puissance de deux.
   
   Le découpage de l'image s'effectue alors en prenant, avec $ n = \log_2(nbThreads) $ et $ m = nbThreads / n$, en une grille de $n \times m$ rectangles.
   
