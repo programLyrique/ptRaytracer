@@ -45,7 +45,7 @@ bool Sphere::intersect(const Point& point, const vector& vect) const
 
 Point Sphere::getIntersection(const Point& point, const vector& vect) const
 {
-    //Calcul du discriminant
+    //Re-calcul du discriminant
     double delta = (vect.x * (Sphere::centre.getX() - point.getX())
                     + vect.y * (Sphere::centre.getY() - point.getY())
                     + vect.z * (Sphere::centre.getZ() - point.getZ()))
@@ -77,7 +77,7 @@ Point Sphere::getIntersection(const Point& point, const vector& vect) const
 
 Point Sphere::autreCote(const Point& point, const vector& vect, const Point& act) const
 {
-    //Calcul du discriminant
+    //Et re-calcul du discriminant
     double delta = (vect.x * (Sphere::centre.getX() - point.getX())
                     + vect.y * (Sphere::centre.getY() - point.getY())
                     + vect.z * (Sphere::centre.getZ() - point.getZ()))

@@ -15,6 +15,14 @@
 #ifndef SCENE_H
 #define SCENE_H
 
+/** @mainpage
+ * @version 0.5
+ *
+ * The ptRaytracer aims at enhancing your visual experience. It uses ray tracing technics to show realistic images.
+ *
+ * That version adds reflexion, transparence, multithreading, and anti-aliasing.
+ */
+
 class Camera;
 class Light;
 
@@ -33,7 +41,6 @@ namespace rt
 {
     /**
      * A scene in which you can place meshes, lights, and cameras, and then, render it on a screen.
-     * @todo Add anti-aliasing filter at the end of the rendering.
      */
     class Scene
     {
@@ -44,6 +51,7 @@ namespace rt
 
         /**
          * Internal class to implement a rendering thread.
+         * @see Thread
          */
         class ThreadRender : public Thread
         {
@@ -99,26 +107,15 @@ namespace rt
              */
             void render(screen& s);
 
-            /*
-            std::vector<Mesh*>::const_iterator getDebObjets() const { return objets.begin(); }
-            std::vector<Mesh*>::const_iterator getFinObjets() const { return objets.end(); }
-            */
-
-            /** Wether an solid exist between them
-            * @param deb the first point
-            * @param end the second point
-            */
-            //bool existInterBetween(const Point& begin, const Point& end) const;
-
             /** The transparency coefficient after going throught the element between the 2 points
-            * @param deb the first point
-            * @param fin the second point
-            */
+             * @param deb the first point
+             * @param fin the second point
+             */
             double existInterBetween(const Point& begin, const Point& end) const;
 
             /** Accessor
-            * \return camera
-            */
+             * @return camera
+             */
 
             Camera* getCamera() const { return cam; }
 
@@ -136,6 +133,8 @@ namespace rt
              * Renders the scene on the screen .
              * @param nbThreads number of threads to render the scene.
              * @todo Handling the case when nbThreads is not a power of two !
+             * @todo Using a better cutting of the image : a circular list with threads that render
+             * little square of the image.
              */
             void render(screen& s, int nbThreads);
 

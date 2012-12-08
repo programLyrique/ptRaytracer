@@ -32,6 +32,7 @@ class Many_Spheres : public rt::Scene
 public:
     /**   Creates a scene with a huge pile of spheres
      * @param nbSpheres number of spheres. Not more 1000 if you want a render time of less than 15 minutes.
+     * 100 takes 39 s to render on an octocore (core i7, 2,6 GHz).
      */
     Many_Spheres(int nbSpheres);
     virtual ~Many_Spheres();

@@ -40,8 +40,8 @@ namespace rt
              */
             Sphere();
 
-            /// default destructor
-            ~Sphere() {};
+            /** default destructor */
+            virtual ~Sphere() {};
 
             /**
             * Constructor
@@ -66,18 +66,18 @@ namespace rt
             Point getIntersection(const Point& point, const vector& vect) const;
 
             /**	get the point on the other side of the object
-            *	\return the point
-            */
+             *	@return the point
+             */
             Point autreCote(const Point& point, const vector& vect, const Point& act) const;
 
             /** Return the normal passing through p at the sphere
-            * \return vector
-            */
+             * @return vector
+             */
             vector getNormal(const Point& p, const vector& vect) const;
 
             /** Accessor
-            * \return centre
-            */
+             * @return centre
+             */
             Point getCentre() const { return centre; }
 
     };

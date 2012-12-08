@@ -36,7 +36,6 @@ class Thread
         /**
          * To use pthread functions that are not implemented in the class Thread.
          * @return a handle to the thread
-         * @todo what if the pointer is NULL ?
          */
         pthread_t getHandle() const { return thread; }
 
@@ -52,7 +51,7 @@ class Thread
         bool join();
 
         /** Return the number of core available in the system
-         * Works on Linux, Mac OS, and Windows. Maybe *BDS.
+         * Works on Linux. Should work on Mac OS, and Windows. Maybe *BDS.
          */
         static unsigned int nbCores();
     protected:

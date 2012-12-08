@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-W -Wall -ansi -pedantic -O3 -DFOUR_SPHERES_REFLEXIONS
+CFLAGS=-W -Wall -ansi -pedantic -O3 -DMANY_SPHERES
 LDFLAGS=
 
 INCLUDE=-I. -I/usr/include -I/usr/include/SDL -I./include
@@ -7,7 +7,7 @@ LIBS=-L/usr/lib -lSDL -lpthread
 
 EXEC=$(PROG_NAME)
 SRC= $(wildcard *.cpp)
-OBJ= $(SRC:.cpp=.o)	z
+OBJ= $(SRC:.cpp=.o)
 
 all: $(EXEC)
 
