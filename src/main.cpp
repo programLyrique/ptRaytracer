@@ -15,13 +15,13 @@
 #ifdef MANY_SPHERES
 // You can put 1000 here, but more is expected to be very long.
 #define NB_SPHERES 100
-#endfi
+#endif
 
 
 int main(int argc, char** argv)
 {
     rt::screen s(640,480);
-#ifdef REAL_TRANSPARENCE
+#if defined(REAL_TRANSPARENCE)
     Real_Transparence scene;
 #elif defined(MANY_SPHERES)
     Many_Spheres scene(NB_SPHERES);
