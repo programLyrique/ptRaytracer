@@ -9,16 +9,7 @@ namespace rt
 
     Scene::~Scene()
     {
-        delete cam;
-        for(std::vector<Solid*>::iterator it = objets.begin(); it != objets.end(); ++it)
-        {
-            delete (*it);
-        }
-        
-        for(std::vector<Light*>::iterator it = lights.begin(); it != lights.end(); ++it)
-        {
-            delete (*it);
-        }
+
     }
 
     void Scene::render(screen& s)
