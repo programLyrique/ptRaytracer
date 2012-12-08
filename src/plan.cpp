@@ -20,7 +20,7 @@ namespace rt
 
 	vector Plan::getNormal(const Point& p, const vector& vect) const
 	{
-		if((vect | normal) > 0)
+        if((vect | normal) > 0)
 			return normal;
 		return -1 * normal;
 	}

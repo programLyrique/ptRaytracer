@@ -5,7 +5,7 @@ LDFLAGS=
 INCLUDE=-I. -I/usr/include -I/usr/include/SDL -I./include
 LIBS=-L/usr/lib -lSDL -lpthread
 
-EXEC=main
+EXEC=$(PROG_NAME)
 SRC= $(wildcard *.cpp)
 OBJ= $(SRC:.cpp=.o)	
 
