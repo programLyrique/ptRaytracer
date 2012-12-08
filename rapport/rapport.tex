@@ -29,7 +29,7 @@ showstringspaces=false,
 morecomment=[l][\color{magenta}]{\#},
 %basicstyle=\small,
 numberstyle=\footnotesize,
-numbers=left,
+%numbers=left,
 stepnumber=1,
 numbersep=10pt,
 tabsize=2,
@@ -55,10 +55,9 @@ extendedchars=true,
 \maketitle
 
 \section*{Introduction} %Situer le problème du lancer de rayon
-Le lancer de rayon est une méthode de synthèse d'images en trois dimensions, qui repose sur le principe, en optique géométrique, du retour 
-inverse de la lumière : un rayon de lumière est lancé, depuis la caméra, vers tous les pixels de l'écran. Il faut alors déterminer l'intersection
-du rayon avec les objets visibles dans la scène, puis après réflexion, ou passage à travers des objets transparents, renvoyer le rayon jusqu'à ce
-qu'il touche une source de lumière.
+Le lancer de rayon est une méthode de synthèse d'images en trois dimensions, qui repose sur le principe \footnote{Principe d'optique géométrique, donc certains phénomènes
+ondulatoires seront ignorés par cette technique.}, du retour inverse de la lumière : un rayon de lumière est lancé, depuis la caméra, vers tous les pixels de l'écran. 
+Il faut alors déterminer l'intersection du rayon avec les objets visibles dans la scène, puis après réflexion, ou passage à travers des objets transparents, renvoyer le rayon jusqu'à ce qu'il touche une source de lumière.
 \begin{figure}[!h]
 \begin{center}
 \includegraphics[scale=0.5]{../presentation/raytracing.png}
@@ -247,5 +246,12 @@ Nous verrons quelques améliorations qui peuvent être apportées pour améliore
 \caption{Exemple de refraction, même configuration que le cas précédent mais avec une sphère transparente d'indice 1.4 devant (du verre par exemple)} \label{erefraction}
 \end{figure}
 
+
+\begin{figure}
+\begin{flushleft}
+\includegraphics[scale=0.9]{anticrenelage.png}
+\end{flushleft} \label{crenelage}
+\caption{L'image à gauche est crénelée. Pour celle de droite,un suréchantillonnage $\times 8$ a été effectué.}
+\end{figure}
 
 \end{document}

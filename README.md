@@ -3,13 +3,23 @@ ptRaytracer
 
 A raytracer.
 
-You need the SDL and the posix thread library to compile the raytracer.
-3 examples are provided, one to show the reflexion, one for the transparency and one for the multithreading.
+You need the SDL and the posix thread library to compile the raytracer. 
+The makefile will build three example programs.
 
-Building:
+Building :
 
 make
 
-To launch the 3 examples, to continue just close the previous windows:
+Warning : don't do make -jx where x > 1. Some examples will not compile in this case.
+
+Running the three examples, one by one :
 
 make run
+
+To go to the next example, close the window or hit ctrl+c in the terminal.
+
+Building the doc :
+
+make doc
+
+To read it : yourInternetNavigator doc/html.index.html
