@@ -6,3 +6,18 @@ L'implémentation a donné des résultats comme celui-ci \ref{ereflection}.
 \subsection{La transparence}
   La transparence des objets a été aussi implémentée : la possibilité de voir un objet à travers un autre. Pour cela, un rayon peut traverser un objet, ce qui entraîne une diminution d'intensité. Les lois de Snell-Descartes ont ensuite été ajoutées, pour avoir la réfraction dans les sphères et gérer des effets comme celui de la lumière qui traverse une boule en verre \ref{refraction}.
 Les résultats sont assez réalistes :  \ref{erefraction}.
+
+\subsection{Anti-crénelage}
+  Les images rendues par le lanceur de rayons présentent le long de leurs contours des bords crénelés.
+Il est possible de réduire ce crénelage disgracieux en utilisant le suréchantillonage, en l'occurence, $\times 8$ : on calcule en plus 
+ du pixel considéré huit autres pixels, répartis équitablement autour de ce pixel, et puis on effectue la moyenne des couleurs.
+Cette méthode demande beaucoup de calculs par rapport à d'autres méthodes, mais est très simple à mettre en place.
+  Les résultats son convaincants : voir la figure \ref{crenelage}.
+ 
+\subsection{Multithreading}
+  Les temps de rendus devenant prohibitifs, il a paru intéressant d'utiliser à leur plein potentiel les machines multicoeurs, et multiprocesseurs.
+  Le lancer de rayon est d'ailleurs extrêmement facilement parallélisable : chaque calcul de la couleur d'un pixel est indépendant de celui des 
+  autres.
+  
+  Notre rendu multithreadé utilise une bibliothèque C, \emph{pthread} \footnote{Posix Threads}, qu'il a fallu, pour que le code soit plus idiomatique de C++, 
+  encapsuler dans une classe : \emph{Thread}.
