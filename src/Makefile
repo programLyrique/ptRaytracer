@@ -7,7 +7,7 @@ LIBS=-L/usr/lib -lSDL -lpthread
 
 EXEC=$(PROG_NAME)
 SRC= $(wildcard *.cpp)
-OBJ= $(SRC:.cpp=.o)	
+OBJ= $(SRC:.cpp=.o)	z
 
 all: $(EXEC)
 

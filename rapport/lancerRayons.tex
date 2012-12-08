@@ -12,4 +12,6 @@ L'illumination de Phong se découpe en plusieurs composantes : l'illumination am
 
 Les sources de lumière multiples sont gérées de la manière suivante: pour chaque source, l'intensité reçue est calculée puis tout est sommé \footnote{Pour rester dans les canaux RGB, l'intensité reçue possible est majorée dans notre implémentation}.
 
-Les résultats après implémentation sont les suivants \ref{phong}
+La formule finale pour l'intensité est alors $$i = \sum_{l \in lumieres}(<\vec{R}|\vec{V}>^{\alpha} {i_{s}}_{l} k_{s} + {i_{d}}_{l}k_{d}<\vec{L}|\vec{N}>)$$.
+
+Les résultats après implémentation sont les captures \ref{phong} suivantes.
