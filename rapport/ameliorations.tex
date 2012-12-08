@@ -20,4 +20,10 @@ Cette méthode demande beaucoup de calculs par rapport à d'autres méthodes, ma
   autres.
   
   Notre rendu multithreadé utilise une bibliothèque C, \emph{pthread} \footnote{Posix Threads}, qu'il a fallu, pour que le code soit plus idiomatique de C++, 
-  encapsuler dans une classe : \emph{Thread}.
+  encapsuler dans une classe : \emph{Thread}. Pour utiliser la fonction \verb|pthread_create| qui prend en argument un pointeur de fonction, passer une méthode de classe
+  n'était pas possible, car celles-ci prennent en argument un pointeur caché vers l'objet dont elles sont méthodes. Il a donc fallu créer une méthode statique privée.
+  
+  Pour lancer un thread, il faut hériter de la classe \emph{Thread}, et implémenter la méthode :
+  \begin{lstlisting}
+  virtual void run() = 0;
+  \end{lstlisting}
