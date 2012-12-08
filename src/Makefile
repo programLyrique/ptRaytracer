@@ -7,16 +7,9 @@ LIBS=-L/usr/lib -lSDL -lpthread
 
 EXEC=$(PROG_NAME)
 SRC= $(wildcard *.cpp)
-OBJ= $(SRC:.cpp=.o)	
-PROG_NAME=4sphere refraction manys
+OBJ= $(SRC:.cpp=.o)	z
 
 all: $(EXEC)
-
-4sphere: 
-
-refraction:
-
-manys:
 
 main: $(OBJ)
 	$(CC) -o $@ $^ $(LDFLAGS) $(LIBS)
