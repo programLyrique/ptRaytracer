@@ -38,10 +38,10 @@ namespace rt
         public:
 
             /** default constructor */
-            Point(){};
+            Point() : x(0), y(0), z(0) {};
 
             /** default destructor */
-            ~Point(){};
+            virtual ~Point(){};
 
             /**
             * Constructor

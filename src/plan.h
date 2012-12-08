@@ -33,7 +33,7 @@ namespace rt
 		public:
 
 			Plan() {}
-			~Plan() {}
+			virtual ~Plan() {}
 			/** Constructor
 			* @param t texture
 			* @param p point of the plane
@@ -43,11 +43,16 @@ namespace rt
 
 			vector getNormal(const Point& p, const vector& vect) const;
 
-			bool intersect(const Point& pos, const vector& vect);
+            /**
+             * Calculations on the normal vector of the plane, and one of its point, to decide wether there is an
+             * intersection.
+             */
+			bool intersect(const Point& pos, const vector& vect) const;
 
 			Point autreCote(const Point& point, const vector& vect, const Point& act) const;
 
-			Point getIntersection(const Point& pos, const vector& vect);
+
+			Point getIntersection(const Point& pos, const vector& vect) const;
 
 	};
 }

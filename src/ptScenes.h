@@ -42,7 +42,7 @@ public:
 private:
     rt::Camera camera;
     rt::PointLight light;
-    std::vector<rt::Solid* > solids;
+    std::vector<rt::Sphere* > spheres;
     rt::Plan plan;
 };
 
