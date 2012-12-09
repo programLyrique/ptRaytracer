@@ -41,6 +41,52 @@ class Light;
 
 namespace rt
 {
+
+/** A rectangle */
+struct rectangle
+{
+    int x;
+    int y;
+    int sX;
+    int sY;
+};
+/** A render queue that gives the coordinates of the next square to render.
+ * default size of a square : 32 x 32.
+ */
+class RenderQueue
+{
+private:
+    int nbW;
+    int nbH;
+    int reminderW;
+    int reminderH;
+    int w;
+    int h;
+    int tileLength;//size of a tile
+public:
+    /**
+     * Init the render queue.
+     * @param width width of the image
+     * @param height height of the image
+     * @param tile size of an elementary square. Default value : 32
+     */
+    RenderQueue(int width, int height, int tile=32);
+    /** Gives the rectangle to render.
+     * @warning Always verify wether all the tiles have been attributed with
+     * noMoreTiles().
+     */
+    rectangle nextTile();
+    /** Gives the length of a default tile.
+     */
+     int getTileLength() const;
+
+     /** You have to call this method before each calling to nextTile().
+      * @return true you can grab a new tile to render
+      * @return false no more tiles
+      */
+      bool enoughTiles() const;
+};
+
 /**
  * A scene in which you can place meshes, lights, and cameras, and then, render it on a screen.
  */
@@ -51,37 +97,21 @@ private:
     std::vector<Light*> lights;
     Camera* cam;
 
+    Mutex mutex;
+
     /**
      * Internal class to implement a rendering thread.
      * @see Thread
      */
+    //friend class ThreadRender;
     class ThreadRender : public Thread
     {
     public:
-        ThreadRender(Scene& _sc,int _x, int _y, int _w, int _h, screen& _s);
+        ThreadRender(Scene& _sc,RenderQueue& rdQueue,screen& _s);
         void run();
-        void setX(int _x)
-        {
-            x = _x;
-        }
-        void setY(int _y)
-        {
-            y = _y;
-        }
-        void setW(int _x)
-        {
-            w = _w;
-        }
-        void setH(int _h)
-        {
-            h = _h;
-        }
     private:
         Scene& sc;
-        int x;
-        int y;
-        int w;
-        int h;
+        RenderQueue& renderQueue;
         screen& s;
     };
 
@@ -173,45 +203,6 @@ public:
     * @param nbTrans the number of transmissions
     */
     color getIllumination(const Point& p, Solid* o, const vector& v, int nbR, int nbTrans) const;
-};
-
- /** A rectangle */
-struct rectangle
-{
-    int x;
-    int y;
-    int sX;
-    int sY;
-};
-/** A render queue that gives the coordinates of the next square to render.
- * default size of a square : 32 x 32.
- */
-class RenderQueue
-{
-private:
-    int nbW;
-    int nbH;
-    int reminderW;
-    int ReminderH;
-    int w;
-    int h;
-    int tileLength;//size of a tile
-public:
-    /**
-     * Init the render queue.
-     * @param width width of the image
-     * @param height height of the image
-     * @param tile size of an elementary square. Default value : 32
-     */
-    RenderQueue(int width, int height, int tile=32);
-    /** Gives the rectangle to render.
-     * Get the length of its side with getTileLenght()
-     */
-    rectangle nextTile() const;
-    /** Gives the length of a tile.
-     *
-     */
-     int getTileLength() const;
 };
 
 }

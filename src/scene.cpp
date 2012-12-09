@@ -86,14 +86,48 @@ namespace rt
         }
     }
 
-    Scene::ThreadRender::ThreadRender(Scene& _sc,int _x, int _y, int _w, int _h, screen& _s) :
-        sc(_sc),x(_x), y(_y), w(_w), h(_h), s(_s)
+    Scene::ThreadRender::ThreadRender(Scene& _sc, RenderQueue& rdQueue, screen& _s) :
+        sc(_sc), renderQueue(rdQueue), s(_s)
     {
 
     }
+
     void Scene::ThreadRender::run()
     {
-        sc.renderArea(x,y,w,h,s);
+        bool cont = false;
+        int x = 0;
+        int y = 0;
+        int w = 0;
+        int h = 0;
+        sc.mutex.lock();
+        if(renderQueue.enoughTiles())
+        {
+            cont = true;
+            rectangle recta = renderQueue.nextTile();
+            x = recta.x;
+            y = recta.y;
+            w = recta.sX;
+            h = recta.sY;
+        }
+        sc.mutex.unlock();
+        while(cont)
+        {
+            s.draw_rect(x,y,x+w, y+h, color::BLUE);
+            sc.renderArea(x,y,w,h,s);
+            sc.mutex.lock();
+            if(renderQueue.enoughTiles())
+            {
+                cont = true;
+                rectangle recta = renderQueue.nextTile();
+                x = recta.x;
+                y = recta.y;
+                w = recta.sX;
+                h = recta.sY;
+            }
+            else
+                cont = false;
+            sc.mutex.unlock();
+        }
     }
 
     void Scene::render(screen& s, int nbThreads)
@@ -105,35 +139,32 @@ namespace rt
         std::vector<ThreadRender*> threads(nbThreads);//A "pool" of threads
 
 
-
-        int w = 32;
-        int h = 32;
-        std::cout << "Parts are 32 x 2 pixels" << std::end;
+        std::cout << "Parts are 32 x 2 pixels" << std::endl;
 
         time_t beginning = std::time(NULL);
 
 
         int k = 0;
 
-        for(int i = 0 ; i <  s.width(); i += w)
-            for(int j = 0; j < s.height(); j += h)
-            {
-                //std::cout << "Rendering of " << i << "," << j << " - " << w << "," << h << std::endl;
-                threads[k] = new ThreadRender(*this,i,j,w,h,s);
-                k++;
-            }
+        RenderQueue renderQueue(s.width(), s.height());
+
+        for(k=0; k < nbThreads; k++)
+        {
+            threads[k] = new ThreadRender(*this, renderQueue, s);
+        }
         for(k=0; k < nbThreads ; k++)
         {
             std::cout << "Launching thread n." << k + 1<< std::endl;
             threads[k]->exec();
         }
-        s.update();
-        for(k=0; k < nbThreads; k++)
+
+        while(renderQueue.enoughTiles())
         {
-            threads[k]->join();
             s.update();
+            sleep(1);
         }
 
+        s.update();
         for(k=0; k < nbThreads; k++)
             delete threads[k];
 
@@ -306,18 +337,18 @@ namespace rt
     	return t;
     }
 
-    RenderQueue::RenderQueue(int width, int height, int tile=32) :
+    RenderQueue::RenderQueue(int width, int height, int tile) :
         nbW(width / tile), nbH(height / tile),
         reminderW( width % tile), reminderH(height % tile),
-        tileLenght(tile), w(0), h(0)
+        w(0), h(0), tileLength(tile)
     {
 
     }
 
     // Attention aux indices : devraient partir de 0.
-    rectangle RenderQueue::nextTile()() const
+    rectangle RenderQueue::nextTile()
     {
-        rectangle p = {w,h, tileLenght, tileLenght};
+        rectangle p = {w*tileLength,h*tileLength, tileLength, tileLength};
         if(w < nbW)
         {
             w++;
@@ -327,17 +358,25 @@ namespace rt
             p.sX = reminderW;
             w = 0;
         }
-        else // reminderW = 0 and w = nbW
+        else
         {
             p.x = 0;
-            w = (nbW > 1);
+            w = (nbW > 1) ? 1 : 0;
+            if(h < nbH)
+            {
+                h++;
+            }
+            else if(reminderH > 0)
+            {
+                p.sY = reminderH;
+            }
+        }
+        return p;
+    }
 
-        }
-        if(h < nbH)
-        {
-            h++;
-        }
-        else if(reminderH > )
+    bool RenderQueue::enoughTiles() const
+    {
+        return w <= nbW && h <= nbH;
     }
 
 }

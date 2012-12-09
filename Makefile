@@ -7,10 +7,11 @@ export MRPROPER = make mrproper
 export MASTER=..#Le chemin du Makefile par rapport au makefile appelé
 
 all:
-	cd $(SRC); $(MAKE) 4sphere; mv main $(MASTER)/$(BIN)/4sphere; $(MAKE) trans; mv main $(MASTER)/$(BIN)/trans; $(MAKE) manys; mv main $(MASTER)/$(BIN)/manys;
+	cd $(SRC); $(MAKE); mv main $(MASTER)/$(BIN)/4sphere
+	#$(MAKE) trans; mv main $(MASTER)/$(BIN)/trans; $(MAKE) manys; mv main $(MASTER)/$(BIN)/manys;
 
 run:
-	cd $(BIN); ./4sphere && ./trans && ./manys;
+	cd $(BIN); ./4sphere #&& ./trans && ./manys;
 
 doc:
 	doxygen

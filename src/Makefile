@@ -10,16 +10,17 @@ SRC= $(wildcard *.cpp)
 OBJ= $(SRC:.cpp=.o)
 PROG_NAME=main
 
-4sphere: CFLAGS+=-DFOUR_SPHERES_REFLEXIONS
-4sphere: clean $(EXEC)
+CFLAGS+=-DFOUR_SPHERES_REFLEXIONS
+#4sphere: CFLAGS+=-DFOUR_SPHERES_REFLEXIONS
+#4sphere: clean $(EXEC)
 
 
-trans: CFLAGS+=-DREAL_TRANSPARENCE
-trans: clean $(EXEC)
+#trans: CFLAGS+=-DREAL_TRANSPARENCE
+#trans: clean $(EXEC)
 
 
-manys: CFLAGS+=-DMANY_SPHERES
-manys: clean $(EXEC)
+#manys: CFLAGS+=-DMANY_SPHERES
+#manys: clean $(EXEC)
 
 main: $(OBJ)
 	$(CC) -o $@ $^ $(LDFLAGS) $(LIBS)
