@@ -112,13 +112,14 @@ namespace rt
         sc.mutex.unlock();
         while(cont)
         {
-            s.draw_rect(x,y,x+w, y+h, color::BLUE);
+            //s.draw_rect(x,y,x+w, y+h, color::BLUE);
             sc.renderArea(x,y,w,h,s);
             sc.mutex.lock();
             if(renderQueue.enoughTiles())
             {
                 cont = true;
                 rectangle recta = renderQueue.nextTile();
+                //std::cerr << renderQueue << std::endl;
                 x = recta.x;
                 y = recta.y;
                 w = recta.sX;
@@ -376,7 +377,15 @@ namespace rt
 
     bool RenderQueue::enoughTiles() const
     {
-        return w <= nbW && h <= nbH;
+        return w <= nbW && h <= nbH - 2;
     }
 
+    std::ostream& operator<<(std::ostream& out, const RenderQueue& rdQ)
+    {
+        out << "Tile " << rdQ.w << "x" << rdQ.h;
+        return out;
+    }
+
+
 }
+

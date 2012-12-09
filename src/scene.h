@@ -85,6 +85,8 @@ public:
       * @return false no more tiles
       */
       bool enoughTiles() const;
+
+     friend std::ostream& operator<<(std::ostream& out, const RenderQueue& rdQ);
 };
 
 /**
