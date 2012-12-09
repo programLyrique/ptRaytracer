@@ -140,7 +140,7 @@ namespace rt
         std::vector<ThreadRender*> threads(nbThreads);//A "pool" of threads
 
 
-        std::cout << "Parts are 32 x 2 pixels" << std::endl;
+        std::cout << "Parts are 32 x 32 pixels" << std::endl;
 
         time_t beginning = std::time(NULL);
 

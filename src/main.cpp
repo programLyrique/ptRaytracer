@@ -12,6 +12,9 @@
 
 #include "ptScenes.h"
 
+#ifdef __unix__
+#include  <X11/Xlib.h>
+#endif
 
 /*
  * Pass -DNOM_SCENE to build the scene you want.
@@ -27,6 +30,9 @@
 
 int main(int argc, char** argv)
 {
+	#ifdef __unix__
+	XInitThreads(); // To have multithreading with X11
+	#endif
     rt::screen s(640,480);
 #if defined(REAL_TRANSPARENCE)
     Real_Transparence scene;
