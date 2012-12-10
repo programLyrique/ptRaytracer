@@ -80,8 +80,8 @@ namespace rt
                     mL2 /= 9.0;
                     mL3 /= 9.0;
                 }
-
                 s.set_pixel(i, j, color((int)mL1, (int)mL2, (int)mL3));
+
             }
         }
     }
@@ -159,15 +159,22 @@ namespace rt
             threads[k]->exec();
         }
 
+        //Pas besoind de locker ici car on s'en fiche de mettre à jour l'écran une fois de trop.
         while(renderQueue.enoughTiles())
         {
             s.update();
             sleep(1);
+//            mutex.lock();
+//            cont = renderQueue.enoughTiles();
+//            mutex.unlock();
         }
 
         s.update();
         for(k=0; k < nbThreads; k++)
+        {
+            threads[k]->join();
             delete threads[k];
+        }
 
         time_t end = std::time(NULL);
         std::cout << "End of rendering. Took " << end - beginning << " seconds." << std::endl;
