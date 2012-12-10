@@ -384,7 +384,7 @@ namespace rt
 
     bool RenderQueue::enoughTiles() const
     {
-        return w <= nbW && h <= nbH - 2;
+        return w <= nbW && h <= nbH - 1;
     }
 
     std::ostream& operator<<(std::ostream& out, const RenderQueue& rdQ)
