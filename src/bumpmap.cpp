@@ -2,6 +2,8 @@
 
 #include <cmath>
 
+#include <iostream>
+
 namespace rt
 {
 
@@ -159,10 +161,9 @@ double SimplexNoise::noise(double x, double y, double z)
     return 32.0 * (n0 + n1 + n2 + n3);
 }
 
-
-const vector Bumpmap::normal(const Point& p, const vector& norm)
+vector Bumpmap::normal(const Point& p, const vector& norm) const
 {
-    vector perturb = pertubation(p);
+    vector perturb = perturbation(p);
     double resX = (1.0 - level) * norm.x + level * perturb.x;
     double resY = (1.0 - level) * norm.y + level * perturb.y;
     double resZ = (1.0 - level) * norm.z + level * perturb.z;
@@ -197,8 +198,9 @@ double ProceduralBumpmap::noise(double x, double y, double z)
     return scale * sum;
 }
 
-const vector ProceduralBumpmap::perturbation(const Point& p)
+vector ProceduralBumpmap::perturbation(const Point& p) const
 {
+    std::cerr << "In perturbation" << std::endl;
     double x = 0.1 * p.getX();
     double y = 0.1 * p.getY();
     double z = 0.1 * p.getZ();

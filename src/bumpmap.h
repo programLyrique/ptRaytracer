@@ -73,9 +73,9 @@ class Bumpmap
         /**
          * A vector to add to the normal (and normalize the sum).
          */
-        virtual const vector pertubation(const Point& p) = 0;
+        virtual vector perturbation(const Point& p) const  = 0;
 
-        const vector normal(const Point& p, const vector& norm);
+        vector normal(const Point& p, const vector& norm) const ;
     private:
         double level;
 };
@@ -106,7 +106,7 @@ class ProceduralBumpmap : public Bumpmap
     ~ProceduralBumpmap() {};
 
 
-    const vector perturbation(const Point&p);
+    vector perturbation(const Point&p) const ;
 };
 
 
