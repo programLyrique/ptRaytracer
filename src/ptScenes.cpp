@@ -1,16 +1,18 @@
 #include "ptScenes.h"
 
+#include <iostream>
+
 Real_Transparence::Real_Transparence() :
+    bmap(new rt::ProceduralBumpmap(0.5, 2, 4)),
     camera(rt::Point(0, 0, 0), rt::Point(0, 500, 0), rt::vector(0, 0, 1)),
     light(0., 0., 0., rt::color::WHITE, this),
-    s2(rt::Point(-3, 20, 3), 3, rt::Texture(rt::color::WHITE, rt::color(255, 0, 255), 100, 0, 1)),
-    s3(rt::Point(-3, 20, -3), 3, rt::Texture(rt::color::WHITE, rt::color(0, 255, 255), 100, 0, 1)),
-    s4(rt::Point(0, 15, 0), 3, rt::Texture(rt::color::WHITE, rt::color::WHITE, 1, 0.9, 1.4)),
-    s5(rt::Point(3, 20, 6), 3, rt::Texture(rt::color::WHITE, rt::color::RED, 100, 0, 1))
+    s1(rt::Point(3, 20, 0), 3, rt::Texture(rt::color::WHITE, rt::color(255, 255, 0), 100, 0, 1, bmap)),
+    s2(rt::Point(-3, 20, 3), 3, rt::Texture(rt::color::WHITE, rt::color(255, 0, 255), 100, 0, 1, bmap)),
+    s3(rt::Point(-3, 20, -3), 3, rt::Texture(rt::color::WHITE, rt::color(0, 255, 255), 100, 0, 1, bmap)),
+    s4(rt::Point(0, 15, 0), 3, rt::Texture(rt::color::WHITE, rt::color::WHITE, 1, 0.9, 1.4, bmap)),
+    s5(rt::Point(3, 20, 6), 3, rt::Texture(rt::color::WHITE, rt::color::RED, 100, 0, 1, bmap))
 
 {
-    bmap = new rt::ProceduralBumpmap(0.5, 0, 1);
-    s1 = rt::Sphere(rt::Point(3, 20, 0), 3, rt::Texture(rt::color::WHITE, rt::color(255, 255, 0), 100, 0, 1, bmap));
     setCamera(&camera);
 
     addLight(&light);

@@ -89,7 +89,7 @@ namespace rt
 			/** @return refraction parameter */
 			double getIndice() const { return indice; }
 
-			const Bumpmap& getBumpmap() const { return *bmap;}
+			const Bumpmap* getBumpmap() const { return bmap;}
 
 
 	};

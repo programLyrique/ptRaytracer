@@ -18,6 +18,7 @@
 #include "point.h"
 #include "vector.hpp"
 #include "texture.h"
+#include "bumpmap.h"
 
 namespace rt
 {

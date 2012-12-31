@@ -15,6 +15,14 @@ namespace rt
     vector Solid::getNormal(const Point& p, const vector& v) const
     {
         const vector n = normal(p, v);
-        return t.getBumpmap().normal(p, n);
+        const Bumpmap *bmap = t.getBumpmap();
+        if(bmap == NULL)
+        {
+            return n;
+        }
+        else
+        {
+            return bmap->normal(p, n);
+        }
     }
 }
