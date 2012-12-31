@@ -47,6 +47,7 @@ class SimplexNoise
          * to fill the space, in 3D, a kind of tetrahedon !)
          */
         static double noise(const Point& p);
+        static double noise(double x, double y, double z);
 
 };
 
@@ -60,35 +61,52 @@ class SimplexNoise
 class Bumpmap
 {
     public:
-        /** Default constructor */
-        Bumpmap();
+        /**
+         * A bumpmap : perturbate the normal of an object.
+         * @param level @f$ \in [0,1] @f$ if 1, the previous normal of the objet dose not remain any more;
+         * if 0, no perturbation
+         */
+        Bumpmap(double _level) : level(_level) {}
         /** Default destructor */
-        virtual ~Bumpmap();
+        virtual ~Bumpmap() {};
 
-        virtual const vector& pertubation(const Point& p) = 0;
+        /**
+         * A vector to add to the normal (and normalize the sum).
+         */
+        virtual const vector pertubation(const Point& p) = 0;
+
+        const vector normal(const Point& p, const vector& norm);
     private:
+        double level;
 };
 
 /**
  * A bumpmap using simplex noise.
  */
-class ProceduralBumpmap : Bumpmap
+class ProceduralBumpmap : public Bumpmap
 {
     private:
-        int persist;
+        double persist;
         int octa;
+
+        double scale;
+
+        double noise(double x, double y, double z);
     public:
     /**
      * Create a procedural bumpmap using Simplex Noise :
      *
      * @f$ bruit_i(v) = p^{i-1} \times bruit(2^i \times v) @f$
      * et @f$ bruitTotal = \sum_i^{nbOctaves} bruit_i(v) @f$
-     * @param persistance
+     * @param persistance @f$ \in [0,1] @f$
      * @param octaves
      */
-    ProceduralBumpmap(int persistance, int octaves);
+    ProceduralBumpmap(double level, double persistance, int octaves);
 
-    const vector& perturbation(const Point&p);
+    ~ProceduralBumpmap() {};
+
+
+    const vector perturbation(const Point&p);
 };
 
 

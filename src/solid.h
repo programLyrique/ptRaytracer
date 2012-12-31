@@ -31,6 +31,7 @@ class Solid
     protected:
         /** Texture of the solid*/
         Texture t;
+        virtual vector normal(const Point& p, const vector& v) const = 0;
     private:
     public:
         /** Default constructor*/
@@ -69,7 +70,8 @@ class Solid
          * @param v the vision vector
          * @return vector
          */
-        virtual vector getNormal(const Point& p, const vector& v) const = 0;
+        vector getNormal(const Point& p, const vector& v) const;
+
 
         /** Accessor
          * @return texture of the solid

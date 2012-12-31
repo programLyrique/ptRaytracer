@@ -1,5 +1,7 @@
 #include "bumpmap.h"
 
+#include <cmath>
+
 namespace rt
 {
 
@@ -43,6 +45,11 @@ double SimplexNoise::noise(const Point& p)
     double x = p.getX();
     double y = p.getY();
     double z = p.getZ();
+    return noise(x, y, z);
+}
+
+double SimplexNoise::noise(double x, double y, double z)
+{
 
     if(!isInit)
     {
@@ -152,14 +159,57 @@ double SimplexNoise::noise(const Point& p)
     return 32.0 * (n0 + n1 + n2 + n3);
 }
 
-Bumpmap::Bumpmap()
+
+const vector Bumpmap::normal(const Point& p, const vector& norm)
 {
-    //ctor
+    vector perturb = pertubation(p);
+    double resX = (1.0 - level) * norm.x + level * perturb.x;
+    double resY = (1.0 - level) * norm.y + level * perturb.y;
+    double resZ = (1.0 - level) * norm.z + level * perturb.z;
+    return vector(resX, resY, resZ).unit();
 }
 
-Bumpmap::~Bumpmap()
+ProceduralBumpmap::ProceduralBumpmap(double level, double persistance, int octaves) :
+Bumpmap(level), persist(persistance), octa(octaves)
 {
-    //dtor
+    if(persist == 1)
+        scale = octa;
+    else
+        scale = (1.0 - std::pow(persist, octa)) / ( 1.0 - persist);
 }
+
+double ProceduralBumpmap::noise(double x, double y, double z)
+{
+    double sum = 0;
+    double powerP = 1;
+    double x0 = x;
+    double y0 = y;
+    double z0 = z;
+
+    for(int i = 1 ; i <= octa; i++)
+    {
+        sum += powerP * SimplexNoise::noise(x0, y0, z0);
+        powerP *= persist;
+        x0 *= 2;
+        y0 *= 2;
+        z0 *= 2;
+    }
+    return scale * sum;
+}
+
+const vector ProceduralBumpmap::perturbation(const Point& p)
+{
+    double x = 0.1 * p.getX();
+    double y = 0.1 * p.getY();
+    double z = 0.1 * p.getZ();
+
+    double pertX = SimplexNoise::noise(x, y, z);
+    double pertY = SimplexNoise::noise(y, z, x);
+    double pertZ = SimplexNoise::noise(z, x, y);
+
+    return vector(pertX, pertY, pertZ);
+
+}
+
 
 }

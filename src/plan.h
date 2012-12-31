@@ -29,7 +29,7 @@ namespace rt
 
 		private:
 			Point point;
-			vector normal;
+			vector norma;
 		public:
             /** A default plan. */
 			Plan() {}
@@ -39,9 +39,9 @@ namespace rt
 			* @param p point of the plane
 			* @param n normal vector to the plane
 			*/
-			Plan(Texture t, const Point& p, vector n) : Solid(t), point(p), normal(n.unit()) {}
+			Plan(Texture t, const Point& p, vector n) : Solid(t), point(p), norma(n.unit()) {}
 
-			vector getNormal(const Point& p, const vector& vect) const;
+			vector normal(const Point& p, const vector& vect) const;
 
             /**
              * Calculations on the normal vector of the plane, and one of its point, to decide wether there is an

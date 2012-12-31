@@ -103,7 +103,7 @@ Point Sphere::autreCote(const Point& point, const vector& vect, const Point& act
         return p2;
 }
 
-vector Sphere::getNormal(const Point& p, const vector& vect) const
+vector Sphere::normal(const Point& p, const vector& vect) const
 {
     return centre.vectTo(p).unit();
 }

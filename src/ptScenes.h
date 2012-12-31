@@ -23,6 +23,7 @@
 #include "camera.h"
 #include "point.h"
 #include "plan.h"
+#include "bumpmap.h"
 
 /**
  * A scene to benchmark the ray tracer with lots of solids in the scene.
@@ -78,8 +79,9 @@ class Real_Transparence : public rt::Scene
 {
 public:
     Real_Transparence();
-    virtual ~Real_Transparence(){};
+    virtual ~Real_Transparence(){delete bmap;};
 private:
+    rt::ProceduralBumpmap* bmap;
     rt::Camera camera;
     rt::PointLight light;
     rt::Sphere s1;

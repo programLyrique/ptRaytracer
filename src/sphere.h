@@ -73,7 +73,7 @@ namespace rt
             /** Return the normal passing through p at the sphere
              * @return vector
              */
-            vector getNormal(const Point& p, const vector& vect) const;
+            vector normal(const Point& p, const vector& vect) const;
 
             /** Accessor
              * @return centre
