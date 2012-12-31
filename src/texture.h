@@ -16,6 +16,7 @@
 #define TEXTURE_H
 
 #include "color.hpp"
+#include "bumpmap.h"
 
 namespace rt
 {
@@ -42,6 +43,8 @@ namespace rt
 			/** refraction parameter*/
 			double indice;
 
+			Bumpmap* bmap;
+
 		public:
 			/** default constructor */
 			Texture() : brillance(0), transparence(0), indice(0) {};
@@ -54,19 +57,39 @@ namespace rt
 			* @param b brillance
 			* @param t transparency between 0 and 1 (0 not transparent at all, 1 perfectly transparent)
 			* @param n refraction parameter
+			* @param bumpmap a 3D-bumpmap
 			*/
-			Texture(color colB, color colN, int b, double t, double n) : cB(colB), cN(colN), brillance(b), transparence(t), indice(n) {};
+			Texture(color colB, color colN, int b, double t, double n, Bumpmap* bumpmap) :
+                cB(colB),
+                cN(colN),
+                brillance(b),
+                transparence(t),
+                indice(n),
+                bmap(bumpmap) {};
+
+            /**
+             * Constructor. Provided for ceonvenience if you don't want to use a bumpmap.
+             */
+            Texture(color colB, color colN, int b, double t, double n) :
+                cB(colB),
+                cN(colN),
+                brillance(b),
+                transparence(t),
+                indice(n),
+                bmap(NULL) {};
 
 			/** @return brillance color */
 			color getColorB() const { return cB; }
 			/** @return inner color */
 			color getColorN() const { return cN; }
 			/** @return brillance */
-			int getBrillance() { return brillance; }
+			int getBrillance() const { return brillance; }
 			/** @return transparency */
-			double getTransparence() { return transparence; }
+			double getTransparence() const { return transparence; }
 			/** @return refraction parameter */
-			double getIndice() { return indice; }
+			double getIndice() const { return indice; }
+
+			const Bumpmap& getBumpmap() const { return *bmap;}
 
 
 	};

@@ -163,7 +163,7 @@ namespace rt
         while(renderQueue.enoughTiles())
         {
             s.update();
-            sleep(1);
+            //sleep(1);
 //            mutex.lock();
 //            cont = renderQueue.enoughTiles();
 //            mutex.unlock();
