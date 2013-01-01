@@ -3,13 +3,13 @@
 #include <iostream>
 
 Real_Transparence::Real_Transparence() :
-    bmap(new rt::ProceduralBumpmap(0.5, 2, 4)),
+    bmap(new rt::ProceduralBumpmap(0.9, 0.9, 10)),
     camera(rt::Point(0, 0, 0), rt::Point(0, 500, 0), rt::vector(0, 0, 1)),
     light(0., 0., 0., rt::color::WHITE, this),
     s1(rt::Point(3, 20, 0), 3, rt::Texture(rt::color::WHITE, rt::color(255, 255, 0), 100, 0, 1, bmap)),
     s2(rt::Point(-3, 20, 3), 3, rt::Texture(rt::color::WHITE, rt::color(255, 0, 255), 100, 0, 1, bmap)),
     s3(rt::Point(-3, 20, -3), 3, rt::Texture(rt::color::WHITE, rt::color(0, 255, 255), 100, 0, 1, bmap)),
-    s4(rt::Point(0, 15, 0), 3, rt::Texture(rt::color::WHITE, rt::color::WHITE, 1, 0.9, 1.4, bmap)),
+    s4(rt::Point(0, 15, 0), 3, rt::Texture(rt::color::WHITE, rt::color::WHITE, 1, 0, 1, bmap)),
     s5(rt::Point(3, 20, 6), 3, rt::Texture(rt::color::WHITE, rt::color::RED, 100, 0, 1, bmap))
 
 {

@@ -4,6 +4,8 @@
 
 #include <iostream>
 
+#include <cstdlib>
+
 namespace rt
 {
 
@@ -53,28 +55,39 @@ double SimplexNoise::noise(const Point& p)
 double SimplexNoise::noise(double x, double y, double z)
 {
 
-    if(!isInit)
-    {
-        init();
-        isInit = true;
-    }
+//    if(!isInit)
+//    {
+//        std::cerr << "Init" << std::endl;
+//        init();
+//        isInit = true;
+//    }
 
     double n0, n1, n2, n3; //Niveau de bruit aux quatre coins du simplexe (en 3D, le tétrahèdre).
 
     //Déterminer dans quel cellule de simplexe on se trouve :
-    double F3 = 1.0 / 3.0;
+    const double F3 = 1.0 / 3.0;
     double s = (x + y + z) * F3; // facteur de l'affinité
 
     int i = fastfloor(x + s);
     int j = fastfloor(y + s);
     int k = fastfloor(z + s);
 
-    double G3 = 1.0 / 1.6; // Revenir dans l'espace non modifié
+//    int i = std::floor(x + s);
+//    int j = std::floor(y + s);
+//    int z = std::floor( z + s);
+
+    const double G3 = 1.0 / 6.0; // Revenir dans l'espace non modifié
     double t = (i + j + k) * G3;
     // Distances à la cellule
-    double x0 = x - (i - t);
-    double y0 = y - (j - t);
-    double z0 = z - (k - t);
+    double X0  = i - t;
+    double Y0 = j - t;
+    double Z0 = k - t;
+    double x0 = x - X0;
+    double y0 = y - Y0;
+    double z0 = z - Z0;
+
+
+    //std::cerr << "x0 y 0 z0 : " << x0 << " " << y0 << " " << z0 << std::endl;
 
 
     // Dans quel simplexe :
@@ -120,7 +133,7 @@ double SimplexNoise::noise(double x, double y, double z)
     int gi2 = permMod12[ii+i2+perm[jj+j2+perm[kk+k2]]];
     int gi3 = permMod12[ii+1+perm[jj+1+perm[kk+1]]];
 
-    // COntribution des 4 sommets du tétrahèdre
+    // Contribution des 4 sommets du tétrahèdre
     double t0 = 0.5 - x0*x0 - y0*y0 - z0*z0;
     if(t0<0)
         n0 = 0.0;
@@ -148,7 +161,7 @@ double SimplexNoise::noise(double x, double y, double z)
         n2 = t2 * t2 * (grad3[gi2] | vector(x2, y2, z2));
     }
 
-    double t3 = 0.6 - x3*x3 - y3*y3 - z3*z3;
+    double t3 = 0.5 - x3*x3 - y3*y3 - z3*z3;
     if(t3<0)
         n3 = 0.0;
     else
@@ -157,21 +170,24 @@ double SimplexNoise::noise(double x, double y, double z)
         n3 = t3 * t3 * (grad3[gi3] | vector(x3, y3, z3));
     }
 
+    //std::cerr << "t0 t1 t2 t3 : " << t0 << " " << t1 << " " << t2 << " " << t3 << std::endl;
     // Pour obtenir la valeur finale fu bruit : on additionne les contributions, et envoie le tout dans l'intervalle [-1, 1]
     return 32.0 * (n0 + n1 + n2 + n3);
 }
 
 vector Bumpmap::normal(const Point& p, const vector& norm) const
 {
+    if(level == 0)
+        return norm;
     vector perturb = this->perturbation(p);
-    double resX = (1.0 - level) * norm.x + level * perturb.x;
-    double resY = (1.0 - level) * norm.y + level * perturb.y;
-    double resZ = (1.0 - level) * norm.z + level * perturb.z;
+    double resX = (1-level) * norm.x + level * perturb.x;
+    double resY =  (1 - level) * norm.y + level * perturb.y;
+    double resZ =  (1 - level) * norm.z + level * perturb.z;
     return vector(resX, resY, resZ).unit();
 }
 
-ProceduralBumpmap::ProceduralBumpmap(double level, double persistance, int octaves) :
-Bumpmap(level), persist(persistance), octa(octaves)
+ProceduralBumpmap::ProceduralBumpmap(double level, double persistance, int octaves, double precision) :
+Bumpmap(level), persist(persistance), octa(octaves), precis(precision)
 {
     if(persist == 1)
         scale = octa;
@@ -179,7 +195,8 @@ Bumpmap(level), persist(persistance), octa(octaves)
         scale = (1.0 - std::pow(persist, octa)) / ( 1.0 - persist);
 }
 
-double ProceduralBumpmap::noise(double x, double y, double z)
+
+double ProceduralBumpmap::noise(double x, double y, double z) const
 {
     double sum = 0;
     double powerP = 1;
@@ -195,18 +212,28 @@ double ProceduralBumpmap::noise(double x, double y, double z)
         y0 *= 2;
         z0 *= 2;
     }
-    return scale * sum;
+    return  sum / scale;
 }
 
 vector ProceduralBumpmap::perturbation(const Point& p) const
 {
-    double x = 0.1 * p.getX();
-    double y = 0.1 * p.getY();
-    double z = 0.1 * p.getZ();
+//    double x = 0.1 * p.getX();
+//    double y = 0.1 * p.getY();
+//    double z = 0.1 * p.getZ();
 
-    double pertX = SimplexNoise::noise(x, y, z);
-    double pertY = SimplexNoise::noise(y, z, x);
-    double pertZ = SimplexNoise::noise(z, x, y);
+      double x = precis * p.getX();
+      double y = precis *p.getY();
+      double z = precis * p.getZ();
+
+//    double pertX = noise(x, y, z);
+//    double pertY = noise(y, z, x);
+//    double pertZ = noise(z, x, y);
+
+    const double epsilon = 0.001;
+
+    double pertX = noise(x - epsilon, y ,z) - noise(x + epsilon, y, z);
+    double pertY = noise(x, y - epsilon, z) - noise(x , y + epsilon, z);
+    double pertZ = noise(x, y, z - epsilon) - noise(x, y, z + epsilon);
 
     return vector(pertX, pertY, pertZ);
 

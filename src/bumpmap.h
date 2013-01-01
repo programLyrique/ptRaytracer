@@ -36,11 +36,11 @@ class SimplexNoise
             return temp >=0 ? temp : temp-1;
         }
         SimplexNoise(){}; //No need to instantiate that class.
+    public:
         /**
          * Initialize permutation tables.
          */
         static void init();
-    public:
         /**
          * Simplex noise at the point p.
          * It is a gradient noise, interpolated in a simplex of the space (i.e. the simpliest shape
@@ -50,6 +50,8 @@ class SimplexNoise
         static double noise(double x, double y, double z);
 
 };
+
+
 
 
 /**
@@ -91,7 +93,9 @@ class ProceduralBumpmap : public Bumpmap
 
         double scale;
 
-        double noise(double x, double y, double z);
+        double precis;
+
+        double noise(double x, double y, double z) const;
     public:
     /**
      * Create a procedural bumpmap using Simplex Noise :
@@ -100,8 +104,9 @@ class ProceduralBumpmap : public Bumpmap
      * et @f$ bruitTotal = \sum_i^{nbOctaves} bruit_i(v) @f$
      * @param persistance @f$ \in [0,1] @f$
      * @param octaves
+     * @param precision
      */
-    ProceduralBumpmap(double level, double persistance, int octaves);
+    ProceduralBumpmap(double level, double persistance, int octaves, double precision=0.01);
 
     ~ProceduralBumpmap() {};
 

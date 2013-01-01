@@ -32,7 +32,6 @@ class Solid
     protected:
         /** Texture of the solid*/
         Texture t;
-        virtual vector normal(const Point& p, const vector& v) const = 0;
     private:
     public:
         /** Default constructor*/
@@ -66,12 +65,17 @@ class Solid
         virtual Point autreCote(const Point& point, const vector& vect, const Point& act) const = 0;
 
 
-        /** Returns a vector which is normal to the surface.
+        /** Returns a vector which is normal to the surface : the perturbated normal.
          * @param p point of the object
          * @param v the vision vector
          * @return vector
          */
         vector getNormal(const Point& p, const vector& v) const;
+
+        /**
+         * Non perturbated normal.
+         */
+        virtual vector normal(const Point& p, const vector& v) const = 0;
 
 
         /** Accessor

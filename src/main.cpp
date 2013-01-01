@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include <cmath>
 #include <sstream>
+#include <cstdlib>
 
 #include "screen.hpp"
 #include "scene.h"
@@ -9,6 +10,8 @@
 #include "texture.h"
 #include "pointlight.h"
 #include "plan.h"
+
+#include "bumpmap.h"
 
 #include "ptScenes.h"
 
@@ -42,6 +45,7 @@ int main(int argc, char** argv)
     Four_Spheres_Reflexions scene;
 #endif
 
+    std::srand(30);
 
     std::cout << "Number of param : " << argc << std::endl;
 
@@ -55,6 +59,9 @@ int main(int argc, char** argv)
         iss.exceptions(std::istringstream::failbit | std::istringstream::badbit );
         int nbThreads;
         iss >> nbThreads;
+
+        rt::SimplexNoise::init();
+
         scene.render(s, nbThreads);
     }
 

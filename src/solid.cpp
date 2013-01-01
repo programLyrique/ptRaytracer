@@ -22,7 +22,7 @@ namespace rt
         }
         else
         {
-            return bmap->normal(p, n);
+            return bmap->normal(p, n).unit();
         }
     }
 }
